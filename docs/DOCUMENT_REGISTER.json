@@ -1,0 +1,53 @@
+{
+  "baselineDate": "2026-10-09",
+  "status": "draft",
+  "version": "1.0",
+  "sourceOfTruth": [
+    "docs/product/MASTER_PLATFORM_BLUEPRINT.md",
+    "docs/architecture/DATABASE_DATA_DICTIONARY.md",
+    "docs/ai-mcp/MCP_AI_AGENT_CONTROL_PLANE.md"
+  ],
+  "domains": {
+    "product": [
+      "docs/product/MASTER_PLATFORM_BLUEPRINT.md",
+      "docs/product/FEATURE_REQUIREMENTS_MATRIX.md",
+      "docs/project/PROJECT_CHARTER.md"
+    ],
+    "games": [
+      "docs/games/GAME_CATALOG_AND_ROADMAP.md",
+      "docs/games/eco-city-lab/GDD.md",
+      "docs/games/eco-city-lab/3D_ASSET_AND_RUNTIME_SPEC.md",
+      "docs/games/eco-city-lab/INFRASTRUCTURE_AND_STORAGE.md"
+    ],
+    "education": [
+      "docs/education/BOARD_GAME_EDUCATION_PRD.md",
+      "docs/education/BOARD_GAME_EDUCATION_MASTER_PLAN.md"
+    ],
+    "architecture": [
+      "docs/architecture/DATABASE_DATA_DICTIONARY.md",
+      "docs/architecture/SCHEMA_STARTER.sql",
+      "docs/architecture/adr/0001-platform-architecture.md"
+    ],
+    "aiMcp": [
+      "docs/ai-mcp/MCP_AI_AGENT_CONTROL_PLANE.md",
+      "docs/ai-mcp/MCP_TOOL_CATALOG_AND_PERMISSIONS.md",
+      "docs/ai-mcp/AI_AUTOMATION_DATA_MODEL.md",
+      "docs/ai-mcp/MCP_AUTOMATION_WORKFLOW_RECIPES.md",
+      "docs/ai-mcp/AI_AGENT_REPOSITORY_RULES.md",
+      "docs/ai-mcp/MCP_BOOTSTRAP_CHECKLIST.md"
+    ],
+    "liveOps": [
+      "docs/liveops/LIVEOPS_CONTENT_STRATEGY.md",
+      "docs/social/SOCIAL_COMMUNITY_TOURNAMENT.md"
+    ],
+    "governance": [
+      "docs/governance/REPOSITORY_GOVERNANCE.md",
+      "docs/governance/DOCUMENT_GOVERNANCE.md",
+      "docs/operations/INFRASTRUCTURE_AND_SECURITY.md"
+    ],
+    "roadmap": [
+      "docs/roadmap/MASTER_ROADMAP.md"
+    ]
+  },
+  "policy": "Changes via reviewed PR/ADR. Do not publish secrets, student data or unlicensed media."
+}
