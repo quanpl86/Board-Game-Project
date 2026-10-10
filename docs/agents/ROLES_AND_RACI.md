@@ -17,7 +17,7 @@ flowchart TD
  UX --> CREATIVE["BGU-VISUAL · Image / Video / 3D"]
  BACK --> GAME["BGU-GAME · Game Rules / Simulation"]
  BACK --> EDU["BGU-EDU · Education / Coding Designer"]
- PD --> SAFE["BGU-SAFE · Privacy & Security Reviewer"]
+ PD --> SAFE["BGU-SEC · Privacy & Security Reviewer"]
  REL --> QA["BGU-QA · QA / Accessibility / Performance"]
  PD --> LIVE["BGU-LIVEOPS · Events / Commerce / Ranking"]
 ```

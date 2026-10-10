@@ -2,7 +2,7 @@
 name: privacy-security
 description: Review child safety, tenant permissions, moderation, secure development, threats, data privacy, prompt injection and high-risk release approval.
 version: 1.0.0
-owner_role: BGU-SAFE
+owner_role: BGU-SEC
 ---
 
 # Skill: privacy-security
