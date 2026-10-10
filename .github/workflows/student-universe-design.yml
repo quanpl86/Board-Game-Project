@@ -1,0 +1,41 @@
+name: Student Universe Design Integrity
+on:
+  pull_request:
+    paths:
+      - 'db/schema/student_universe_extension_candidate.json'
+      - 'docs/database/student-universe/**'
+      - 'scripts/check_student_universe.py'
+      - 'scripts/generate_student_drawio.mjs'
+      - '.github/workflows/student-universe-design.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'db/schema/student_universe_extension_candidate.json'
+      - 'docs/database/student-universe/**'
+      - 'scripts/check_student_universe.py'
+      - 'scripts/generate_student_drawio.mjs'
+      - '.github/workflows/student-universe-design.yml'
+permissions:
+  contents: read
+concurrency:
+  group: student-universe-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  candidate-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Check source-generated editable Draw.io
+        run: node scripts/generate_student_drawio.mjs --check
+      - name: Verify table/column/reference parity across P0 and P1
+        run: python scripts/check_student_universe.py
+      - name: Check documentation reference links
+        run: python scripts/validate_docs.py
+# Documentation only; zero DB migrations, credentials, student records or release writes.

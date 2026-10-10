@@ -45,3 +45,9 @@ Rebuild with `node scripts/generate_db_diagrams.mjs`; verify with `node scripts/
 
 ## P1 structured schema candidates (NO MIGRATION)
 [39-table Education, Competition and Commerce candidate contract](schema/p1_candidate_tables.json); [P1 editable Draw.io, 44 SVG previews and individual data dictionary](../docs/database/p1/README.md); [human decision gates](../docs/database/p1/DECISION_REGISTER.md). Generated using `node scripts/generate_p1_database_atlas.mjs` and validated by `--check` plus `python scripts/validate_p1_database.py`. These tables do not exist in PostgreSQL until individually reviewed and migrated later.
+
+## Student profile + ownership + wallet extension — design only
+- [Canonical 22-table candidate manifest](schema/student_universe_extension_candidate.json).
+- [Student Universe design, 30-page Draw.io and table relationship cards](../docs/database/student-universe/START_HERE.md).
+- [Integration and security contract](../docs/database/student-universe/IMPLEMENTATION_AND_SECURITY_CONTRACT.md).
+- Check `node scripts/generate_student_drawio.mjs --check` and `python scripts/check_student_universe.py`. These checks verify **design parity**, not a migration or legitimate wallet posting.

@@ -38,3 +38,9 @@ F01 identity and tenant; F02 catalog and assets; F03 room and memberships; F04 m
 - [44-tab editable P1 Draw.io](p1/diagrams/Board_Game_Universe_P1_Editable.drawio), [39 per-table datasheets](p1/tables/README.md), [overall Mermaid ERD](p1/ERD_P1_ALL.md).
 - [P1 Backend/Frontend typed-service flow matrix](p1/CROSS_LAYER_IMPLEMENTATION.md) and [open 23-decision review register](p1/DECISION_REGISTER.md).
 - P0 migration is the only reviewed CI SQL candidate; P1 relationships remain **proposals** until approved migrations and security tests.
+
+## Student profile, ownable characters, asset provenance and Coin design
+- [Student Universe full candidate model, 22 tables and direct ERDs](student-universe/START_HERE.md).
+- [Editable 30-page Draw.io](student-universe/Student_Universe_Editable.drawio).
+- [Pending privacy, character, grant and wallet decisions](student-universe/DECISION_REGISTER.md).
+- This is **not** a deployed database schema: it extends P0 and P1 designs without duplicating existing `users`, `assets`, `item_versions` or `ledger_entries`.

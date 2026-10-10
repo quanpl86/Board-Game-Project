@@ -1,0 +1,2174 @@
+{
+  "version": "0.1.0",
+  "status": "DESIGN_CANDIDATE_NO_PHYSICAL_SQL",
+  "scope": "Student Profile & Digital Identity → Character → Asset → Inventory → Coin Wallet → Progress/Achievements",
+  "date": "2026-10-10",
+  "tables": [
+    {
+      "id": "student.student_profiles",
+      "domain": "student",
+      "summary": "Hồ sơ học sinh bảo mật theo user global; không sao chép họ tên, ngày sinh hoặc mật khẩu từ KingDragonHub.",
+      "sensitivity": "highly restricted",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": "identity.users.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "display_alias",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "learning_stage",
+          "type": "text",
+          "pk": false,
+          "required": false,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "onboarding_status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "pending"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "account_type must be student; server validates SSO and guardian policy",
+        "display_alias sanitized/non-identifying, 3-40 chars",
+        "learning_stage is optional and NOT exact birthdate"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "student.privacy_settings",
+      "domain": "student",
+      "summary": "Quyền hiển thị hồ sơ và nhân vật, mặc định riêng tư; nguồn ủy quyền guardian chỉ từ verified link.",
+      "sensitivity": "highly restricted",
+      "columns": [
+        {
+          "name": "student_user_id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "public_profile_mode",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "private"
+        },
+        {
+          "name": "leaderboard_mode",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "hidden"
+        },
+        {
+          "name": "character_gallery_mode",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "private"
+        },
+        {
+          "name": "allow_invites",
+          "type": "boolean",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "false"
+        },
+        {
+          "name": "guardian_link_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "identity.guardian_links.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "revised_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "minor has no unrestricted public/profile messaging by default",
+        "a guardian link must be verified AND match student before using as consent",
+        "separate audit for visibility changes"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "characters.character_definitions",
+      "domain": "characters",
+      "summary": "Mẫu nhân vật trong danh mục; chưa phải nhân vật học sinh sở hữu.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "code",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "category",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "draft"
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "identity.users.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "published character catalog is immutable via versioning"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "characters.character_versions",
+      "domain": "characters",
+      "summary": "Phiên bản mẫu gắn rig canonical và asset GLB đã duyệt.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "definition_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "characters.character_definitions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "rig_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "commerce.avatar_rigs.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "base_asset_version_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "assets.asset_versions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "manifest_sha256",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": false,
+          "reference": null,
+          "unique": false,
+          "default": null
+        }
+      ],
+      "unique": [
+        "(definition_id,revision)"
+      ],
+      "invariants": [
+        "asset rights approved; GLB rig compatible",
+        "revision > 0; published row immutable",
+        "never embed remote unapproved asset URLs"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "characters.character_instances",
+      "domain": "characters",
+      "summary": "Nhân vật riêng của học sinh; nhiều nhân vật với nickname được kiểm duyệt.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "character_version_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "characters.character_versions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "nickname",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "owned"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "owner immutable except approved compensation",
+        "one user can own multiple character instances",
+        "no resale/trade among minors"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "characters.character_loadout_bindings",
+      "domain": "characters",
+      "summary": "Gắn nhân vật sở hữu với avatar loadout theo game/context.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "character_instance_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "characters.character_instances.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "loadout_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "commerce.avatar_loadouts.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "context_game_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "catalog.games.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "false"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [
+        "(character_instance_id,loadout_id,context_game_id)"
+      ],
+      "invariants": [
+        "character owner == loadout owner (server and DB guard)",
+        "one active loadout per character+context; partial unique index",
+        "all equipped item instances owned by same user"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "characters.character_progress_events",
+      "domain": "characters",
+      "summary": "Tiến trình nhân vật append-only, EXP không phải Coin; nguồn game đã xác minh.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "character_instance_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "characters.character_instances.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_result_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "gameplay.match_results.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "event_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "event_type",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "exp_delta",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "recorded_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "append only; signed source and idempotency",
+        "exp level never automatically credits wallet"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "characters.pet_states",
+      "domain": "characters",
+      "summary": "Tùy chọn pet được đại diện bởi inventory_instance đã sở hữu; không tạo bản sao quyền sở hữu.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "inventory_instance_id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": "commerce.inventory_instances.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "character_instance_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "characters.character_instances.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "state_version",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "pet_state",
+          "type": "jsonb",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "pet item owner must match attached character owner",
+        "pet cosmetics never alter competitive hitbox",
+        "pet_state allowlisted schema, no arbitrary binary code"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "creations.student_projects",
+      "domain": "creations",
+      "summary": "Sản phẩm học sinh tự tạo được tách khỏi asset catalog đã duyệt.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "creator_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "organization_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "tenancy.organizations.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "project_type",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "visibility",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "private"
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "draft"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "default private; ownership/guardian moderation required",
+        "no direct publication to public asset CDN"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "creations.student_project_versions",
+      "domain": "creations",
+      "summary": "Lịch sử version của project: source editable và asset đầu ra được kiểm duyệt.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "project_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "creations.student_projects.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_hash",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_storage_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "output_asset_version_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "assets.asset_versions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [
+        "(project_id,revision)"
+      ],
+      "invariants": [
+        "immutable revision + object ownership",
+        "source_storage_key private; signed access only",
+        "GLB/texture licensing and safe content scanning"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "creations.project_review_events",
+      "domain": "creations",
+      "summary": "Biên bản kiểm duyệt riêng từng version, có người duyệt và lý do đã lọc PII.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "project_version_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "creations.student_project_versions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "reviewer_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "identity.users.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "decision",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "review_note_redacted",
+          "type": "text",
+          "pk": false,
+          "required": false,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "reviewed_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "append only, reviewer cannot self approve",
+        "public release requires verified approval and guardian policy"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "progress.student_game_progress",
+      "domain": "progress",
+      "summary": "Projection tiến trình học sinh theo game; rebuild từ verified progress events.",
+      "sensitivity": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "student_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "game_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "catalog.games.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "total_exp",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "game_level",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_revision",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "calculated_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        }
+      ],
+      "unique": [
+        "(student_user_id,game_id)"
+      ],
+      "invariants": [
+        "read-model only; EXP not currency or school grade",
+        "source_revision monotonic; private by default"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "progress.student_game_progress_events",
+      "domain": "progress",
+      "summary": "Tiến trình liên game ghi append-only, chỉ nhận nguồn đã xác thực.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "student_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "game_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "catalog.games.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_match_result_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "gameplay.match_results.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_learning_attempt_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "education.learning_attempts.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "event_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "exp_delta",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "recorded_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "event source verified; academic feedback remains private",
+        "idempotent events, corrections via compensating delta"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "ownership.inventory_events",
+      "domain": "ownership",
+      "summary": "Ledger quyền sở hữu items: grant, revoke, equip, consumption; immutable.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "inventory_instance_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "commerce.inventory_instances.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "inventory_stack_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "ownership.inventory_stacks.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_reward_grant_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "economy.reward_grants.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_order_line_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "commerce.shop_order_lines.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "event_type",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "quantity_delta",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "event_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "occurred_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "exactly one of inventory_instance or inventory_stack",
+        "no owner transfer for minors",
+        "at least one verified grant/order/audited admin source",
+        "append-only; no silent deletion"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "ownership.inventory_stacks",
+      "domain": "ownership",
+      "summary": "Số lượng vật phẩm stackable, tách khỏi mỗi bản thể inventory_instances.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "item_version_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "commerce.item_versions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "available_qty",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "reserved_qty",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "revision",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [
+        "(owner_user_id,item_version_id)"
+      ],
+      "invariants": [
+        "available_qty >= 0 and reserved_qty >= 0",
+        "stack cache must reconcile with immutable inventory_events",
+        "lock rows for concurrent equipment/consume"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "economy.wallet_balance_projections",
+      "domain": "economy",
+      "summary": "Số dư Coin đọc nhanh; dẫn xuất từ ledger, không được là nguồn sự thật.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "ledger_account_id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": "commerce.ledger_accounts.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "available_units",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "held_units",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_revision",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "calculated_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "projection rebuild from immutable posted ledger entries + active holds",
+        "never mutate wallet balance from client/Agent"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "economy.wallet_holds",
+      "domain": "economy",
+      "summary": "Giữ Coin cho đơn hàng chờ xử lý, có TTL/idempotency.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "ledger_account_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "commerce.ledger_accounts.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "shop_order_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "commerce.shop_orders.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "hold_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "amount_units",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "active"
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "amount_units > 0",
+        "available after holds must never be negative",
+        "atomic lock and release/consume under database transaction"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "economy.reward_policies",
+      "domain": "economy",
+      "summary": "Quy tắc phát Coin/đồ theo nguồn đạt chuẩn, revision immutable.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "policy_code",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "currency_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "commerce.currencies.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "organization_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "tenancy.organizations.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "max_units_per_event",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "approved_by",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "identity.users.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "effective_from",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "draft"
+        }
+      ],
+      "unique": [
+        "(policy_code,revision,organization_id)"
+      ],
+      "invariants": [
+        "closed loop only, cannot buy real goods or cash out",
+        "valid source evidence, reward caps and rate limits",
+        "guardian/age policy verified in service"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "economy.reward_grants",
+      "domain": "economy",
+      "summary": "Biên nhận phát Coin hoặc item; chỉ posted sau khi ledger và inventory commit.",
+      "sensitivity": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "recipient_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "reward_policy_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "economy.reward_policies.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_match_result_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "gameplay.match_results.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_learning_attempt_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "education.learning_attempts.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "posted_transaction_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "commerce.ledger_transactions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_event_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "pending"
+        },
+        {
+          "name": "awarded_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": false,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "idempotent, exact verified source and non-self-grant",
+        "reward postings and inventory grant atomic/replay safe",
+        "no automatic grade-to-Coin promise"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "economy.wallet_spending_limits",
+      "domain": "economy",
+      "summary": "Ngưỡng chi tiêu Coin theo người, loại tiền và kỳ hiệu lực.",
+      "sensitivity": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "recipient_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "currency_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "commerce.currencies.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "period_code",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "max_spend_units",
+          "type": "bigint",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "effective_from",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "approved_guardian_link_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "identity.guardian_links.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "active"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "limits by age/guardian and policy, not user-controlled",
+        "actual spend derived from posted ledger",
+        "no self-elevated limit edits"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "achievements.achievement_definitions",
+      "domain": "achievements",
+      "summary": "Bộ achievement/huy hiệu phiên bản hóa, tách ranking/game score.",
+      "sensitivity": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "code",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "icon_item_version_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "commerce.item_versions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "criteria_sha256",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "draft"
+        }
+      ],
+      "unique": [
+        "(code,revision)"
+      ],
+      "invariants": [
+        "verified, published criteria immutable",
+        "icon rights approved"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    },
+    {
+      "id": "achievements.achievement_grants",
+      "domain": "achievements",
+      "summary": "Học sinh nhận thành tích với nguồn xác minh và phạm vi hiển thị độc lập.",
+      "sensitivity": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "pk": true,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "student_user_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "student.student_profiles.user_id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "definition_id",
+          "type": "uuid",
+          "pk": false,
+          "required": true,
+          "reference": "achievements.achievement_definitions.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_result_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "gameplay.match_results.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "source_learning_attempt_id",
+          "type": "uuid",
+          "pk": false,
+          "required": false,
+          "reference": "education.learning_attempts.id",
+          "unique": false,
+          "default": null
+        },
+        {
+          "name": "grant_key",
+          "type": "text",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": true,
+          "default": null
+        },
+        {
+          "name": "visible_publicly",
+          "type": "boolean",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "false"
+        },
+        {
+          "name": "granted_at",
+          "type": "timestamptz",
+          "pk": false,
+          "required": true,
+          "reference": null,
+          "unique": false,
+          "default": "now()"
+        }
+      ],
+      "unique": [],
+      "invariants": [
+        "grant unique by eligibility source",
+        "not equivalent to score, grade, wallet credit or item ownership",
+        "public display requires separate guardian/age review"
+      ],
+      "status": "DESIGN_CANDIDATE"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "student.student_profiles",
+      "from_column": "user_id",
+      "to": "identity.users",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "student.privacy_settings",
+      "from_column": "student_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "student.privacy_settings",
+      "from_column": "guardian_link_id",
+      "to": "identity.guardian_links",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "characters.character_definitions",
+      "from_column": "created_by",
+      "to": "identity.users",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "characters.character_versions",
+      "from_column": "definition_id",
+      "to": "characters.character_definitions",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "characters.character_versions",
+      "from_column": "rig_id",
+      "to": "commerce.avatar_rigs",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "characters.character_versions",
+      "from_column": "base_asset_version_id",
+      "to": "assets.asset_versions",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "characters.character_instances",
+      "from_column": "owner_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "characters.character_instances",
+      "from_column": "character_version_id",
+      "to": "characters.character_versions",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "characters.character_loadout_bindings",
+      "from_column": "character_instance_id",
+      "to": "characters.character_instances",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "characters.character_loadout_bindings",
+      "from_column": "loadout_id",
+      "to": "commerce.avatar_loadouts",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "characters.character_loadout_bindings",
+      "from_column": "context_game_id",
+      "to": "catalog.games",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "characters.character_progress_events",
+      "from_column": "character_instance_id",
+      "to": "characters.character_instances",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "characters.character_progress_events",
+      "from_column": "source_result_id",
+      "to": "gameplay.match_results",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "characters.pet_states",
+      "from_column": "inventory_instance_id",
+      "to": "commerce.inventory_instances",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "characters.pet_states",
+      "from_column": "character_instance_id",
+      "to": "characters.character_instances",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "creations.student_projects",
+      "from_column": "creator_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "creations.student_projects",
+      "from_column": "organization_id",
+      "to": "tenancy.organizations",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "creations.student_project_versions",
+      "from_column": "project_id",
+      "to": "creations.student_projects",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "creations.student_project_versions",
+      "from_column": "output_asset_version_id",
+      "to": "assets.asset_versions",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "creations.project_review_events",
+      "from_column": "project_version_id",
+      "to": "creations.student_project_versions",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "creations.project_review_events",
+      "from_column": "reviewer_user_id",
+      "to": "identity.users",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "progress.student_game_progress",
+      "from_column": "student_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "progress.student_game_progress",
+      "from_column": "game_id",
+      "to": "catalog.games",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "progress.student_game_progress_events",
+      "from_column": "student_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "progress.student_game_progress_events",
+      "from_column": "game_id",
+      "to": "catalog.games",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "progress.student_game_progress_events",
+      "from_column": "source_match_result_id",
+      "to": "gameplay.match_results",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "progress.student_game_progress_events",
+      "from_column": "source_learning_attempt_id",
+      "to": "education.learning_attempts",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "ownership.inventory_events",
+      "from_column": "inventory_instance_id",
+      "to": "commerce.inventory_instances",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "ownership.inventory_events",
+      "from_column": "inventory_stack_id",
+      "to": "ownership.inventory_stacks",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "ownership.inventory_events",
+      "from_column": "owner_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "ownership.inventory_events",
+      "from_column": "source_reward_grant_id",
+      "to": "economy.reward_grants",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "ownership.inventory_events",
+      "from_column": "source_order_line_id",
+      "to": "commerce.shop_order_lines",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "ownership.inventory_stacks",
+      "from_column": "owner_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "ownership.inventory_stacks",
+      "from_column": "item_version_id",
+      "to": "commerce.item_versions",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.wallet_balance_projections",
+      "from_column": "ledger_account_id",
+      "to": "commerce.ledger_accounts",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.wallet_holds",
+      "from_column": "ledger_account_id",
+      "to": "commerce.ledger_accounts",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.wallet_holds",
+      "from_column": "shop_order_id",
+      "to": "commerce.shop_orders",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.reward_policies",
+      "from_column": "currency_id",
+      "to": "commerce.currencies",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.reward_policies",
+      "from_column": "organization_id",
+      "to": "tenancy.organizations",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "economy.reward_policies",
+      "from_column": "approved_by",
+      "to": "identity.users",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "economy.reward_grants",
+      "from_column": "recipient_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "economy.reward_grants",
+      "from_column": "reward_policy_id",
+      "to": "economy.reward_policies",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "economy.reward_grants",
+      "from_column": "source_match_result_id",
+      "to": "gameplay.match_results",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "economy.reward_grants",
+      "from_column": "source_learning_attempt_id",
+      "to": "education.learning_attempts",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.reward_grants",
+      "from_column": "posted_transaction_id",
+      "to": "commerce.ledger_transactions",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.wallet_spending_limits",
+      "from_column": "recipient_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "economy.wallet_spending_limits",
+      "from_column": "currency_id",
+      "to": "commerce.currencies",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "economy.wallet_spending_limits",
+      "from_column": "approved_guardian_link_id",
+      "to": "identity.guardian_links",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "achievements.achievement_definitions",
+      "from_column": "icon_item_version_id",
+      "to": "commerce.item_versions",
+      "to_column": "id",
+      "scope": "P1_design"
+    },
+    {
+      "from": "achievements.achievement_grants",
+      "from_column": "student_user_id",
+      "to": "student.student_profiles",
+      "to_column": "user_id",
+      "scope": "extension"
+    },
+    {
+      "from": "achievements.achievement_grants",
+      "from_column": "definition_id",
+      "to": "achievements.achievement_definitions",
+      "to_column": "id",
+      "scope": "extension"
+    },
+    {
+      "from": "achievements.achievement_grants",
+      "from_column": "source_result_id",
+      "to": "gameplay.match_results",
+      "to_column": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "achievements.achievement_grants",
+      "from_column": "source_learning_attempt_id",
+      "to": "education.learning_attempts",
+      "to_column": "id",
+      "scope": "P1_design"
+    }
+  ],
+  "baseContract": {
+    "p0_tables": 30,
+    "p1_design_tables": 39,
+    "education_physical_pr": 21,
+    "competition_physical_issue": 23,
+    "commerce_physical_issue": 24
+  },
+  "knownLimitations": [
+    "Student profile mapping and guardian review depend on unverified KingDragonHub SSO",
+    "Existing 17 commerce tables are proposed P1 definitions, not SQL",
+    "Education P1-A is still open PR #21 and must not be presumed on main",
+    "No real-coin wallets, asset granting, or authenticated student accounts exist in the deployed product"
+  ],
+  "authorities": [
+    "Product Owner",
+    "DBA",
+    "Security and Privacy",
+    "Economy owner",
+    "3D/Avatar owner"
+  ],
+  "invariants": [
+    "Student identity separated from public alias",
+    "Assets represent content versions, item instances represent rights",
+    "Character instance distinct from Rig/GLB/Loadout",
+    "Game XP and school grade distinct from spendable Coin",
+    "Currency balance is a projection of immutable posted ledger; per-currency double-entry and nonnegative reserve enforced transactionally before release",
+    "No child peer trading, cashout, NFTs, lootboxes, pay-to-win or unmoderated public UGC"
+  ]
+}
