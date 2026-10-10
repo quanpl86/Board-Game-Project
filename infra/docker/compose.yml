@@ -1,0 +1,14 @@
+name: board-game-universe-local
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: {POSTGRES_USER: bgu, POSTGRES_PASSWORD: bgu_local_only, POSTGRES_DB: bgu_dev}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["bgu_pg_data:/var/lib/postgresql/data"]
+    healthcheck: {test: ["CMD-SHELL","pg_isready -U bgu -d bgu_dev"],interval: 5s,timeout: 3s,retries: 10}
+  redis:
+    image: redis:7-alpine
+    ports: ["127.0.0.1:6379:6379"]
+    healthcheck: {test: ["CMD","redis-cli","ping"],interval: 5s,timeout: 3s,retries: 10}
+volumes:
+  bgu_pg_data:

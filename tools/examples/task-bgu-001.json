@@ -1,0 +1,18 @@
+{
+  "task_id": "BGU-001",
+  "executor_role": "BGU-UI",
+  "reviewer_role": "BGU-UX",
+  "risk": "R1",
+  "skills": [
+    "react-frontend",
+    "design-tokens",
+    "iconography"
+  ],
+  "scope": "Build Game Hub demo. No live user/game actions.",
+  "acceptance": [
+    "Responsive at 390, 1024, 1440",
+    "No fake playable game status",
+    "KingDragonHub colors"
+  ],
+  "status": "draft"
+}

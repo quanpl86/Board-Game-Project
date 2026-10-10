@@ -1,6 +1,6 @@
 # AI Agent Instructions — Board Game Universe
 
-**This repo contains planning artifacts only. Do not claim production functions exist until verified in source and tests.**
+**This repo contains architecture documents plus Foundation Alpha source code in a feature branch. Do not claim playable games, integrated database, authenticated MCP or production functions exist until verified by tests and deployment.**
 
 ## Mission
 Build an extensible AI-native board-game platform with a safe, auditable MCP integration for classic games, STEM education, 3D simulation, competitive play, and coding challenges.
@@ -50,3 +50,6 @@ All agents working on this repository MUST read `docs/agents/README.md`, `docs/a
 - **Validation:** `python scripts/validate_agent_pack.py` and `python scripts/validate_docs.py`; these are static checks, not proof an agent runner is installed or model evals have passed.
 
 **Governance:** `docs/agents/AGENT_REGISTRY.json` maps roles and `docs/agents/SKILL_REGISTRY.json` maps exact skill paths; changes require reviewed PR.
+
+## Phase 1 implementation note
+See `docs/implementation/PHASE1_BOOTSTRAP.md` and `docs/implementation/AGENT_TASK_LIFECYCLE.md`. Web catalog is a demo, API seeded data is not persistent, Realtime and MCP are disabled for gameplay/tools, Worker is no-op. `tools/agent-task.mjs` validates role/skill policy only. No actual Agent orchestration is claimed. The new CI is bootstrap-only pending pinned lockfile, full lint/security, SSO and schema signoff.

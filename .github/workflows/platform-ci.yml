@@ -1,0 +1,57 @@
+name: Platform Foundation CI
+on:
+  pull_request:
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'games/**'
+      - 'tools/**'
+      - 'infra/**'
+      - 'package.json'
+      - 'pnpm-workspace.yaml'
+      - 'tsconfig.base.json'
+      - 'turbo.json'
+      - '.github/workflows/platform-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'games/**'
+      - 'tools/**'
+      - 'infra/**'
+      - 'package.json'
+      - 'pnpm-workspace.yaml'
+      - 'tsconfig.base.json'
+      - 'turbo.json'
+      - '.github/workflows/platform-ci.yml'
+permissions:
+  contents: read
+concurrency:
+  group: platform-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install workspace dependencies (temporary bootstrap)
+        run: pnpm install --no-frozen-lockfile
+      - name: Source policy
+        run: pnpm lint
+      - name: TypeScript
+        run: pnpm typecheck
+      - name: Tests
+        run: pnpm test
+      - name: Build Next.js
+        run: pnpm build
+# TODO next PR: commit pnpm-lock.yaml and use --frozen-lockfile;
+# pin Actions by SHA, add ESLint, Playwright, security scan and staging CD.
+# No secrets or deploy permissions in this workflow.
