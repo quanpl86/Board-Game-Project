@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="608" viewBox="0 0 1450 608" role="img" aria-label="DOMAIN CATALOG — 2 BẢNG">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">DOMAIN CATALOG — 2 BẢNG</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">Đầy đủ cột PK/FK và 4 quan hệ chạm domain · Bảng ngoài domain hiện dạng liên kết</text>
+<path d="M440,253 L730,253 L730,177 L1020,177" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
+<path d="M560,289 L500,289 L500,253 L440,253" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,265 L960,265 L960,289 L900,289" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,353 L960,353 L960,289 L900,289" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<rect x="100" y="145" width="340" height="216" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<rect x="100" y="145" width="340" height="37" rx="8" fill="#A36C25"/>
+<text x="112" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">catalog.games</text>
+<text x="111" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="224" font-family="Consolas,monospace" font-size="12" fill="#293647">    slug : text</text>
+<text x="111" y="248" font-family="Consolas,monospace" font-size="12" fill="#293647">    title : text</text>
+<rect x="102" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="272" font-family="Consolas,monospace" font-size="12" fill="#293647">    kind : text</text>
+<text x="111" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="102" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="320" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  created_by : uuid</text>
+<text x="111" y="344" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="560" y="145" width="340" height="288" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<rect x="560" y="145" width="340" height="37" rx="8" fill="#A36C25"/>
+<text x="572" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">catalog.game_versions</text>
+<text x="571" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="224" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  game_id : uuid</text>
+<text x="571" y="248" font-family="Consolas,monospace" font-size="12" fill="#293647">    version : text</text>
+<rect x="562" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="272" font-family="Consolas,monospace" font-size="12" fill="#293647">    engine_api_version : text</text>
+<text x="571" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    state_schema_version : integer</text>
+<rect x="562" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="320" font-family="Consolas,monospace" font-size="12" fill="#293647">    rules_sha256 : text</text>
+<text x="571" y="344" font-family="Consolas,monospace" font-size="12" fill="#293647">    asset_manifest_sha256 : text</text>
+<rect x="562" y="351" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="368" font-family="Consolas,monospace" font-size="12" fill="#293647">    manifest : jsonb</text>
+<text x="571" y="392" font-family="Consolas,monospace" font-size="12" fill="#293647">    published_at : timestamptz</text>
+<rect x="562" y="399" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="416" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="1020" y="145" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="1032" y="169" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="1032" y="190" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="1020" y="233" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1032" y="257" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.game_rooms</text>
+<text x="1032" y="278" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_version_id</text>
+<rect x="1020" y="321" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1032" y="345" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.matches</text>
+<text x="1032" y="366" font-family="monospace" font-size="11" fill="#566579">PK id · FK room_id</text>
+<text x="1385" y="577" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

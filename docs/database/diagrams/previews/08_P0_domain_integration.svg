@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="965" viewBox="0 0 1450 965" role="img" aria-label="DOMAIN INTEGRATION — 4 BẢNG">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">DOMAIN INTEGRATION — 4 BẢNG</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">Đầy đủ cột PK/FK và 8 quan hệ chạm domain · Bảng ngoài domain hiện dạng liên kết</text>
+<path d="M900,289 L960,289 L960,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M900,289 L960,289 L960,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M440,622 L730,622 L730,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M440,622 L730,622 L730,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M440,622 L730,622 L730,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M730,478 L950,478 L950,209 L1170,209" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M560,634 L500,634 L500,622 L440,622" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M900,634 L960,634 L960,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<rect x="100" y="145" width="340" height="264" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<rect x="100" y="145" width="340" height="37" rx="8" fill="#567184"/>
+<text x="112" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">integration.domain_outbox</text>
+<text x="111" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="224" font-family="Consolas,monospace" font-size="12" fill="#293647">    aggregate_type : text</text>
+<text x="111" y="248" font-family="Consolas,monospace" font-size="12" fill="#293647">    aggregate_id : uuid</text>
+<rect x="102" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="272" font-family="Consolas,monospace" font-size="12" fill="#293647">    event_type : text</text>
+<text x="111" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    schema_version : integer</text>
+<rect x="102" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="320" font-family="Consolas,monospace" font-size="12" fill="#293647">    dedupe_key : text</text>
+<text x="111" y="344" font-family="Consolas,monospace" font-size="12" fill="#293647">    payload : jsonb</text>
+<rect x="102" y="351" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="368" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<text x="111" y="392" font-family="Consolas,monospace" font-size="12" fill="#293647">    published_at : timestamptz</text>
+<rect x="560" y="145" width="340" height="288" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<rect x="560" y="145" width="340" height="37" rx="8" fill="#567184"/>
+<text x="572" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">integration.audit_events</text>
+<text x="571" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="224" font-family="Consolas,monospace" font-size="12" fill="#293647">    actor_type : text</text>
+<text x="571" y="248" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  actor_user_id : uuid</text>
+<rect x="562" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="272" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  organization_id : uuid</text>
+<text x="571" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    action_code : text</text>
+<rect x="562" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="320" font-family="Consolas,monospace" font-size="12" fill="#293647">    resource_type : text</text>
+<text x="571" y="344" font-family="Consolas,monospace" font-size="12" fill="#293647">    resource_id : uuid</text>
+<rect x="562" y="351" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="368" font-family="Consolas,monospace" font-size="12" fill="#293647">    correlation_id : uuid</text>
+<text x="571" y="392" font-family="Consolas,monospace" font-size="12" fill="#293647">    redacted_metadata : jsonb</text>
+<rect x="562" y="399" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="416" font-family="Consolas,monospace" font-size="12" fill="#293647">    occurred_at : timestamptz</text>
+<rect x="100" y="454" width="340" height="336" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<rect x="100" y="454" width="340" height="37" rx="8" fill="#567184"/>
+<text x="112" y="479" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">integration.agent_approvals</text>
+<text x="111" y="509" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="516" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="533" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  requested_by : uuid</text>
+<text x="111" y="557" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  approved_by : uuid</text>
+<rect x="102" y="564" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="581" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  organization_id : uuid</text>
+<text x="111" y="605" font-family="Consolas,monospace" font-size="12" fill="#293647">    tool_code : text</text>
+<rect x="102" y="612" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="629" font-family="Consolas,monospace" font-size="12" fill="#293647">    target_resource : text</text>
+<text x="111" y="653" font-family="Consolas,monospace" font-size="12" fill="#293647">    revision_sha256 : text</text>
+<rect x="102" y="660" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="677" font-family="Consolas,monospace" font-size="12" fill="#293647">    scope_hash : text</text>
+<text x="111" y="701" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="102" y="708" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="725" font-family="Consolas,monospace" font-size="12" fill="#293647">    expires_at : timestamptz</text>
+<text x="111" y="749" font-family="Consolas,monospace" font-size="12" fill="#293647">    consumed_at : timestamptz</text>
+<rect x="102" y="756" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="773" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="560" y="478" width="340" height="312" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<rect x="560" y="478" width="340" height="37" rx="8" fill="#567184"/>
+<text x="572" y="503" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">integration.agent_invocations</text>
+<text x="571" y="533" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="540" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="557" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  initiated_by : uuid</text>
+<text x="571" y="581" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  approval_id : uuid</text>
+<rect x="562" y="588" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="605" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  organization_id : uuid</text>
+<text x="571" y="629" font-family="Consolas,monospace" font-size="12" fill="#293647">    tool_code : text</text>
+<rect x="562" y="636" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="653" font-family="Consolas,monospace" font-size="12" fill="#293647">    idempotency_key : text</text>
+<text x="571" y="677" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="562" y="684" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="701" font-family="Consolas,monospace" font-size="12" fill="#293647">    started_at : timestamptz</text>
+<text x="571" y="725" font-family="Consolas,monospace" font-size="12" fill="#293647">    finished_at : timestamptz</text>
+<rect x="562" y="732" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="749" font-family="Consolas,monospace" font-size="12" fill="#293647">    redacted_result : jsonb</text>
+<text x="571" y="773" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="1020" y="145" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="1032" y="169" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="1032" y="190" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="1020" y="233" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="1032" y="257" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.organizations</text>
+<text x="1032" y="278" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<text x="1385" y="934" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

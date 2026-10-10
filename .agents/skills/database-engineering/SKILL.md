@@ -49,3 +49,6 @@ database, SQL, migrations, schema, index, data dictionary, PostgreSQL, Drizzle, 
 
 ## Handoff
 Use `docs/agents/templates/HANDOFF.md` with changed files, status, test links, unresolved risks and reviewer. Any unapproved R3/R4 action stops at proposal/approval stage.
+
+## P0 database diagram and source-of-truth gate
+Before P0 Database, API, Game Server, frontend or MCP implementation that touches persisted data, read `docs/database/AGENT_IMPLEMENTATION_REFERENCE.md`, the [editable Draw.io source and 39 SVG previews](../../../docs/database/diagrams/README.md), affected `docs/database/tables/<schema.table>.md`, `db/schema/p0_tables.json` and current SQL. Do not infer permissions from ERD edges. DB table/relation changes require regeneration of diagram+CSV assets and CI parity; never add SSO/RLS allow rules or production migrations without human approval.

@@ -8,3 +8,9 @@
 /.agents/ @quanpl86
 /docs/agents/ @quanpl86
 /scripts/validate_agent_pack.py @quanpl86
+
+# Database physical schema, editable diagrams and cross-layer contracts
+/db/ @quanpl86
+/docs/database/ @quanpl86
+/scripts/generate_db_diagrams.mjs @quanpl86
+/scripts/check_db_diagrams.py @quanpl86

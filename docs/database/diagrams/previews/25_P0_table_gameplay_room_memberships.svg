@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1730" height="577" viewBox="0 0 1730 577" role="img" aria-label="BẢNG GAMEPLAY.ROOM_MEMBERSHIPS">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">BẢNG GAMEPLAY.ROOM_MEMBERSHIPS</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">6 cột · 0 FK tham chiếu tới · 2 FK tham chiếu đi · 0 self-edge</text>
+<path d="M1040,296 L1180,296 L1180,222 L1320,222" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1040,296 L1180,296 L1180,322 L1320,322" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<rect x="700" y="200" width="340" height="192" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="700" y="200" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="712" y="225" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.room_memberships</text>
+<text x="711" y="255" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="702" y="262" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="279" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  room_id : uuid</text>
+<text x="711" y="303" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  user_id : uuid</text>
+<rect x="702" y="310" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="327" font-family="Consolas,monospace" font-size="12" fill="#293647">    seat : integer</text>
+<text x="711" y="351" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="702" y="358" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="375" font-family="Consolas,monospace" font-size="12" fill="#293647">    joined_at : timestamptz</text>
+<rect x="1320" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1332" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.game_rooms</text>
+<text x="1332" y="235" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_version_id</text>
+<rect x="1320" y="290" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="1332" y="314" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="1332" y="335" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<text x="1665" y="546" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

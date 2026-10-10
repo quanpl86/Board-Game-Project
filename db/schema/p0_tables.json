@@ -1,0 +1,975 @@
+{
+  "version": "0.1.0",
+  "status": "proposed_not_frozen",
+  "source": "docs/architecture/DB_FREEZE_READINESS_V2.md",
+  "totalTables": 30,
+  "totalForeignKeys": 49,
+  "domains": [
+    "identity",
+    "tenancy",
+    "assets",
+    "catalog",
+    "gameplay",
+    "publishing",
+    "integration"
+  ],
+  "tableSpecs": [
+    {
+      "id": "identity.users",
+      "domain": "identity",
+      "name": "users",
+      "description": "Danh tính toàn cục của người dùng; không đồng nhất với external SSO subject.",
+      "owner": "Identity",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "account_type text NOT NULL CHECK (account_type IN ('adult','student','service'))",
+        "status text NOT NULL DEFAULT 'active' CHECK (status IN ('active','limited','suspended','deactivated'))",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "updated_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "identity.external_identities",
+      "domain": "identity",
+      "name": "external_identities",
+      "description": "Ánh xạ tài khoản bên KingDragonHub/OIDC sang user UUID nội bộ; không lưu password/token.",
+      "owner": "Identity",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "provider text NOT NULL",
+        "provider_subject text NOT NULL",
+        "linked_at timestamptz NOT NULL DEFAULT now()",
+        "revoked_at timestamptz",
+        "UNIQUE (provider,provider_subject)",
+        "UNIQUE (user_id,provider,provider_subject)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX external_identities_user_idx ON identity.external_identities(user_id);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "identity.profiles",
+      "domain": "identity",
+      "name": "profiles",
+      "description": "Thông tin hiển thị với quyền riêng tư tách biệt danh tính đăng nhập.",
+      "owner": "Identity",
+      "classification": "personal",
+      "fields": [
+        "user_id uuid PRIMARY KEY REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "display_name text NOT NULL CHECK (length(btrim(display_name)) BETWEEN 1 AND 80)",
+        "locale text NOT NULL DEFAULT 'vi-VN'",
+        "visibility text NOT NULL DEFAULT 'private' CHECK (visibility IN ('private','organization','public_approved'))",
+        "updated_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "identity.guardian_links",
+      "domain": "identity",
+      "name": "guardian_links",
+      "description": "Quan hệ người giám hộ–học sinh; xác minh trước khi có quyền xem dữ liệu.",
+      "owner": "Identity/Safety",
+      "classification": "highly restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "guardian_user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "student_user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "status text NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','verified','revoked'))",
+        "verified_by uuid REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "verified_at timestamptz",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "CHECK (guardian_user_id <> student_user_id)",
+        "UNIQUE (guardian_user_id,student_user_id)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "identity.policy_acknowledgments",
+      "domain": "identity",
+      "name": "policy_acknowledgments",
+      "description": "Bản ghi phiên bản chính sách đã xác nhận; không thay thế quy trình đồng ý hợp pháp.",
+      "owner": "Identity/Safety",
+      "classification": "highly restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "policy_code text NOT NULL",
+        "policy_version text NOT NULL",
+        "acknowledged_at timestamptz NOT NULL DEFAULT now()",
+        "source text NOT NULL CHECK (source IN ('web','guardian','organization','admin'))",
+        "UNIQUE (user_id,policy_code,policy_version)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "tenancy.organizations",
+      "domain": "tenancy",
+      "name": "organizations",
+      "description": "Trường, CLB hoặc đơn vị vận hành; tách khỏi người dùng toàn cục.",
+      "owner": "Tenancy",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "slug text NOT NULL UNIQUE",
+        "display_name text NOT NULL",
+        "kind text NOT NULL CHECK (kind IN ('school','center','club','organizer','other'))",
+        "status text NOT NULL DEFAULT 'active' CHECK (status IN ('active','suspended','archived'))",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "tenancy.organization_memberships",
+      "domain": "tenancy",
+      "name": "organization_memberships",
+      "description": "Thành viên trong tổ chức, có trạng thái riêng và FK toàn vẹn.",
+      "owner": "Tenancy",
+      "classification": "restricted",
+      "fields": [
+        "organization_id uuid NOT NULL REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "status text NOT NULL DEFAULT 'invited' CHECK (status IN ('invited','active','suspended','left'))",
+        "joined_at timestamptz",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "PRIMARY KEY (organization_id,user_id)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX memberships_by_user_idx ON tenancy.organization_memberships(user_id,status);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "tenancy.roles",
+      "domain": "tenancy",
+      "name": "roles",
+      "description": "Vai trò nghiệp vụ theo code; không dùng một role global trong users.",
+      "owner": "IAM",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "code text NOT NULL UNIQUE",
+        "description text NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "tenancy.permissions",
+      "domain": "tenancy",
+      "name": "permissions",
+      "description": "Quyền chi tiết áp dụng bởi service, không mặc định do UI quyết định.",
+      "owner": "IAM",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "code text NOT NULL UNIQUE",
+        "resource_type text NOT NULL",
+        "description text NOT NULL"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "tenancy.role_permissions",
+      "domain": "tenancy",
+      "name": "role_permissions",
+      "description": "Quan hệ N–N giữa vai trò và quyền.",
+      "owner": "IAM",
+      "classification": "restricted",
+      "fields": [
+        "role_id uuid NOT NULL REFERENCES tenancy.roles(id) ON DELETE RESTRICT",
+        "permission_id uuid NOT NULL REFERENCES tenancy.permissions(id) ON DELETE RESTRICT",
+        "PRIMARY KEY (role_id,permission_id)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "tenancy.role_assignments",
+      "domain": "tenancy",
+      "name": "role_assignments",
+      "description": "Phân vai trò theo membership trong tổ chức, không tự cấp quyền qua SSO claim.",
+      "owner": "IAM",
+      "classification": "highly restricted",
+      "fields": [
+        "organization_id uuid NOT NULL",
+        "user_id uuid NOT NULL",
+        "role_id uuid NOT NULL REFERENCES tenancy.roles(id) ON DELETE RESTRICT",
+        "assigned_by uuid REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "assigned_at timestamptz NOT NULL DEFAULT now()",
+        "PRIMARY KEY (organization_id,user_id,role_id)",
+        "FOREIGN KEY (organization_id,user_id) REFERENCES tenancy.organization_memberships(organization_id,user_id) ON DELETE RESTRICT"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX role_assignments_lookup_idx ON tenancy.role_assignments(user_id,organization_id);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "assets.assets",
+      "domain": "assets",
+      "name": "assets",
+      "description": "Danh mục asset source; không đại diện vật phẩm đã sở hữu.",
+      "owner": "Asset Registry",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "owner_organization_id uuid REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "created_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "slug text NOT NULL UNIQUE",
+        "kind text NOT NULL CHECK (kind IN ('model3d','texture','image','video','audio','other'))",
+        "rights_status text NOT NULL DEFAULT 'unverified' CHECK (rights_status IN ('unverified','approved','restricted','revoked'))",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "assets.asset_versions",
+      "domain": "assets",
+      "name": "asset_versions",
+      "description": "Version/hash bất biến của GLB/ảnh/video; asset đã approve không cập nhật trong chỗ.",
+      "owner": "Asset Registry",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "asset_id uuid NOT NULL REFERENCES assets.assets(id) ON DELETE RESTRICT",
+        "version integer NOT NULL CHECK (version > 0)",
+        "sha256 text NOT NULL CHECK (sha256 ~ '^[a-f0-9]{64}$')",
+        "storage_key text NOT NULL",
+        "mime_type text NOT NULL",
+        "status text NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','review','approved','revoked'))",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (asset_id,version)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX asset_versions_asset_status_idx ON assets.asset_versions(asset_id,status);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "catalog.games",
+      "domain": "catalog",
+      "name": "games",
+      "description": "Game Registry; danh mục game độc lập room, kết quả, phần thưởng.",
+      "owner": "Game Catalog",
+      "classification": "public filtered",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "slug text NOT NULL UNIQUE",
+        "title text NOT NULL",
+        "kind text NOT NULL CHECK (kind IN ('board','card','puzzle','stem','coding','simulation','party'))",
+        "status text NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','review','published','archived'))",
+        "created_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "catalog.game_versions",
+      "domain": "catalog",
+      "name": "game_versions",
+      "description": "Phiên bản luật và manifest được pin vào phòng/trận; published không sửa.",
+      "owner": "Game Catalog",
+      "classification": "public filtered",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "game_id uuid NOT NULL REFERENCES catalog.games(id) ON DELETE RESTRICT",
+        "version text NOT NULL",
+        "engine_api_version text NOT NULL",
+        "state_schema_version integer NOT NULL CHECK (state_schema_version > 0)",
+        "rules_sha256 text NOT NULL CHECK (rules_sha256 ~ '^[a-f0-9]{64}$')",
+        "asset_manifest_sha256 text NOT NULL CHECK (asset_manifest_sha256 ~ '^[a-f0-9]{64}$')",
+        "manifest jsonb NOT NULL",
+        "published_at timestamptz",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (game_id,version)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.game_rooms",
+      "domain": "gameplay",
+      "name": "game_rooms",
+      "description": "Phòng chờ trước trận; một room có thể có nhiều trận rematch.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "game_version_id uuid NOT NULL REFERENCES catalog.game_versions(id) ON DELETE RESTRICT",
+        "organization_id uuid REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "created_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "visibility text NOT NULL DEFAULT 'private' CHECK (visibility IN ('private','organization','classroom','public'))",
+        "status text NOT NULL DEFAULT 'waiting' CHECK (status IN ('draft','waiting','ready','in_match','closed','canceled','expired'))",
+        "capacity integer NOT NULL CHECK (capacity BETWEEN 1 AND 100)",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (id,game_version_id)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX room_status_idx ON gameplay.game_rooms(game_version_id,status,created_at DESC);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.room_memberships",
+      "domain": "gameplay",
+      "name": "room_memberships",
+      "description": "Thành viên và ghế của phòng; chỉ ghế active được unique.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "room_id uuid NOT NULL REFERENCES gameplay.game_rooms(id) ON DELETE RESTRICT",
+        "user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "seat integer CHECK (seat >= 0)",
+        "status text NOT NULL DEFAULT 'joined' CHECK (status IN ('joined','ready','left','kicked'))",
+        "joined_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (room_id,user_id)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE UNIQUE INDEX room_live_seat_unique ON gameplay.room_memberships(room_id,seat) WHERE seat IS NOT NULL AND status IN ('joined','ready');"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.matches",
+      "domain": "gameplay",
+      "name": "matches",
+      "description": "Trận cụ thể pin game_version từ room; kết quả server xác minh.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "room_id uuid NOT NULL",
+        "game_version_id uuid NOT NULL REFERENCES catalog.game_versions(id) ON DELETE RESTRICT",
+        "status text NOT NULL DEFAULT 'created' CHECK (status IN ('created','active','paused','pending_review','finalized','aborted'))",
+        "config jsonb NOT NULL DEFAULT '{}'::jsonb",
+        "started_at timestamptz",
+        "finalized_at timestamptz",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "FOREIGN KEY (room_id,game_version_id) REFERENCES gameplay.game_rooms(id,game_version_id) ON DELETE RESTRICT"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX matches_by_room_idx ON gameplay.matches(room_id,created_at DESC);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.match_participants",
+      "domain": "gameplay",
+      "name": "match_participants",
+      "description": "Người chơi/quan sát có định danh; ghế unique khi khác null.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "match_id uuid NOT NULL REFERENCES gameplay.matches(id) ON DELETE RESTRICT",
+        "user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "seat integer CHECK (seat >= 0)",
+        "role text NOT NULL DEFAULT 'player' CHECK (role IN ('player','host','observer'))",
+        "joined_at timestamptz NOT NULL DEFAULT now()",
+        "CHECK (role = 'observer' OR seat IS NOT NULL)",
+        "UNIQUE (match_id,user_id)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE UNIQUE INDEX match_live_seat_unique ON gameplay.match_participants(match_id,seat) WHERE seat IS NOT NULL;"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.match_commands",
+      "domain": "gameplay",
+      "name": "match_commands",
+      "description": "Lệnh đã được Game Server kiểm tra; append-only, idempotent.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "match_id uuid NOT NULL REFERENCES gameplay.matches(id) ON DELETE RESTRICT",
+        "actor_user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "seq bigint NOT NULL CHECK (seq > 0)",
+        "idempotency_key text NOT NULL",
+        "command_type text NOT NULL",
+        "payload jsonb NOT NULL",
+        "accepted_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (match_id,seq)",
+        "UNIQUE (match_id,actor_user_id,idempotency_key)",
+        "FOREIGN KEY (match_id,actor_user_id) REFERENCES gameplay.match_participants(match_id,user_id) ON DELETE RESTRICT"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX match_commands_recent_idx ON gameplay.match_commands(match_id,seq DESC);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.match_snapshots",
+      "domain": "gameplay",
+      "name": "match_snapshots",
+      "description": "Snapshot phiên bản state và hash để replay sau khi reconnect.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "match_id uuid NOT NULL REFERENCES gameplay.matches(id) ON DELETE RESTRICT",
+        "state_revision bigint NOT NULL CHECK (state_revision >= 0)",
+        "schema_version integer NOT NULL CHECK (schema_version > 0)",
+        "state_sha256 text NOT NULL CHECK (state_sha256 ~ '^[a-f0-9]{64}$')",
+        "state jsonb NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "PRIMARY KEY (match_id,state_revision)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.match_results",
+      "domain": "gameplay",
+      "name": "match_results",
+      "description": "Kết quả một lần cho một trận; sửa sai bằng dòng bù/version tương lai.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "match_id uuid NOT NULL UNIQUE REFERENCES gameplay.matches(id) ON DELETE RESTRICT",
+        "rules_sha256 text NOT NULL CHECK (rules_sha256 ~ '^[a-f0-9]{64}$')",
+        "result_sha256 text NOT NULL CHECK (result_sha256 ~ '^[a-f0-9]{64}$')",
+        "result jsonb NOT NULL",
+        "finalized_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (id,match_id)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "gameplay.match_result_entries",
+      "domain": "gameplay",
+      "name": "match_result_entries",
+      "description": "Điểm/địa vị trong kết quả, không phải bảng xếp hạng hay ví Coin.",
+      "owner": "Game Runtime",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "result_id uuid NOT NULL",
+        "match_id uuid NOT NULL",
+        "user_id uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "placement integer CHECK (placement > 0)",
+        "score_numeric numeric(18,5)",
+        "winner boolean NOT NULL DEFAULT false",
+        "FOREIGN KEY (result_id,match_id) REFERENCES gameplay.match_results(id,match_id) ON DELETE RESTRICT",
+        "FOREIGN KEY (match_id,user_id) REFERENCES gameplay.match_participants(match_id,user_id) ON DELETE RESTRICT",
+        "UNIQUE (result_id,user_id)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "publishing.content_items",
+      "domain": "publishing",
+      "name": "content_items",
+      "description": "Trang/bài/khối nội dung; không trộn event/season/campaign.",
+      "owner": "CMS",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "owner_organization_id uuid REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "created_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "slug text NOT NULL",
+        "content_type text NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE UNIQUE INDEX content_global_slug_unique ON publishing.content_items(slug) WHERE owner_organization_id IS NULL;",
+        "CREATE UNIQUE INDEX content_org_slug_unique ON publishing.content_items(owner_organization_id,slug) WHERE owner_organization_id IS NOT NULL;"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "publishing.content_revisions",
+      "domain": "publishing",
+      "name": "content_revisions",
+      "description": "Nội dung theo revision, hash và người tạo, không ghi đè bản cũ.",
+      "owner": "CMS",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "content_item_id uuid NOT NULL REFERENCES publishing.content_items(id) ON DELETE RESTRICT",
+        "revision integer NOT NULL CHECK (revision > 0)",
+        "locale text NOT NULL DEFAULT 'vi-VN'",
+        "schema_version integer NOT NULL DEFAULT 1 CHECK (schema_version > 0)",
+        "body jsonb NOT NULL",
+        "body_sha256 text NOT NULL CHECK (body_sha256 ~ '^[a-f0-9]{64}$')",
+        "created_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (content_item_id,locale,revision)"
+      ],
+      "extra": [],
+      "indexes": [],
+      "retention": "Review before production"
+    },
+    {
+      "id": "publishing.content_publications",
+      "domain": "publishing",
+      "name": "content_publications",
+      "description": "Con trỏ phát hành và cửa sổ thời gian; phải được phê duyệt đúng revision.",
+      "owner": "CMS",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "revision_id uuid NOT NULL REFERENCES publishing.content_revisions(id) ON DELETE RESTRICT",
+        "approved_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "channel text NOT NULL",
+        "target_policy jsonb NOT NULL DEFAULT '{}'::jsonb",
+        "priority integer NOT NULL DEFAULT 0",
+        "starts_at timestamptz NOT NULL",
+        "ends_at timestamptz",
+        "status text NOT NULL DEFAULT 'scheduled' CHECK (status IN ('scheduled','active','expired','revoked'))",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "CHECK (ends_at IS NULL OR ends_at > starts_at)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX content_publication_lookup_idx ON publishing.content_publications(channel,status,starts_at,ends_at,priority DESC);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "integration.domain_outbox",
+      "domain": "integration",
+      "name": "domain_outbox",
+      "description": "Thông điệp nghiệp vụ sau commit; consumer retry idempotent.",
+      "owner": "Platform Integration",
+      "classification": "restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "aggregate_type text NOT NULL",
+        "aggregate_id uuid NOT NULL",
+        "event_type text NOT NULL",
+        "schema_version integer NOT NULL CHECK (schema_version > 0)",
+        "dedupe_key text UNIQUE",
+        "payload jsonb NOT NULL",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "published_at timestamptz"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX outbox_pending_idx ON integration.domain_outbox(created_at) WHERE published_at IS NULL;"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "integration.audit_events",
+      "domain": "integration",
+      "name": "audit_events",
+      "description": "Lịch sử tác động append-only và redacted; không đưa token hoặc dữ liệu trẻ em vào payload.",
+      "owner": "Platform Security",
+      "classification": "highly restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "actor_type text NOT NULL CHECK (actor_type IN ('human','agent','service'))",
+        "actor_user_id uuid REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "organization_id uuid REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "action_code text NOT NULL",
+        "resource_type text NOT NULL",
+        "resource_id uuid",
+        "correlation_id uuid NOT NULL",
+        "redacted_metadata jsonb NOT NULL DEFAULT '{}'::jsonb",
+        "occurred_at timestamptz NOT NULL DEFAULT now()"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX audit_time_idx ON integration.audit_events(occurred_at DESC);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "integration.agent_approvals",
+      "domain": "integration",
+      "name": "agent_approvals",
+      "description": "Human approval gắn với hash và phạm vi chính xác, có hạn dùng.",
+      "owner": "AI Control",
+      "classification": "highly restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "requested_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "approved_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "organization_id uuid REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "tool_code text NOT NULL",
+        "target_resource text NOT NULL",
+        "revision_sha256 text NOT NULL CHECK (revision_sha256 ~ '^[a-f0-9]{64}$')",
+        "scope_hash text NOT NULL CHECK (scope_hash ~ '^[a-f0-9]{64}$')",
+        "status text NOT NULL DEFAULT 'approved' CHECK (status IN ('approved','consumed','revoked','expired'))",
+        "expires_at timestamptz NOT NULL",
+        "consumed_at timestamptz",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "CHECK (approved_by <> requested_by)",
+        "CHECK ((status = 'consumed') = (consumed_at IS NOT NULL))"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX agent_approvals_lookup_idx ON integration.agent_approvals(tool_code,status,expires_at);"
+      ],
+      "retention": "Review before production"
+    },
+    {
+      "id": "integration.agent_invocations",
+      "domain": "integration",
+      "name": "agent_invocations",
+      "description": "Một lần gọi typed tool và kết quả auditable; không cấp tool qua table này.",
+      "owner": "AI Control",
+      "classification": "highly restricted",
+      "fields": [
+        "id uuid PRIMARY KEY DEFAULT gen_random_uuid()",
+        "initiated_by uuid NOT NULL REFERENCES identity.users(id) ON DELETE RESTRICT",
+        "approval_id uuid REFERENCES integration.agent_approvals(id) ON DELETE RESTRICT",
+        "organization_id uuid REFERENCES tenancy.organizations(id) ON DELETE RESTRICT",
+        "tool_code text NOT NULL",
+        "idempotency_key text NOT NULL",
+        "status text NOT NULL DEFAULT 'queued' CHECK (status IN ('queued','running','succeeded','failed','canceled'))",
+        "started_at timestamptz",
+        "finished_at timestamptz",
+        "redacted_result jsonb",
+        "created_at timestamptz NOT NULL DEFAULT now()",
+        "UNIQUE (initiated_by,tool_code,idempotency_key)"
+      ],
+      "extra": [],
+      "indexes": [
+        "CREATE INDEX agent_invocations_status_idx ON integration.agent_invocations(status,created_at);"
+      ],
+      "retention": "Review before production"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "from": "identity.external_identities",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "identity.profiles",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "identity.guardian_links",
+      "via": "guardian_user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "identity.guardian_links",
+      "via": "student_user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "identity.guardian_links",
+      "via": "verified_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "identity.policy_acknowledgments",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.organization_memberships",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.organization_memberships",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.role_permissions",
+      "via": "role_id",
+      "to": "tenancy.roles",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.role_permissions",
+      "via": "permission_id",
+      "to": "tenancy.permissions",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.role_assignments",
+      "via": "role_id",
+      "to": "tenancy.roles",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.role_assignments",
+      "via": "assigned_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "tenancy.role_assignments",
+      "via": "organization_id,user_id",
+      "to": "tenancy.organization_memberships",
+      "target": "organization_id,user_id"
+    },
+    {
+      "from": "assets.assets",
+      "via": "owner_organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    },
+    {
+      "from": "assets.assets",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "assets.asset_versions",
+      "via": "asset_id",
+      "to": "assets.assets",
+      "target": "id"
+    },
+    {
+      "from": "catalog.games",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "catalog.game_versions",
+      "via": "game_id",
+      "to": "catalog.games",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.game_rooms",
+      "via": "game_version_id",
+      "to": "catalog.game_versions",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.game_rooms",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.game_rooms",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.room_memberships",
+      "via": "room_id",
+      "to": "gameplay.game_rooms",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.room_memberships",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.matches",
+      "via": "game_version_id",
+      "to": "catalog.game_versions",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.matches",
+      "via": "room_id,game_version_id",
+      "to": "gameplay.game_rooms",
+      "target": "id,game_version_id"
+    },
+    {
+      "from": "gameplay.match_participants",
+      "via": "match_id",
+      "to": "gameplay.matches",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_participants",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_commands",
+      "via": "match_id",
+      "to": "gameplay.matches",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_commands",
+      "via": "actor_user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_commands",
+      "via": "match_id,actor_user_id",
+      "to": "gameplay.match_participants",
+      "target": "match_id,user_id"
+    },
+    {
+      "from": "gameplay.match_snapshots",
+      "via": "match_id",
+      "to": "gameplay.matches",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_results",
+      "via": "match_id",
+      "to": "gameplay.matches",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_result_entries",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "gameplay.match_result_entries",
+      "via": "result_id,match_id",
+      "to": "gameplay.match_results",
+      "target": "id,match_id"
+    },
+    {
+      "from": "gameplay.match_result_entries",
+      "via": "match_id,user_id",
+      "to": "gameplay.match_participants",
+      "target": "match_id,user_id"
+    },
+    {
+      "from": "publishing.content_items",
+      "via": "owner_organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    },
+    {
+      "from": "publishing.content_items",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "publishing.content_revisions",
+      "via": "content_item_id",
+      "to": "publishing.content_items",
+      "target": "id"
+    },
+    {
+      "from": "publishing.content_revisions",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "publishing.content_publications",
+      "via": "revision_id",
+      "to": "publishing.content_revisions",
+      "target": "id"
+    },
+    {
+      "from": "publishing.content_publications",
+      "via": "approved_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "integration.audit_events",
+      "via": "actor_user_id",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "integration.audit_events",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    },
+    {
+      "from": "integration.agent_approvals",
+      "via": "requested_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "integration.agent_approvals",
+      "via": "approved_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "integration.agent_approvals",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    },
+    {
+      "from": "integration.agent_invocations",
+      "via": "initiated_by",
+      "to": "identity.users",
+      "target": "id"
+    },
+    {
+      "from": "integration.agent_invocations",
+      "via": "approval_id",
+      "to": "integration.agent_approvals",
+      "target": "id"
+    },
+    {
+      "from": "integration.agent_invocations",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id"
+    }
+  ],
+  "defaultRls": "ENABLE + FORCE RLS without policies; deny all non-bypass roles; no production writes",
+  "targetEnv": "isolated development or CI test PostgreSQL only"
+}
