@@ -1,0 +1,28 @@
+# Secrets and local runtime
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+node_modules/
+.next/
+dist/
+build/
+coverage/
+tmp/
+.cache/
+*.log
+.DS_Store
+Thumbs.db
+.venv/
+__pycache__/
+*.pyc
+# Generated 3D / binaries to be managed by LFS or asset registry
+*.glb
+*.gltf
+*.blend
+*.bbmodel
+# Do not store student data
+data/private/
+exports/
+backups/

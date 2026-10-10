@@ -1,0 +1,31 @@
+name: Documentation checks
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'scripts/validate_docs.py'
+      - '.github/workflows/docs-check.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'scripts/validate_docs.py'
+      - '.github/workflows/docs-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check internal document links
+        run: python scripts/validate_docs.py
