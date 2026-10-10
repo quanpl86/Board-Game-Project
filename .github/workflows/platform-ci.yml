@@ -8,8 +8,10 @@ on:
       - 'tools/**'
       - 'infra/**'
       - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - 'tsconfig.base.json'
+      - 'eslint.config.mjs'
       - 'turbo.json'
       - '.github/workflows/platform-ci.yml'
   push:
@@ -21,8 +23,10 @@ on:
       - 'tools/**'
       - 'infra/**'
       - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - 'tsconfig.base.json'
+      - 'eslint.config.mjs'
       - 'turbo.json'
       - '.github/workflows/platform-ci.yml'
 permissions:
@@ -35,16 +39,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
         with:
           version: 10.14.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
-      - name: Install workspace dependencies (temporary bootstrap)
-        run: pnpm install --no-frozen-lockfile
-      - name: Source policy
+          cache: 'pnpm'
+      - name: Install dependencies (frozen)
+        run: pnpm install --frozen-lockfile
+      - name: Source checks
         run: pnpm lint
       - name: TypeScript
         run: pnpm typecheck
@@ -52,6 +57,3 @@ jobs:
         run: pnpm test
       - name: Build Next.js
         run: pnpm build
-# TODO next PR: commit pnpm-lock.yaml and use --frozen-lockfile;
-# pin Actions by SHA, add ESLint, Playwright, security scan and staging CD.
-# No secrets or deploy permissions in this workflow.
