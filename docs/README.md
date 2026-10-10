@@ -84,3 +84,7 @@ Change documentation by reviewed PR; publish a new ADR for major decisions; keep
 - [39 table data dictionary + 44 editable diagrams](database/p1/README.md)
 - [P1 architecture/implementation map for DBA, Backend, Frontend and QA](database/p1/CROSS_LAYER_IMPLEMENTATION.md)
 - [P1 approval decisions and risk register](database/p1/DECISION_REGISTER.md)
+
+## P1-A Education physical database candidate
+- [Education SQL/ERD composite FK and negative integrity tests](database/p1/EDUCATION_PHYSICAL_ERD.md)
+- [Education implementation and approval gates](database/p1/EDUCATION_PHYSICAL_CANDIDATE.md)

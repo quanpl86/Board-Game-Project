@@ -48,3 +48,6 @@ Use `docs/agents/templates/HANDOFF.md`; cross-domain changes require affected sk
 
 ## Database P1 Candidate Modeling — mandatory pre-implementation gate
 Read [P1 Database Atlas](../../../docs/database/p1/README.md) and [P1 Cross-Layer Plan](../../../docs/database/p1/CROSS_LAYER_IMPLEMENTATION.md) for Education/Competition/Commerce scopes. 39 tables, 265 fields and 80 relationships are **PROPOSED**, not executable PostgreSQL or migrated entities. Study per-table dictionaries and editable Draw.io before API/UI design; do not use P1 diagrams as permission to query DB, invent frontend data or issue production DDL. Require Product Owner/DBA/Security decision signoff and isolated migration tests; coin double-entry/concurrency and private student rubric assessments are high-risk stop-gates.
+
+## Education P1-A physical review gate
+The full candidate P1 Draw.io is **not** the current SQL state. Use `docs/database/p1/EDUCATION_PHYSICAL_ERD.md` and `docs/database/p1/EDUCATION_PHYSICAL_CANDIDATE.md` for the 11 Education migration tables, physical composite FKs and negative tests. No real student data, SSO authorization policies or production migration until explicit privacy/DBA/owner signoff.

@@ -45,3 +45,8 @@ Rebuild with `node scripts/generate_db_diagrams.mjs`; verify with `node scripts/
 
 ## P1 structured schema candidates (NO MIGRATION)
 [39-table Education, Competition and Commerce candidate contract](schema/p1_candidate_tables.json); [P1 editable Draw.io, 44 SVG previews and individual data dictionary](../docs/database/p1/README.md); [human decision gates](../docs/database/p1/DECISION_REGISTER.md). Generated using `node scripts/generate_p1_database_atlas.mjs` and validated by `--check` plus `python scripts/validate_p1_database.py`. These tables do not exist in PostgreSQL until individually reviewed and migrated later.
+
+## P1-A Education development migration (after P0, not approved for production)
+- `migrations/0002_p1a_education_candidate.sql`: 11 restricted classroom/learning tables, composite FK, provenance guards and FORCE RLS (no allow policies).
+- `tests/0002_p1a_education_smoke.sql`: test on disposable PostgreSQL 16 **after** `0001` migration and P0 smoke rollback.
+- [Exact physical ERD and P0 dependencies](../docs/database/p1/EDUCATION_PHYSICAL_ERD.md); [security review scope](../docs/database/p1/EDUCATION_PHYSICAL_CANDIDATE.md).
