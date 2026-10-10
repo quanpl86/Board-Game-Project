@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "status": "draft-for-review",
+  "policy": "Skills are instructions and not proof an AI runtime/connector has loaded them",
+  "skills": [
+    {
+      "id": "project-delivery",
+      "path": ".agents/skills/project-delivery/SKILL.md",
+      "owner_role": "BGU-PD",
+      "domain": "governance",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "product-specification",
+      "path": ".agents/skills/product-specification/SKILL.md",
+      "owner_role": "BGU-PRODUCT",
+      "domain": "product",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "architecture-contracts",
+      "path": ".agents/skills/architecture-contracts/SKILL.md",
+      "owner_role": "BGU-ARCH",
+      "domain": "platform",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "database-engineering",
+      "path": ".agents/skills/database-engineering/SKILL.md",
+      "owner_role": "BGU-DBA",
+      "domain": "data",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "privacy-security",
+      "path": ".agents/skills/privacy-security/SKILL.md",
+      "owner_role": "BGU-SEC",
+      "domain": "security",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "ux-flows",
+      "path": ".agents/skills/ux-flows/SKILL.md",
+      "owner_role": "BGU-UX",
+      "domain": "design",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "design-tokens",
+      "path": ".agents/skills/design-tokens/SKILL.md",
+      "owner_role": "BGU-UX",
+      "domain": "design",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "react-frontend",
+      "path": ".agents/skills/react-frontend/SKILL.md",
+      "owner_role": "BGU-UI",
+      "domain": "frontend",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "iconography",
+      "path": ".agents/skills/iconography/SKILL.md",
+      "owner_role": "BGU-UI",
+      "domain": "design",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "ux-copy",
+      "path": ".agents/skills/ux-copy/SKILL.md",
+      "owner_role": "BGU-COPY",
+      "domain": "content",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "image-production",
+      "path": ".agents/skills/image-production/SKILL.md",
+      "owner_role": "BGU-IMAGE",
+      "domain": "media",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "video-production",
+      "path": ".agents/skills/video-production/SKILL.md",
+      "owner_role": "BGU-VIDEO",
+      "domain": "media",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "blockbench-3d",
+      "path": ".agents/skills/blockbench-3d/SKILL.md",
+      "owner_role": "BGU-3D",
+      "domain": "3d",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "avatar-wardrobe",
+      "path": ".agents/skills/avatar-wardrobe/SKILL.md",
+      "owner_role": "BGU-3D",
+      "domain": "avatar",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "game-sdk",
+      "path": ".agents/skills/game-sdk/SKILL.md",
+      "owner_role": "BGU-GAME",
+      "domain": "game",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "realtime-multiplayer",
+      "path": ".agents/skills/realtime-multiplayer/SKILL.md",
+      "owner_role": "BGU-BACK",
+      "domain": "realtime",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "education-pedagogy",
+      "path": ".agents/skills/education-pedagogy/SKILL.md",
+      "owner_role": "BGU-EDU",
+      "domain": "education",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "coding-arena",
+      "path": ".agents/skills/coding-arena/SKILL.md",
+      "owner_role": "BGU-EDU",
+      "domain": "coding",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "economy-inventory",
+      "path": ".agents/skills/economy-inventory/SKILL.md",
+      "owner_role": "BGU-LIVEOPS",
+      "domain": "economy",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "liveops-competition",
+      "path": ".agents/skills/liveops-competition/SKILL.md",
+      "owner_role": "BGU-LIVEOPS",
+      "domain": "competition",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "cms-content-liveops",
+      "path": ".agents/skills/cms-content-liveops/SKILL.md",
+      "owner_role": "BGU-LIVEOPS",
+      "domain": "cms",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "mcp-automation",
+      "path": ".agents/skills/mcp-automation/SKILL.md",
+      "owner_role": "BGU-MCP",
+      "domain": "automation",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "devops-release",
+      "path": ".agents/skills/devops-release/SKILL.md",
+      "owner_role": "BGU-RELEASE",
+      "domain": "operations",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "quality-evaluation",
+      "path": ".agents/skills/quality-evaluation/SKILL.md",
+      "owner_role": "BGU-QA",
+      "domain": "testing",
+      "mandatory_for_role": true
+    },
+    {
+      "id": "observability-incident",
+      "path": ".agents/skills/observability-incident/SKILL.md",
+      "owner_role": "BGU-RELEASE",
+      "domain": "operations",
+      "mandatory_for_role": true
+    }
+  ]
+}

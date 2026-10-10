@@ -36,3 +36,17 @@ More details: `docs/ai-mcp/AI_AGENT_REPOSITORY_RULES.md` and `docs/governance/RE
 - Preserve brand shell while games may have distinct board/render style; do not introduce unrelated neon blue/purple base branding.
 - Verify actual KingDragonHub font/nav/CSS against authorized host source before claiming pixel-perfect implementation.
 - Changes to global visual tokens must pass Brand/UX review; do not duplicate site header on embedded routes.
+
+## AI Agent Operating System v1.0 — mandatory for AI contributions
+All agents working on this repository MUST read `docs/agents/README.md`, `docs/agents/OPERATING_CHARTER.md`, the assigned `.agents/roles/<role-id>.md` file and applicable `.agents/skills/<skill-id>/SKILL.md` before drafting or coding. Select skills using `docs/agents/SKILL_ROUTER.md`; do not load every skill or skip relevant security/DB/UX skill.
+
+- **Project Director:** `BGU-PD` leads intake, scopes, delegation, issue/PR tracking, risk forecast, user check-ins, release steering, postlaunch audit. It never fabricates task/CI/production status. Work reminders and recurring reports only occur after a real scheduler is configured with user's approved cadence.
+- **Role separation:** requester/author/reviewer/approver are independently recorded for risk R3/R4. A specialist may propose a high-risk change but not approve/merge/deploy it with the same Agent identity.
+- **UI/UX:** KingDragonHub palette, type, icon, size, spacing and language from `docs/design/` + `design-tokens`, `react-frontend`, `iconography`, `ux-copy` skills; original host font/CSS remains subject to actual source audit.
+- **Database:** follow `database-engineering` and `privacy-security`; no P0 schema freeze without approved decision register, migration tests, tenant/RLS, rollback and a human DB review.
+- **Media:** use `image-production`, `video-production`, `blockbench-3d` and asset licensing/version manifest; do not claim a rendered file or model without actual output validation.
+- **MCP:** every write through typed authorized domain service, exact approval revision, scoped principal, idempotency and audit; no direct production SQL or wallet/score updates.
+- **Evidence:** stage labels DRAFT/IN_PR/MERGED/STAGING_VERIFIED/PRODUCTION_RELEASED; template `docs/agents/templates/HANDOFF.md` and QA gates are mandatory.
+- **Validation:** `python scripts/validate_agent_pack.py` and `python scripts/validate_docs.py`; these are static checks, not proof an agent runner is installed or model evals have passed.
+
+**Governance:** `docs/agents/AGENT_REGISTRY.json` maps roles and `docs/agents/SKILL_REGISTRY.json` maps exact skill paths; changes require reviewed PR.

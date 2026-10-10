@@ -36,6 +36,7 @@ Một tài khoản có thể chơi các board game cổ điển, tham gia thử 
 | Player Customization | [Avatar & Blockbench 3D Items](docs/avatars/AVATAR_ITEM_AND_3D_ASSET_SPEC.md) · [Shop/Avatar UI UX](docs/economy/SHOP_AVATAR_UI_UX.md) |
 | Delivery | [Master Roadmap](docs/roadmap/MASTER_ROADMAP.md) · [Repository Governance](docs/governance/REPOSITORY_GOVERNANCE.md) |
 | Automation | [AGENTS.md](AGENTS.md) · [AI Repository Rules](docs/ai-mcp/AI_AGENT_REPOSITORY_RULES.md) |
+| Agent Operating System | [18 Roles / 25 Skills](docs/agents/README.md) · [Project Director](docs/agents/PROJECT_DIRECTOR_RUNBOOK.md) · [Skill Router](docs/agents/SKILL_ROUTER.md) · [Quality Gates](docs/agents/QUALITY_GATES.md) |
 
 ## Delivery workflow
 

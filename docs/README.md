@@ -26,6 +26,23 @@
 - [AI SQL reference](ai-mcp/AI_CONTROL_PLANE_SCHEMA_STARTER.sql)
 - [MCP bootstrap](ai-mcp/MCP_BOOTSTRAP_CHECKLIST.md)
 
+## AI Agent Operating System & Skill Library
+- [Operating overview](agents/README.md)
+- [Non-negotiable AI charter](agents/OPERATING_CHARTER.md)
+- [18 roles and RACI](agents/ROLES_AND_RACI.md)
+- [Project Director runbook](agents/PROJECT_DIRECTOR_RUNBOOK.md)
+- [25-skill router](agents/SKILL_ROUTER.md)
+- [Human communication & reminders](agents/USER_INTERACTION_PROTOCOL.md)
+- [Durable PM automation specification](agents/AI_PROJECT_MANAGER_AUTOMATION_SPEC.md)
+- [Cross-role workflow recipes](agents/WORKFLOW_RECIPES.md)
+- [Quality / Definition of Done gates](agents/QUALITY_GATES.md)
+- [Agent evaluation scenarios](agents/AGENT_EVALUATION_SUITE.md)
+- [Skill authoring and version policy](agents/SKILL_AUTHORING_STANDARD.md)
+- [Machine-readable Agent registry](agents/AGENT_REGISTRY.json)
+- [Machine-readable Skill registry](agents/SKILL_REGISTRY.json)
+- [Daily report template](agents/templates/DAILY_STATUS.md)
+- [Weekly steering template](agents/templates/WEEKLY_REPORT.md)
+
 ## Games, Social & LiveOps
 - [Eco City Lab GDD](games/eco-city-lab/GDD.md)
 - [Eco City Lab 3D assets](games/eco-city-lab/3D_ASSET_AND_RUNTIME_SPEC.md)

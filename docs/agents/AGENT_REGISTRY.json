@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "status": "draft-for-review",
+  "accountability": "Product Owner is human; specialized agents are advisory/executor under authorized scope",
+  "roles": [
+    {
+      "id": "BGU-PD",
+      "title": "Program Director",
+      "role_prompt": ".agents/roles/bgu-pd.md",
+      "skill_ids": [
+        "project-delivery",
+        "product-specification"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-PRODUCT",
+      "title": "Product Manager",
+      "role_prompt": ".agents/roles/bgu-product.md",
+      "skill_ids": [
+        "product-specification",
+        "ux-flows"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-ARCH",
+      "title": "Platform Architect",
+      "role_prompt": ".agents/roles/bgu-arch.md",
+      "skill_ids": [
+        "architecture-contracts",
+        "database-engineering"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-DBA",
+      "title": "Database Engineer",
+      "role_prompt": ".agents/roles/bgu-dba.md",
+      "skill_ids": [
+        "database-engineering",
+        "privacy-security"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-UX",
+      "title": "UX/Design Lead",
+      "role_prompt": ".agents/roles/bgu-ux.md",
+      "skill_ids": [
+        "ux-flows",
+        "design-tokens",
+        "ux-copy"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-UI",
+      "title": "Frontend/UI Engineer",
+      "role_prompt": ".agents/roles/bgu-ui.md",
+      "skill_ids": [
+        "react-frontend",
+        "design-tokens",
+        "iconography"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-COPY",
+      "title": "UX Writer",
+      "role_prompt": ".agents/roles/bgu-copy.md",
+      "skill_ids": [
+        "ux-copy",
+        "education-pedagogy"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-IMAGE",
+      "title": "Image Director",
+      "role_prompt": ".agents/roles/bgu-image.md",
+      "skill_ids": [
+        "image-production",
+        "design-tokens"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-VIDEO",
+      "title": "Video Producer",
+      "role_prompt": ".agents/roles/bgu-video.md",
+      "skill_ids": [
+        "video-production",
+        "ux-copy"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-3D",
+      "title": "3D Asset/Blockbench",
+      "role_prompt": ".agents/roles/bgu-3d.md",
+      "skill_ids": [
+        "blockbench-3d",
+        "avatar-wardrobe"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-GAME",
+      "title": "Game Systems Engineer",
+      "role_prompt": ".agents/roles/bgu-game.md",
+      "skill_ids": [
+        "game-sdk",
+        "realtime-multiplayer"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-EDU",
+      "title": "STEM Curriculum Lead",
+      "role_prompt": ".agents/roles/bgu-edu.md",
+      "skill_ids": [
+        "education-pedagogy",
+        "coding-arena"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-BACK",
+      "title": "Backend/Realtime Engineer",
+      "role_prompt": ".agents/roles/bgu-back.md",
+      "skill_ids": [
+        "architecture-contracts",
+        "realtime-multiplayer",
+        "database-engineering"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-SEC",
+      "title": "Security/Safeguarding",
+      "role_prompt": ".agents/roles/bgu-sec.md",
+      "skill_ids": [
+        "privacy-security",
+        "quality-evaluation"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-MCP",
+      "title": "MCP/Agent Engineer",
+      "role_prompt": ".agents/roles/bgu-mcp.md",
+      "skill_ids": [
+        "mcp-automation",
+        "privacy-security"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-LIVEOPS",
+      "title": "LiveOps/Economy",
+      "role_prompt": ".agents/roles/bgu-liveops.md",
+      "skill_ids": [
+        "cms-content-liveops",
+        "liveops-competition",
+        "economy-inventory"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-QA",
+      "title": "QA/Evaluation",
+      "role_prompt": ".agents/roles/bgu-qa.md",
+      "skill_ids": [
+        "quality-evaluation",
+        "observability-incident"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    },
+    {
+      "id": "BGU-RELEASE",
+      "title": "DevOps/Release",
+      "role_prompt": ".agents/roles/bgu-release.md",
+      "skill_ids": [
+        "devops-release",
+        "observability-incident"
+      ],
+      "require_independent_review": true,
+      "production_authority": false
+    }
+  ]
+}
