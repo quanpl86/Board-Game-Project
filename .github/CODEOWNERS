@@ -5,3 +5,6 @@
 /packages/ @quanpl86
 /.github/ @quanpl86
 /infra/ @quanpl86
+/.agents/ @quanpl86
+/docs/agents/ @quanpl86
+/scripts/validate_agent_pack.py @quanpl86

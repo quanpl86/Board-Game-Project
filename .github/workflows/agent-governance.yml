@@ -1,0 +1,45 @@
+name: AI Agent / Skill Governance
+
+on:
+  pull_request:
+    paths:
+      - "AGENTS.md"
+      - ".agents/**"
+      - "docs/agents/**"
+      - "docs/design/**"
+      - "scripts/validate_agent_pack.py"
+      - ".github/workflows/agent-governance.yml"
+  push:
+    branches: [main]
+    paths:
+      - "AGENTS.md"
+      - ".agents/**"
+      - "docs/agents/**"
+      - "docs/design/**"
+      - "scripts/validate_agent_pack.py"
+      - ".github/workflows/agent-governance.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agent-pack-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-agent-check:
+    name: Skill/Role Structure & Doc Links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate AI roles and skills
+        run: python scripts/validate_agent_pack.py
+      - name: Validate internal documentation links
+        run: python scripts/validate_docs.py
+
+# This is static governance lint only; LLM task evals, OAuth/MCP authority
+# tests and child-safety release gates require separately implemented runners.
