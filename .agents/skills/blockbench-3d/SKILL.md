@@ -48,3 +48,6 @@ Blockbench, GLB, 3D, low-poly, voxel, rigging, modeling, animation, Three.js
 
 ## Handoff
 Use `docs/agents/templates/HANDOFF.md`; cross-domain changes require affected skill/owner and independent human approval at risk R3/R4.
+
+## Student Universe profile/asset/character/wallet source-of-truth
+Read [learner-owned data atlas](../../../docs/database/student-universe/START_HERE.md), [editable 30-page Draw.io](../../../docs/database/student-universe/Student_Universe_Editable.drawio), [cross-layer security and API draft](../../../docs/database/student-universe/IMPLEMENTATION_AND_SECURITY_CONTRACT.md) and canonical `db/schema/student_universe_extension_candidate.json` before touching student profiles, cosmetic items, assets, character instances, ownership, Coin or badges. All 22 new tables are **proposal-only**. Never infer owned items from approved GLB, EXP from Coin, or a wallet amount from a user profile. No direct SQL from frontend/MCP; respect guardian/tenant RLS, reward idempotency and double-entry concurrent spending gates. Obtain Human DBA/Product/Security approval before any physical migration.

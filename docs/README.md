@@ -84,3 +84,9 @@ Change documentation by reviewed PR; publish a new ADR for major decisions; keep
 - [39 table data dictionary + 44 editable diagrams](database/p1/README.md)
 - [P1 architecture/implementation map for DBA, Backend, Frontend and QA](database/p1/CROSS_LAYER_IMPLEMENTATION.md)
 - [P1 approval decisions and risk register](database/p1/DECISION_REGISTER.md)
+
+## Student Universe — Learner Profile & Digital Ownership
+- [AI Agent onboarding: user → characters → item/assets → inventory → wallet/awards](database/student-universe/START_HERE.md)
+- [Detailed 22-table candidate data model, including per-table relationship diagrams](database/student-universe/README.md)
+- [Editable 30-page Draw.io](database/student-universe/Student_Universe_Editable.drawio)
+- [Backend/Frontend owner and trust contract](database/student-universe/IMPLEMENTATION_AND_SECURITY_CONTRACT.md)

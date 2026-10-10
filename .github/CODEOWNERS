@@ -20,3 +20,9 @@
 /docs/database/p1/ @quanpl86
 /scripts/generate_p1_database_atlas.mjs @quanpl86
 /scripts/validate_p1_database.py @quanpl86
+
+# Student learner profile, characters, UGC, inventory and currency extensions
+/db/schema/student_universe_extension_candidate.json @quanpl86
+/docs/database/student-universe/ @quanpl86
+/scripts/check_student_universe.py @quanpl86
+/scripts/generate_student_drawio.mjs @quanpl86
