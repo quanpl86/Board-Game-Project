@@ -31,6 +31,9 @@ Một tài khoản có thể chơi các board game cổ điển, tham gia thử 
 | Education | [Education PRD](docs/education/BOARD_GAME_EDUCATION_PRD.md) · [Education Master Plan](docs/education/BOARD_GAME_EDUCATION_MASTER_PLAN.md) |
 | Game Design | [Game Catalog](docs/games/GAME_CATALOG_AND_ROADMAP.md) · [Eco City Lab 3D](docs/games/eco-city-lab/README.md) |
 | Social / LiveOps | [Community & Tournament](docs/social/SOCIAL_COMMUNITY_TOURNAMENT.md) · [Dynamic Content & Campaigns](docs/liveops/LIVEOPS_CONTENT_STRATEGY.md) |
+| Rankings & Honors | [Leaderboard / Hall of Fame](docs/competition/LEADERBOARD_HALL_OF_FAME_SPEC.md) |
+| Cosmetic Economy | [Shop & Marketplace PRD](docs/economy/ECONOMY_SHOP_MARKETPLACE_PRD.md) · [Economy Data Model](docs/economy/ECONOMY_INVENTORY_DATA_MODEL.md) · [MCP & Automation](docs/economy/MCP_AGENT_AND_GOVERNANCE.md) |
+| Player Customization | [Avatar & Blockbench 3D Items](docs/avatars/AVATAR_ITEM_AND_3D_ASSET_SPEC.md) · [Shop/Avatar UI UX](docs/economy/SHOP_AVATAR_UI_UX.md) |
 | Delivery | [Master Roadmap](docs/roadmap/MASTER_ROADMAP.md) · [Repository Governance](docs/governance/REPOSITORY_GOVERNANCE.md) |
 | Automation | [AGENTS.md](AGENTS.md) · [AI Repository Rules](docs/ai-mcp/AI_AGENT_REPOSITORY_RULES.md) |
 
