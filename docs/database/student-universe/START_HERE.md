@@ -31,3 +31,8 @@ flowchart TD
 
 ## Workflow after human review
 Approved cross-layer flow/screen → physical SQL migration + composite FK/unique/immutable guards + deny-by-default RLS → PostgreSQL negative/concurrency tests → backend service and typed DTO with SSO/guardian scope → frontend private read-model and accessible states → staging security QA. No CI job may deploy production tables or grant virtual currency automatically.
+
+## Physical database in stacked PR #27 (not merged)
+- [Actual six-table SQL-derived ERD / preview](PHYSICAL_CORE_ERD.md) and [editable physical Draw.io](Student_Character_Core_Physical.drawio)
+- [Migration safety and release gates](PHYSICAL_CORE_MIGRATION.md)
+- P1 Wallet/Inventory/Loadout still **design-only**; do not infer persisted data from candidate diagrams.
