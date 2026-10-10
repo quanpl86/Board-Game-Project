@@ -42,3 +42,6 @@ Tests use a transaction that rolls back all data and temporary probe roles. SQL 
 ## Editable ERD for backend/API/agents
 See [39-page Draw.io and SVG previews](../docs/database/diagrams/README.md). Agent-safe implementation workflow: [Database–Backend–Frontend Contract](../docs/database/AGENT_IMPLEMENTATION_REFERENCE.md).
 Rebuild with `node scripts/generate_db_diagrams.mjs`; verify with `node scripts/generate_db_diagrams.mjs --check` and `python scripts/check_db_diagrams.py`.
+
+## P1 structured schema candidates (NO MIGRATION)
+[39-table Education, Competition and Commerce candidate contract](schema/p1_candidate_tables.json); [P1 editable Draw.io, 44 SVG previews and individual data dictionary](../docs/database/p1/README.md); [human decision gates](../docs/database/p1/DECISION_REGISTER.md). Generated using `node scripts/generate_p1_database_atlas.mjs` and validated by `--check` plus `python scripts/validate_p1_database.py`. These tables do not exist in PostgreSQL until individually reviewed and migrated later.

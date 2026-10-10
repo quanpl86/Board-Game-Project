@@ -14,3 +14,9 @@
 /docs/database/ @quanpl86
 /scripts/generate_db_diagrams.mjs @quanpl86
 /scripts/check_db_diagrams.py @quanpl86
+
+# P1 Education/Competition/Economy schema proposals and generated diagrams
+/db/schema/p1_candidate_tables.json @quanpl86
+/docs/database/p1/ @quanpl86
+/scripts/generate_p1_database_atlas.mjs @quanpl86
+/scripts/validate_p1_database.py @quanpl86

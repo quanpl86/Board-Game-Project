@@ -24,3 +24,6 @@
 
 ## Current verification and known constraints
 The ERD of 30 P0 physical tables is derived from explicit 49 SQL foreign keys. These are **not** 159 fully modeled physical tables. Extra conceptual diagrams in [Full Platform Relationship Blueprint](FULL_PLATFORM_RELATIONSHIP_BLUEPRINT.md) indicate **future proposals** and require per-table data dictionary/SQL before deployment.
+
+## October 2026 P1 design advance — no production schema freeze
+A detailed **candidate** P1 data model now covers 39 tables across Education (11), Competition (11) and Commerce/Avatar (17) with 265 columns and 80 prospective FK edges: [P1 table-by-table atlas](p1/README.md). This replaces the *lack of detailed proposals* for these particular domains; it **does not** mean the P1 tables were physically created, added to SQL migrations, or passed PostgreSQL RLS/financial transaction tests. Social, persistent world, marketplace and coding judge remain future conceptual design phases.

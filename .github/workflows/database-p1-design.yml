@@ -1,0 +1,46 @@
+name: Database P1 Design Parity
+
+on:
+  pull_request:
+    paths:
+      - 'db/schema/p1_candidate_tables.json'
+      - 'docs/database/p1/**'
+      - 'scripts/generate_p1_database_atlas.mjs'
+      - 'scripts/validate_p1_database.py'
+      - '.github/workflows/database-p1-design.yml'
+      - 'AGENTS.md'
+  push:
+    branches: [main]
+    paths:
+      - 'db/schema/p1_candidate_tables.json'
+      - 'docs/database/p1/**'
+      - 'scripts/generate_p1_database_atlas.mjs'
+      - 'scripts/validate_p1_database.py'
+      - '.github/workflows/database-p1-design.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: p1-design-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  design-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Regeneration parity for Draw.io SVG CSV Markdown
+        run: node scripts/generate_p1_database_atlas.mjs --check
+      - name: Cross-domain keys, fields and editable diagram integrity
+        run: python scripts/validate_p1_database.py
+      - name: Documentation link validation
+        run: python scripts/validate_docs.py
+# No database service, credentials, migrations or RLS allow policies in this workflow.

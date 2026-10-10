@@ -45,3 +45,6 @@ tournament, leaderboard, event, season, Hall of Fame, medals, ranking, prizes, c
 
 ## Handoff
 Use `docs/agents/templates/HANDOFF.md`. Report confirmed artifacts, not intentions. Critical incidents and R3/R4 changes wait for authorized human gate.
+
+## Database P1 Candidate Modeling — mandatory pre-implementation gate
+Read [P1 Database Atlas](../../../docs/database/p1/README.md) and [P1 Cross-Layer Plan](../../../docs/database/p1/CROSS_LAYER_IMPLEMENTATION.md) for Education/Competition/Commerce scopes. 39 tables, 265 fields and 80 relationships are **PROPOSED**, not executable PostgreSQL or migrated entities. Study per-table dictionaries and editable Draw.io before API/UI design; do not use P1 diagrams as permission to query DB, invent frontend data or issue production DDL. Require Product Owner/DBA/Security decision signoff and isolated migration tests; coin double-entry/concurrency and private student rubric assessments are high-risk stop-gates.

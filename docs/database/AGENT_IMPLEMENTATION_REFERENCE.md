@@ -49,3 +49,6 @@ Before coding, an Agent documents: user goal, flow/screen ID, exact table IDs an
 
 ## Upcoming scope: deliberately NOT physical P0
 School/class/rubrics, tournament/ranking, wallet/ledger, avatar/inventory/shop, pet, marketplace, persistent 3D world, coding judge and creator studio belong to `docs/database/FULL_PLATFORM_RELATIONSHIP_BLUEPRINT.md` (proposed P1/P2). Each new physical table will need a real SQL declaration, migration, test, diagram, ownership, RLS/retention and application contract.
+
+## P1 extension (design review only)
+A full **proposed** model for Education, Competition, Inventory, Avatar and Official Shop now exists in [P1 Data Dictionary and Draw.io](p1/README.md). It contains 39 proposed tables and 80 planned FKs; unlike P0, **no P1 SQL migration or real API/Frontend implementation has been executed**. Follow [P1 cross-layer assignments](p1/CROSS_LAYER_IMPLEMENTATION.md), [human decision register](p1/DECISION_REGISTER.md) and source `db/schema/p1_candidate_tables.json` before implementing a feature. Do not route P1 API calls to nonexisting DB tables.

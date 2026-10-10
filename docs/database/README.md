@@ -32,3 +32,9 @@ F01 identity and tenant; F02 catalog and assets; F03 room and memberships; F04 m
 ## Visual Draw.io & AI Agent use
 - [Editable Draw.io with 39 pages, 39 SVGs, 30 table diagrams and CSV](diagrams/README.md).
 - [Cross-layer Database → Backend → Frontend Agent contract](AGENT_IMPLEMENTATION_REFERENCE.md).
+
+## P1 detailed modeling — proposed only, no physical migration
+- [39 Education/Competition/Avatar/Inventory/Shop table proposals, 265 columns, 80 candidate FKs](p1/README.md).
+- [44-tab editable P1 Draw.io](p1/diagrams/Board_Game_Universe_P1_Editable.drawio), [39 per-table datasheets](p1/tables/README.md), [overall Mermaid ERD](p1/ERD_P1_ALL.md).
+- [P1 Backend/Frontend typed-service flow matrix](p1/CROSS_LAYER_IMPLEMENTATION.md) and [open 23-decision review register](p1/DECISION_REGISTER.md).
+- P0 migration is the only reviewed CI SQL candidate; P1 relationships remain **proposals** until approved migrations and security tests.
