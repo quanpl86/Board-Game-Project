@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2130" height="1000" viewBox="0 0 2130 1000">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="50" y="70" font-family="Arial" font-size="27" font-weight="700" fill="#17304E">P1-D | STUDENT PROFILE + CHARACTER CORE</text>
+<text x="50" y="110" font-family="Arial" font-size="15" fill="#53677D">6 physical candidate tables · 9 SQL FKs + 2 P0 context edges · RLS deny by default</text>
+<path d="M635,277.5L417.5,277.5L417.5,224.5L200,224.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M635,629.5L635,629.5L635,277.5L635,277.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M635,629.5L417.5,629.5L417.5,466.5L200,466.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1085,262.5L642.5,262.5L642.5,224.5L200,224.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1495,312.5L1290,312.5L1290,262.5L1085,262.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1495,312.5L1290,312.5L1290,503.5L1085,503.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1495,312.5L1482.5,312.5L1482.5,631.5L1470,631.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1915,312.5L1275,312.5L1275,277.5L635,277.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1915,312.5L1705,312.5L1705,312.5L1495,312.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M200,466.5L200,466.5L200,224.5L200,224.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<path d="M1470,631.5L1680,631.5L1680,711.5L1890,711.5" fill="none" stroke="#7695AC" opacity=".5" stroke-width="1.5"/>
+<rect x="50" y="175" width="300" height="99" rx="9" fill="#F0F5FA" stroke="#4A7397" stroke-width="2"/>
+<rect x="50" y="175" width="300" height="42" rx="9" fill="#4A7397"/>
+<text x="60" y="203" font-size="15" font-weight="700" font-family="Arial" fill="white">identity.users</text>
+<text x="62" y="237" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="62" y="261" font-family="monospace" font-size="12" fill="#284259">    account_type : text</text>
+<rect x="50" y="405" width="300" height="123" rx="9" fill="#F0F5FA" stroke="#4A7397" stroke-width="2"/>
+<rect x="50" y="405" width="300" height="42" rx="9" fill="#4A7397"/>
+<text x="60" y="433" font-size="15" font-weight="700" font-family="Arial" fill="white">identity.guardian_links</text>
+<text x="62" y="467" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="62" y="491" font-family="monospace" font-size="12" fill="#284259">FK  student_user_id : uuid</text>
+<text x="62" y="515" font-family="monospace" font-size="12" fill="#284259">    status : text</text>
+<rect x="1320" y="570" width="300" height="123" rx="9" fill="#F0F5FA" stroke="#777F97" stroke-width="2"/>
+<rect x="1320" y="570" width="300" height="42" rx="9" fill="#777F97"/>
+<text x="1330" y="598" font-size="15" font-weight="700" font-family="Arial" fill="white">assets.asset_versions</text>
+<text x="1332" y="632" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="1332" y="656" font-family="monospace" font-size="12" fill="#284259">FK  asset_id : uuid</text>
+<text x="1332" y="680" font-family="monospace" font-size="12" fill="#284259">    status : text</text>
+<rect x="1740" y="650" width="300" height="123" rx="9" fill="#F0F5FA" stroke="#777F97" stroke-width="2"/>
+<rect x="1740" y="650" width="300" height="42" rx="9" fill="#777F97"/>
+<text x="1750" y="678" font-size="15" font-weight="700" font-family="Arial" fill="white">assets.assets</text>
+<text x="1752" y="712" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="1752" y="736" font-family="monospace" font-size="12" fill="#284259">    rights_status : text</text>
+<text x="1752" y="760" font-family="monospace" font-size="12" fill="#284259">    kind : text</text>
+<rect x="460" y="180" width="350" height="195" rx="9" fill="#FFFFFF" stroke="#1D7A79" stroke-width="2"/>
+<rect x="460" y="180" width="350" height="42" rx="9" fill="#1D7A79"/>
+<text x="470" y="208" font-size="15" font-weight="700" font-family="Arial" fill="white">student.student_profiles</text>
+<text x="472" y="242" font-family="monospace" font-size="12" fill="#284259">PK  user_id : uuid</text>
+<text x="472" y="266" font-family="monospace" font-size="12" fill="#284259">    display_alias : text</text>
+<text x="472" y="290" font-family="monospace" font-size="12" fill="#284259">    learning_stage : text</text>
+<text x="472" y="314" font-family="monospace" font-size="12" fill="#284259">    onboarding_status : text</text>
+<text x="472" y="338" font-family="monospace" font-size="12" fill="#284259">    created_at : timestamptz</text>
+<text x="472" y="362" font-family="monospace" font-size="12" fill="#284259">    updated_at : timestamptz</text>
+<rect x="460" y="520" width="350" height="219" rx="9" fill="#FFFFFF" stroke="#1D7A79" stroke-width="2"/>
+<rect x="460" y="520" width="350" height="42" rx="9" fill="#1D7A79"/>
+<text x="470" y="548" font-size="15" font-weight="700" font-family="Arial" fill="white">student.privacy_settings</text>
+<text x="472" y="582" font-family="monospace" font-size="12" fill="#284259">PK  student_user_id : uuid</text>
+<text x="472" y="606" font-family="monospace" font-size="12" fill="#284259">    public_profile_mode : text</text>
+<text x="472" y="630" font-family="monospace" font-size="12" fill="#284259">    leaderboard_mode : text</text>
+<text x="472" y="654" font-family="monospace" font-size="12" fill="#284259">    character_gallery_mode : text</text>
+<text x="472" y="678" font-family="monospace" font-size="12" fill="#284259">    allow_invites : boolean</text>
+<text x="472" y="702" font-family="monospace" font-size="12" fill="#284259">FK  guardian_link_id : uuid</text>
+<text x="472" y="726" font-family="monospace" font-size="12" fill="#284259">    revised_at : timestamptz</text>
+<rect x="910" y="430" width="350" height="147" rx="9" fill="#FFFFFF" stroke="#6A5EB4" stroke-width="2"/>
+<rect x="910" y="430" width="350" height="42" rx="9" fill="#6A5EB4"/>
+<text x="920" y="458" font-size="15" font-weight="700" font-family="Arial" fill="white">commerce.avatar_rigs</text>
+<text x="922" y="492" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="922" y="516" font-family="monospace" font-size="12" fill="#284259">    rig_code : text</text>
+<text x="922" y="540" font-family="monospace" font-size="12" fill="#284259">    revision : integer</text>
+<text x="922" y="564" font-family="monospace" font-size="12" fill="#284259">    created_at : timestamptz</text>
+<rect x="910" y="165" width="350" height="195" rx="9" fill="#FFFFFF" stroke="#B2673D" stroke-width="2"/>
+<rect x="910" y="165" width="350" height="42" rx="9" fill="#B2673D"/>
+<text x="920" y="193" font-size="15" font-weight="700" font-family="Arial" fill="white">characters.character_definitions</text>
+<text x="922" y="227" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="922" y="251" font-family="monospace" font-size="12" fill="#284259">    code : text</text>
+<text x="922" y="275" font-family="monospace" font-size="12" fill="#284259">    category : text</text>
+<text x="922" y="299" font-family="monospace" font-size="12" fill="#284259">    status : text</text>
+<text x="922" y="323" font-family="monospace" font-size="12" fill="#284259">FK  created_by : uuid</text>
+<text x="922" y="347" font-family="monospace" font-size="12" fill="#284259">    created_at : timestamptz</text>
+<rect x="1320" y="215" width="350" height="195" rx="9" fill="#FFFFFF" stroke="#B2673D" stroke-width="2"/>
+<rect x="1320" y="215" width="350" height="42" rx="9" fill="#B2673D"/>
+<text x="1330" y="243" font-size="15" font-weight="700" font-family="Arial" fill="white">characters.character_versions</text>
+<text x="1332" y="277" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="1332" y="301" font-family="monospace" font-size="12" fill="#284259">FK  definition_id : uuid</text>
+<text x="1332" y="325" font-family="monospace" font-size="12" fill="#284259">    revision : integer</text>
+<text x="1332" y="349" font-family="monospace" font-size="12" fill="#284259">FK  rig_id : uuid</text>
+<text x="1332" y="373" font-family="monospace" font-size="12" fill="#284259">FK  base_asset_version_id : uuid</text>
+<text x="1332" y="397" font-family="monospace" font-size="12" fill="#284259">    published_at : timestamptz</text>
+<rect x="1740" y="215" width="350" height="195" rx="9" fill="#FFFFFF" stroke="#B2673D" stroke-width="2"/>
+<rect x="1740" y="215" width="350" height="42" rx="9" fill="#B2673D"/>
+<text x="1750" y="243" font-size="15" font-weight="700" font-family="Arial" fill="white">characters.character_instances</text>
+<text x="1752" y="277" font-family="monospace" font-size="12" fill="#284259">PK  id : uuid</text>
+<text x="1752" y="301" font-family="monospace" font-size="12" fill="#284259">FK  owner_user_id : uuid</text>
+<text x="1752" y="325" font-family="monospace" font-size="12" fill="#284259">FK  character_version_id : uuid</text>
+<text x="1752" y="349" font-family="monospace" font-size="12" fill="#284259">    nickname : text</text>
+<text x="1752" y="373" font-family="monospace" font-size="12" fill="#284259">    status : text</text>
+<text x="1752" y="397" font-family="monospace" font-size="12" fill="#284259">    created_at : timestamptz</text>
+<text x="2080" y="960" text-anchor="end" font-family="Arial" font-size="12" fill="#75889A">Development / CI schema only. No student auth policy or runtime grants.</text>
+</svg>

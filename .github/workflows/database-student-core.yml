@@ -42,6 +42,8 @@ jobs:
         with: {python-version: '3.12'}
       - name: Validate physical schema against P1 and student manifests
         run: python scripts/check_student_character_core.py
+      - name: Validate SQL-derived physical Draw.io and SVG parity
+        run: node scripts/generate_student_physical_erd.mjs --check
       - name: Install PostgreSQL client if absent
         run: command -v psql || (sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client)
       - name: Apply P0 migration on disposable PostgreSQL
