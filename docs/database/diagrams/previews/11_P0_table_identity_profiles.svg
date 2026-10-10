@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1730" height="553" viewBox="0 0 1730 553" role="img" aria-label="BẢNG IDENTITY.PROFILES">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">BẢNG IDENTITY.PROFILES</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">5 cột · 0 FK tham chiếu tới · 1 FK tham chiếu đi · 0 self-edge</text>
+<path d="M1040,284 L1180,284 L1180,222 L1320,222" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<rect x="700" y="200" width="340" height="168" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<rect x="700" y="200" width="340" height="37" rx="8" fill="#3869A6"/>
+<text x="712" y="225" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">identity.profiles</text>
+<text x="711" y="255" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  user_id : uuid</text>
+<rect x="702" y="262" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="279" font-family="Consolas,monospace" font-size="12" fill="#293647">    display_name : text</text>
+<text x="711" y="303" font-family="Consolas,monospace" font-size="12" fill="#293647">    locale : text</text>
+<rect x="702" y="310" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="327" font-family="Consolas,monospace" font-size="12" fill="#293647">    visibility : text</text>
+<text x="711" y="351" font-family="Consolas,monospace" font-size="12" fill="#293647">    updated_at : timestamptz</text>
+<rect x="1320" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="1332" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="1332" y="235" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<text x="1665" y="522" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

@@ -53,3 +53,8 @@ All agents working on this repository MUST read `docs/agents/README.md`, `docs/a
 
 ## Phase 1 implementation note
 See `docs/implementation/PHASE1_BOOTSTRAP.md` and `docs/implementation/AGENT_TASK_LIFECYCLE.md`. Web catalog is a demo, API seeded data is not persistent, Realtime and MCP are disabled for gameplay/tools, Worker is no-op. `tools/agent-task.mjs` validates role/skill policy only. No actual Agent orchestration is claimed. The new CI is bootstrap-only pending pinned lockfile, full lint/security, SSO and schema signoff.
+
+## Editable database ERD & cross-layer Agent implementation (mandatory)
+- [Draw.io (39 pages), 39 SVG previews and canonical column/FK CSV](docs/database/diagrams/README.md).
+- [Database → Backend → Frontend AI Agent contract](docs/database/AGENT_IMPLEMENTATION_REFERENCE.md).
+- If changing DB schema, update SQL and manifest then run `node scripts/generate_db_diagrams.mjs`, `node scripts/generate_db_diagrams.mjs --check`, `python scripts/check_db_diagrams.py` and PostgreSQL CI. Generated visual does not grant permission to use DB or imply production readiness.

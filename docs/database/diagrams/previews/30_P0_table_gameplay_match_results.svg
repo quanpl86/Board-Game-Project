@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1730" height="529" viewBox="0 0 1730 529" role="img" aria-label="BẢNG GAMEPLAY.MATCH_RESULTS">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">BẢNG GAMEPLAY.MATCH_RESULTS</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">4 cột · 1 FK tham chiếu tới · 1 FK tham chiếu đi · 0 self-edge</text>
+<path d="M380,222 L540,222 L540,272 L700,272" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1040,272 L1180,272 L1180,222 L1320,222" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<rect x="700" y="200" width="340" height="144" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="700" y="200" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="712" y="225" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.match_results</text>
+<text x="711" y="255" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="702" y="262" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="279" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  match_id : uuid</text>
+<text x="711" y="303" font-family="Consolas,monospace" font-size="12" fill="#293647">    result : jsonb</text>
+<rect x="702" y="310" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="327" font-family="Consolas,monospace" font-size="12" fill="#293647">    finalized_at : timestamptz</text>
+<rect x="80" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="92" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.match_result_entries</text>
+<text x="92" y="235" font-family="monospace" font-size="11" fill="#566579">PK id · FK result_id</text>
+<rect x="1320" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1332" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.matches</text>
+<text x="1332" y="235" font-family="monospace" font-size="11" fill="#566579">PK id · FK room_id</text>
+<text x="1665" y="498" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

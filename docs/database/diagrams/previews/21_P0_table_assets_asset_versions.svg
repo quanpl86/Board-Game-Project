@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1730" height="601" viewBox="0 0 1730 601" role="img" aria-label="BẢNG ASSETS.ASSET_VERSIONS">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">BẢNG ASSETS.ASSET_VERSIONS</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">7 cột · 0 FK tham chiếu tới · 1 FK tham chiếu đi · 0 self-edge</text>
+<path d="M1040,308 L1180,308 L1180,222 L1320,222" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<rect x="700" y="200" width="340" height="216" rx="9" fill="#FFFFFF" stroke="#7952AF" stroke-width="2"/>
+<rect x="700" y="200" width="340" height="37" rx="8" fill="#7952AF"/>
+<text x="712" y="225" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">assets.asset_versions</text>
+<text x="711" y="255" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="702" y="262" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="279" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  asset_id : uuid</text>
+<text x="711" y="303" font-family="Consolas,monospace" font-size="12" fill="#293647">    version : integer</text>
+<rect x="702" y="310" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="327" font-family="Consolas,monospace" font-size="12" fill="#293647">    storage_key : text</text>
+<text x="711" y="351" font-family="Consolas,monospace" font-size="12" fill="#293647">    mime_type : text</text>
+<rect x="702" y="358" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="375" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<text x="711" y="399" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="1320" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#7952AF" stroke-width="2"/>
+<text x="1332" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#7952AF">assets.assets</text>
+<text x="1332" y="235" font-family="monospace" font-size="11" fill="#566579">PK id · FK owner_organization_id</text>
+<text x="1665" y="570" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

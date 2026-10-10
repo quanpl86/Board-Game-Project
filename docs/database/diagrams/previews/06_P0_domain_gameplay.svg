@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="1319" viewBox="0 0 1450 1319" role="img" aria-label="DOMAIN GAMEPLAY — 8 BẢNG">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">DOMAIN GAMEPLAY — 8 BẢNG</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">Đầy đủ cột PK/FK và 17 quan hệ chạm domain · Bảng ngoài domain hiện dạng liên kết</text>
+<path d="M440,265 L730,265 L730,177 L1020,177" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M440,265 L730,265 L730,265 L1020,265" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M440,265 L730,265 L730,353 L1020,353" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M560,241 L500,241 L500,265 L440,265" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M900,241 L960,241 L960,353 L1020,353" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M440,550 L730,550 L730,177 L1020,177" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M270,430 L270,430 L270,385 L270,385" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M560,478 L500,478 L500,550 L440,550" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M900,478 L960,478 L960,353 L1020,353" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M270,715 L270,715 L270,670 L270,670" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M440,835 L730,835 L730,353 L1020,353" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M440,835 L500,835 L500,478 L560,478" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M560,703 L500,703 L500,550 L440,550" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M270,1000 L270,1000 L270,670 L270,670" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M730,832 L950,832 L950,385 L1170,385" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M560,940 L500,940 L500,1072 L440,1072" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M730,832 L730,832 L730,574 L730,574" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<rect x="100" y="145" width="340" height="240" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="100" y="145" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="112" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.game_rooms</text>
+<text x="111" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="224" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  game_version_id : uuid</text>
+<text x="111" y="248" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  organization_id : uuid</text>
+<rect x="102" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="272" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  created_by : uuid</text>
+<text x="111" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    visibility : text</text>
+<rect x="102" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="320" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<text x="111" y="344" font-family="Consolas,monospace" font-size="12" fill="#293647">    capacity : integer</text>
+<rect x="102" y="351" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="368" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="560" y="145" width="340" height="192" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="560" y="145" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="572" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.room_memberships</text>
+<text x="571" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="224" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  room_id : uuid</text>
+<text x="571" y="248" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  user_id : uuid</text>
+<rect x="562" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="272" font-family="Consolas,monospace" font-size="12" fill="#293647">    seat : integer</text>
+<text x="571" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="562" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="320" font-family="Consolas,monospace" font-size="12" fill="#293647">    joined_at : timestamptz</text>
+<rect x="100" y="430" width="340" height="240" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="100" y="430" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="112" y="455" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.matches</text>
+<text x="111" y="485" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="492" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="509" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  room_id : uuid</text>
+<text x="111" y="533" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  game_version_id : uuid</text>
+<rect x="102" y="540" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="557" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<text x="111" y="581" font-family="Consolas,monospace" font-size="12" fill="#293647">    config : jsonb</text>
+<rect x="102" y="588" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="605" font-family="Consolas,monospace" font-size="12" fill="#293647">    started_at : timestamptz</text>
+<text x="111" y="629" font-family="Consolas,monospace" font-size="12" fill="#293647">    finalized_at : timestamptz</text>
+<rect x="102" y="636" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="653" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="560" y="382" width="340" height="192" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="560" y="382" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="572" y="407" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.match_participants</text>
+<text x="571" y="437" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="444" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="461" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  match_id : uuid</text>
+<text x="571" y="485" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  user_id : uuid</text>
+<rect x="562" y="492" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="509" font-family="Consolas,monospace" font-size="12" fill="#293647">    seat : integer</text>
+<text x="571" y="533" font-family="Consolas,monospace" font-size="12" fill="#293647">    role : text</text>
+<rect x="562" y="540" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="557" font-family="Consolas,monospace" font-size="12" fill="#293647">    joined_at : timestamptz</text>
+<rect x="100" y="715" width="340" height="240" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="100" y="715" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="112" y="740" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.match_commands</text>
+<text x="111" y="770" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="777" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="794" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  match_id : uuid</text>
+<text x="111" y="818" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  actor_user_id : uuid</text>
+<rect x="102" y="825" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="842" font-family="Consolas,monospace" font-size="12" fill="#293647">    seq : bigint</text>
+<text x="111" y="866" font-family="Consolas,monospace" font-size="12" fill="#293647">    idempotency_key : text</text>
+<rect x="102" y="873" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="890" font-family="Consolas,monospace" font-size="12" fill="#293647">    command_type : text</text>
+<text x="111" y="914" font-family="Consolas,monospace" font-size="12" fill="#293647">    payload : jsonb</text>
+<rect x="102" y="921" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="938" font-family="Consolas,monospace" font-size="12" fill="#293647">    accepted_at : timestamptz</text>
+<rect x="560" y="619" width="340" height="168" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="560" y="619" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="572" y="644" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.match_snapshots</text>
+<text x="571" y="674" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  match_id : uuid</text>
+<rect x="562" y="681" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="698" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  state_revision : bigint</text>
+<text x="571" y="722" font-family="Consolas,monospace" font-size="12" fill="#293647">    schema_version : integer</text>
+<rect x="562" y="729" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="746" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  state : jsonb</text>
+<text x="571" y="770" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="100" y="1000" width="340" height="144" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="100" y="1000" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="112" y="1025" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.match_results</text>
+<text x="111" y="1055" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="1062" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="1079" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  match_id : uuid</text>
+<text x="111" y="1103" font-family="Consolas,monospace" font-size="12" fill="#293647">    result : jsonb</text>
+<rect x="102" y="1110" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="1127" font-family="Consolas,monospace" font-size="12" fill="#293647">    finalized_at : timestamptz</text>
+<rect x="560" y="832" width="340" height="216" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<rect x="560" y="832" width="340" height="37" rx="8" fill="#C65029"/>
+<text x="572" y="857" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">gameplay.match_result_entries</text>
+<text x="571" y="887" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="894" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="911" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  result_id : uuid</text>
+<text x="571" y="935" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  match_id : uuid</text>
+<rect x="562" y="942" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="959" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  user_id : uuid</text>
+<text x="571" y="983" font-family="Consolas,monospace" font-size="12" fill="#293647">    placement : integer</text>
+<rect x="562" y="990" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="1007" font-family="Consolas,monospace" font-size="12" fill="#293647">    score_numeric : numeric(18,5)</text>
+<text x="571" y="1031" font-family="Consolas,monospace" font-size="12" fill="#293647">    winner : boolean</text>
+<rect x="1020" y="145" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<text x="1032" y="169" font-family="Arial" font-size="14" font-weight="700" fill="#A36C25">catalog.game_versions</text>
+<text x="1032" y="190" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_id</text>
+<rect x="1020" y="233" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="1032" y="257" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.organizations</text>
+<text x="1032" y="278" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="1020" y="321" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="1032" y="345" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="1032" y="366" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<text x="1385" y="1288" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="1060" viewBox="0 0 1480 1060" role="img" aria-label="BOARD GAME UNIVERSE — 7 DATA DOMAINS">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">BOARD GAME UNIVERSE — 7 DATA DOMAINS</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">Tổng quan 30 bảng P0 · Quan hệ chéo domain · Màu phân biệt nhóm dữ liệu</text>
+<path d="M570,261 L512.5,261 L512.5,261 L455,261" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M1010,261 L952.5,261 L952.5,261 L895,261" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<path d="M1010,261 L732.5,261 L732.5,261 L455,261" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<path d="M292.5,500 L292.5,500 L292.5,317 L292.5,317" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
+<path d="M570,556 L512.5,556 L512.5,556 L455,556" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M732.5,500 L732.5,500 L732.5,317 L732.5,317" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M570,556 L512.5,556 L512.5,261 L455,261" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1010,556 L952.5,556 L952.5,261 L895,261" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M1010,556 L732.5,556 L732.5,261 L455,261" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M732.5,790 L512.5,790 L512.5,317 L292.5,317" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M732.5,790 L732.5,790 L732.5,317 L732.5,317" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<rect x="130" y="205" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="292.5" y="249" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#3869A6">IDENTITY</text>
+<text x="292.5" y="277" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">5 bảng</text>
+<rect x="570" y="205" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="732.5" y="249" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#147F77">TENANCY</text>
+<text x="732.5" y="277" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">6 bảng</text>
+<rect x="1010" y="205" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#7952AF" stroke-width="2"/>
+<text x="1172.5" y="249" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#7952AF">ASSETS</text>
+<text x="1172.5" y="277" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">2 bảng</text>
+<rect x="130" y="500" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<text x="292.5" y="544" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#A36C25">CATALOG</text>
+<text x="292.5" y="572" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">2 bảng</text>
+<rect x="570" y="500" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="732.5" y="544" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#C65029">GAMEPLAY</text>
+<text x="732.5" y="572" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">8 bảng</text>
+<rect x="1010" y="500" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#A3567B" stroke-width="2"/>
+<text x="1172.5" y="544" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#A3567B">PUBLISHING</text>
+<text x="1172.5" y="572" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">3 bảng</text>
+<rect x="570" y="790" width="325" height="112" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="732.5" y="834" font-family="Arial" font-size="20" text-anchor="middle" font-weight="700" fill="#567184">INTEGRATION</text>
+<text x="732.5" y="862" font-family="Arial" font-size="15" text-anchor="middle" fill="#44556A">4 bảng</text>
+<text x="1415" y="1029" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="891" viewBox="0 0 1450 891" role="img" aria-label="DOMAIN TENANCY — 6 BẢNG">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">DOMAIN TENANCY — 6 BẢNG</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">Đầy đủ cột PK/FK và 13 quan hệ chạm domain · Bảng ngoài domain hiện dạng liên kết</text>
+<path d="M560,229 L500,229 L500,241 L440,241" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M900,229 L960,229 L960,177 L1020,177" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,571 L270,571 L270,526 L270,526" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M440,619 L500,619 L500,430 L560,430" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M560,631 L500,631 L500,454 L440,454" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M730,547 L950,547 L950,209 L1170,209" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M730,547 L730,547 L730,313 L730,313" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,265 L730,265 L730,241 L440,241" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,353 L730,353 L730,241 L440,241" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,441 L730,441 L730,241 L440,241" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,529 L730,529 L730,241 L440,241" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,617 L730,617 L730,241 L440,241" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1020,705 L730,705 L730,241 L440,241" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<rect x="100" y="145" width="340" height="192" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<rect x="100" y="145" width="340" height="37" rx="8" fill="#147F77"/>
+<text x="112" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">tenancy.organizations</text>
+<text x="111" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="224" font-family="Consolas,monospace" font-size="12" fill="#293647">    slug : text</text>
+<text x="111" y="248" font-family="Consolas,monospace" font-size="12" fill="#293647">    display_name : text</text>
+<rect x="102" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="272" font-family="Consolas,monospace" font-size="12" fill="#293647">    kind : text</text>
+<text x="111" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="102" y="303" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="320" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="560" y="145" width="340" height="168" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<rect x="560" y="145" width="340" height="37" rx="8" fill="#147F77"/>
+<text x="572" y="170" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">tenancy.organization_memberships</text>
+<text x="571" y="200" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  organization_id : uuid</text>
+<rect x="562" y="207" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="224" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  user_id : uuid</text>
+<text x="571" y="248" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
+<rect x="562" y="255" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="272" font-family="Consolas,monospace" font-size="12" fill="#293647">    joined_at : timestamptz</text>
+<text x="571" y="296" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="100" y="382" width="340" height="144" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<rect x="100" y="382" width="340" height="37" rx="8" fill="#147F77"/>
+<text x="112" y="407" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">tenancy.roles</text>
+<text x="111" y="437" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="102" y="444" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="461" font-family="Consolas,monospace" font-size="12" fill="#293647">    code : text</text>
+<text x="111" y="485" font-family="Consolas,monospace" font-size="12" fill="#293647">    description : text</text>
+<rect x="102" y="492" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="509" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<rect x="560" y="358" width="340" height="144" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<rect x="560" y="358" width="340" height="37" rx="8" fill="#147F77"/>
+<text x="572" y="383" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">tenancy.permissions</text>
+<text x="571" y="413" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
+<rect x="562" y="420" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="437" font-family="Consolas,monospace" font-size="12" fill="#293647">    code : text</text>
+<text x="571" y="461" font-family="Consolas,monospace" font-size="12" fill="#293647">    resource_type : text</text>
+<rect x="562" y="468" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="485" font-family="Consolas,monospace" font-size="12" fill="#293647">    description : text</text>
+<rect x="100" y="571" width="340" height="96" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<rect x="100" y="571" width="340" height="37" rx="8" fill="#147F77"/>
+<text x="112" y="596" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">tenancy.role_permissions</text>
+<text x="111" y="626" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  role_id : uuid</text>
+<rect x="102" y="633" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="650" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  permission_id : uuid</text>
+<rect x="560" y="547" width="340" height="168" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<rect x="560" y="547" width="340" height="37" rx="8" fill="#147F77"/>
+<text x="572" y="572" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">tenancy.role_assignments</text>
+<text x="571" y="602" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  organization_id : uuid</text>
+<rect x="562" y="609" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="626" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  user_id : uuid</text>
+<text x="571" y="650" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  role_id : uuid</text>
+<rect x="562" y="657" width="336" height="24" fill="#F4F7FA"/>
+<text x="571" y="674" font-family="Consolas,monospace" font-size="12" fill="#AD512D">FK  assigned_by : uuid</text>
+<text x="571" y="698" font-family="Consolas,monospace" font-size="12" fill="#293647">    assigned_at : timestamptz</text>
+<rect x="1020" y="145" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="1032" y="169" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="1032" y="190" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="1020" y="233" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#7952AF" stroke-width="2"/>
+<text x="1032" y="257" font-family="Arial" font-size="14" font-weight="700" fill="#7952AF">assets.assets</text>
+<text x="1032" y="278" font-family="monospace" font-size="11" fill="#566579">PK id · FK owner_organization_id</text>
+<rect x="1020" y="321" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1032" y="345" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.game_rooms</text>
+<text x="1032" y="366" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_version_id</text>
+<rect x="1020" y="409" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A3567B" stroke-width="2"/>
+<text x="1032" y="433" font-family="Arial" font-size="14" font-weight="700" fill="#A3567B">publishing.content_items</text>
+<text x="1032" y="454" font-family="monospace" font-size="11" fill="#566579">PK id · FK owner_organization_id</text>
+<rect x="1020" y="497" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1032" y="521" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.audit_events</text>
+<text x="1032" y="542" font-family="monospace" font-size="11" fill="#566579">PK id · FK actor_user_id</text>
+<rect x="1020" y="585" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1032" y="609" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.agent_approvals</text>
+<text x="1032" y="630" font-family="monospace" font-size="11" fill="#566579">PK id · FK requested_by</text>
+<rect x="1020" y="673" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1032" y="697" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.agent_invocations</text>
+<text x="1032" y="718" font-family="monospace" font-size="11" fill="#566579">PK id · FK initiated_by</text>
+<text x="1385" y="860" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>

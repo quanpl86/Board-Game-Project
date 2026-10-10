@@ -5,6 +5,8 @@ on:
       - 'db/**'
       - 'docs/database/**'
       - 'scripts/check_db_schema.py'
+      - 'scripts/generate_db_diagrams.mjs'
+      - 'scripts/check_db_diagrams.py'
       - '.github/workflows/database-p0.yml'
   push:
     branches: [main]
@@ -47,6 +49,10 @@ jobs:
           python-version: '3.12'
       - name: Validate ERD and migration metadata
         run: python scripts/check_db_schema.py
+      - name: Verify Draw.io/CSV/SVG generated from schema manifest
+        run: node scripts/generate_db_diagrams.mjs --check
+      - name: Validate editable ERD XML, columns and 49 foreign keys
+        run: python scripts/check_db_diagrams.py
       - name: Install PostgreSQL client if absent
         run: command -v psql || (sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client)
       - name: Apply P0 migration to isolated CI PostgreSQL

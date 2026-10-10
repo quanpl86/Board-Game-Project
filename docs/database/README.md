@@ -28,3 +28,7 @@ F01 identity and tenant; F02 catalog and assets; F03 room and memberships; F04 m
 ## Future data model planning
 - [P1/P2 relationship blueprint](FULL_PLATFORM_RELATIONSHIP_BLUEPRINT.md) — education, competition, avatar/shop, social, CMS, worlds, coding/AI logical ERDs (not migration-ready).
 - [Gap and review matrix](P1_P2_GAP_MATRIX.md) — schema still needed before each feature release.
+
+## Visual Draw.io & AI Agent use
+- [Editable Draw.io with 39 pages, 39 SVGs, 30 table diagrams and CSV](diagrams/README.md).
+- [Cross-layer Database → Backend → Frontend Agent contract](AGENT_IMPLEMENTATION_REFERENCE.md).

@@ -38,3 +38,7 @@ Tests use a transaction that rolls back all data and temporary probe roles. SQL 
 2. BGU-DBA + BGU-SEC verify all 30 table definitions, missing entities, class-specific retention, RBAC/ABAC and access policies.
 3. Approve physical data dictionary/ERDs, signed migrations, least-privilege roles, backup/restore, performance and upgrade tests.
 4. Versioned schema migrations and canary deploy tested in staging before any real data.
+
+## Editable ERD for backend/API/agents
+See [39-page Draw.io and SVG previews](../docs/database/diagrams/README.md). Agent-safe implementation workflow: [Database–Backend–Frontend Contract](../docs/database/AGENT_IMPLEMENTATION_REFERENCE.md).
+Rebuild with `node scripts/generate_db_diagrams.mjs`; verify with `node scripts/generate_db_diagrams.mjs --check` and `python scripts/check_db_diagrams.py`.

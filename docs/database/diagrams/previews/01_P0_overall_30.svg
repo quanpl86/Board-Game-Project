@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1620" height="1309" viewBox="0 0 1620 1309" role="img" aria-label="ERD TỔNG THỂ — 30 BẢNG / 49 FK">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">ERD TỔNG THỂ — 30 BẢNG / 49 FK</text>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">7 domain · Quan hệ FK SQL thực tế · Xem từng domain để thấy toàn bộ cột</text>
+<rect x="100" y="138" width="430" height="424" rx="15" fill="#EFF4FA" stroke="#3869A6" stroke-width="2"/>
+<text x="116" y="162" font-family="Arial" font-size="16" font-weight="700" fill="#3869A6">IDENTITY · 5 bảng</text>
+<rect x="100" y="596" width="430" height="504" rx="15" fill="#EFF4FA" stroke="#147F77" stroke-width="2"/>
+<text x="116" y="620" font-family="Arial" font-size="16" font-weight="700" fill="#147F77">TENANCY · 6 bảng</text>
+<rect x="600" y="138" width="430" height="184" rx="15" fill="#EFF4FA" stroke="#7952AF" stroke-width="2"/>
+<text x="616" y="162" font-family="Arial" font-size="16" font-weight="700" fill="#7952AF">ASSETS · 2 bảng</text>
+<rect x="600" y="356" width="430" height="184" rx="15" fill="#EFF4FA" stroke="#A36C25" stroke-width="2"/>
+<text x="616" y="380" font-family="Arial" font-size="16" font-weight="700" fill="#A36C25">CATALOG · 2 bảng</text>
+<rect x="600" y="574" width="430" height="264" rx="15" fill="#EFF4FA" stroke="#A3567B" stroke-width="2"/>
+<text x="616" y="598" font-family="Arial" font-size="16" font-weight="700" fill="#A3567B">PUBLISHING · 3 bảng</text>
+<rect x="1100" y="138" width="430" height="664" rx="15" fill="#EFF4FA" stroke="#C65029" stroke-width="2"/>
+<text x="1116" y="162" font-family="Arial" font-size="16" font-weight="700" fill="#C65029">GAMEPLAY · 8 bảng</text>
+<rect x="1100" y="836" width="430" height="344" rx="15" fill="#EFF4FA" stroke="#567184" stroke-width="2"/>
+<text x="1116" y="860" font-family="Arial" font-size="16" font-weight="700" fill="#567184">INTEGRATION · 4 bảng</text>
+<path d="M270,262 L270,262 L270,246 L270,246" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<path d="M270,342 L270,342 L270,246 L270,246" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<path d="M270,422 L270,422 L270,246 L270,246" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<path d="M270,422 L270,422 L270,246 L270,246" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<path d="M270,422 L270,422 L270,246 L270,246" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<path d="M270,502 L270,502 L270,246 L270,246" fill="none" stroke="#3869A6" stroke-width="1.2" opacity=".52"/>
+<path d="M270,720 L270,720 L270,704 L270,704" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,720 L270,720 L270,246 L270,246" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,960 L270,960 L270,864 L270,864" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,960 L270,960 L270,944 L270,944" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,1040 L270,1040 L270,864 L270,864" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,1040 L270,1040 L270,246 L270,246" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M270,1040 L270,1040 L270,784 L270,784" fill="none" stroke="#147F77" stroke-width="1.2" opacity=".52"/>
+<path d="M620,214 L520,214 L520,672 L420,672" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<path d="M620,214 L520,214 L520,214 L420,214" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<path d="M770,262 L770,262 L770,246 L770,246" fill="none" stroke="#7952AF" stroke-width="1.2" opacity=".52"/>
+<path d="M620,432 L520,432 L520,214 L420,214" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
+<path d="M770,480 L770,480 L770,464 L770,464" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,214 L1020,214 L1020,512 L920,512" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,214 L770,214 L770,672 L420,672" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,214 L770,214 L770,214 L420,214" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,262 L1270,262 L1270,246 L1270,246" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,294 L770,294 L770,214 L420,214" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,374 L1020,374 L1020,512 L920,512" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,342 L1270,342 L1270,246 L1270,246" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,422 L1270,422 L1270,406 L1270,406" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,454 L770,454 L770,214 L420,214" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,502 L1270,502 L1270,406 L1270,406" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,534 L770,534 L770,214 L420,214" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,502 L1270,502 L1270,486 L1270,486" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,582 L1270,582 L1270,406 L1270,406" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,662 L1270,662 L1270,406 L1270,406" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,774 L770,774 L770,214 L420,214" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,742 L1270,742 L1270,726 L1270,726" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,742 L1270,742 L1270,486 L1270,486" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M620,650 L520,650 L520,672 L420,672" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M620,650 L520,650 L520,214 L420,214" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M770,698 L770,698 L770,682 L770,682" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M770,698 L520,698 L520,246 L270,246" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M770,778 L770,778 L770,762 L770,762" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M770,778 L520,778 L520,246 L270,246" fill="none" stroke="#A3567B" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,992 L770,992 L770,214 L420,214" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,992 L770,992 L770,672 L420,672" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,1072 L770,1072 L770,214 L420,214" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,1072 L770,1072 L770,214 L420,214" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,1072 L770,1072 L770,672 L420,672" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,1152 L770,1152 L770,214 L420,214" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1270,1120 L1270,1120 L1270,1104 L1270,1104" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M1120,1152 L770,1152 L770,672 L420,672" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<rect x="120" y="182" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="132" y="206" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.users</text>
+<text x="132" y="227" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="120" y="262" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="132" y="286" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.external_identities</text>
+<text x="132" y="307" font-family="monospace" font-size="11" fill="#566579">PK id · FK user_id</text>
+<rect x="120" y="342" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="132" y="366" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.profiles</text>
+<text x="132" y="387" font-family="monospace" font-size="11" fill="#566579">PK user_id</text>
+<rect x="120" y="422" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="132" y="446" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.guardian_links</text>
+<text x="132" y="467" font-family="monospace" font-size="11" fill="#566579">PK id · FK guardian_user_id</text>
+<rect x="120" y="502" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#3869A6" stroke-width="2"/>
+<text x="132" y="526" font-family="Arial" font-size="14" font-weight="700" fill="#3869A6">identity.policy_acknowledgments</text>
+<text x="132" y="547" font-family="monospace" font-size="11" fill="#566579">PK id · FK user_id</text>
+<rect x="120" y="640" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="132" y="664" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.organizations</text>
+<text x="132" y="685" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="120" y="720" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="132" y="744" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.organization_memberships</text>
+<text x="132" y="765" font-family="monospace" font-size="11" fill="#566579">PK organization_id · PK user_id</text>
+<rect x="120" y="800" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="132" y="824" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.roles</text>
+<text x="132" y="845" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="120" y="880" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="132" y="904" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.permissions</text>
+<text x="132" y="925" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="120" y="960" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="132" y="984" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.role_permissions</text>
+<text x="132" y="1005" font-family="monospace" font-size="11" fill="#566579">PK role_id · PK permission_id</text>
+<rect x="120" y="1040" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#147F77" stroke-width="2"/>
+<text x="132" y="1064" font-family="Arial" font-size="14" font-weight="700" fill="#147F77">tenancy.role_assignments</text>
+<text x="132" y="1085" font-family="monospace" font-size="11" fill="#566579">PK organization_id · PK user_id</text>
+<rect x="620" y="182" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#7952AF" stroke-width="2"/>
+<text x="632" y="206" font-family="Arial" font-size="14" font-weight="700" fill="#7952AF">assets.assets</text>
+<text x="632" y="227" font-family="monospace" font-size="11" fill="#566579">PK id · FK owner_organization_id</text>
+<rect x="620" y="262" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#7952AF" stroke-width="2"/>
+<text x="632" y="286" font-family="Arial" font-size="14" font-weight="700" fill="#7952AF">assets.asset_versions</text>
+<text x="632" y="307" font-family="monospace" font-size="11" fill="#566579">PK id · FK asset_id</text>
+<rect x="620" y="400" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<text x="632" y="424" font-family="Arial" font-size="14" font-weight="700" fill="#A36C25">catalog.games</text>
+<text x="632" y="445" font-family="monospace" font-size="11" fill="#566579">PK id · FK created_by</text>
+<rect x="620" y="480" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<text x="632" y="504" font-family="Arial" font-size="14" font-weight="700" fill="#A36C25">catalog.game_versions</text>
+<text x="632" y="525" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_id</text>
+<rect x="620" y="618" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A3567B" stroke-width="2"/>
+<text x="632" y="642" font-family="Arial" font-size="14" font-weight="700" fill="#A3567B">publishing.content_items</text>
+<text x="632" y="663" font-family="monospace" font-size="11" fill="#566579">PK id · FK owner_organization_id</text>
+<rect x="620" y="698" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A3567B" stroke-width="2"/>
+<text x="632" y="722" font-family="Arial" font-size="14" font-weight="700" fill="#A3567B">publishing.content_revisions</text>
+<text x="632" y="743" font-family="monospace" font-size="11" fill="#566579">PK id · FK content_item_id</text>
+<rect x="620" y="778" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A3567B" stroke-width="2"/>
+<text x="632" y="802" font-family="Arial" font-size="14" font-weight="700" fill="#A3567B">publishing.content_publications</text>
+<text x="632" y="823" font-family="monospace" font-size="11" fill="#566579">PK id · FK revision_id</text>
+<rect x="1120" y="182" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="206" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.game_rooms</text>
+<text x="1132" y="227" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_version_id</text>
+<rect x="1120" y="262" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="286" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.room_memberships</text>
+<text x="1132" y="307" font-family="monospace" font-size="11" fill="#566579">PK id · FK room_id</text>
+<rect x="1120" y="342" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="366" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.matches</text>
+<text x="1132" y="387" font-family="monospace" font-size="11" fill="#566579">PK id · FK room_id</text>
+<rect x="1120" y="422" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="446" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.match_participants</text>
+<text x="1132" y="467" font-family="monospace" font-size="11" fill="#566579">PK id · FK match_id</text>
+<rect x="1120" y="502" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="526" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.match_commands</text>
+<text x="1132" y="547" font-family="monospace" font-size="11" fill="#566579">PK id · FK match_id</text>
+<rect x="1120" y="582" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="606" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.match_snapshots</text>
+<text x="1132" y="627" font-family="monospace" font-size="11" fill="#566579">PK match_id · PK state_revision</text>
+<rect x="1120" y="662" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="686" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.match_results</text>
+<text x="1132" y="707" font-family="monospace" font-size="11" fill="#566579">PK id · FK match_id</text>
+<rect x="1120" y="742" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
+<text x="1132" y="766" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.match_result_entries</text>
+<text x="1132" y="787" font-family="monospace" font-size="11" fill="#566579">PK id · FK result_id</text>
+<rect x="1120" y="880" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1132" y="904" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.domain_outbox</text>
+<text x="1132" y="925" font-family="monospace" font-size="11" fill="#566579">PK id</text>
+<rect x="1120" y="960" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1132" y="984" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.audit_events</text>
+<text x="1132" y="1005" font-family="monospace" font-size="11" fill="#566579">PK id · FK actor_user_id</text>
+<rect x="1120" y="1040" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1132" y="1064" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.agent_approvals</text>
+<text x="1132" y="1085" font-family="monospace" font-size="11" fill="#566579">PK id · FK requested_by</text>
+<rect x="1120" y="1120" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<text x="1132" y="1144" font-family="Arial" font-size="14" font-weight="700" fill="#567184">integration.agent_invocations</text>
+<text x="1132" y="1165" font-family="monospace" font-size="11" fill="#566579">PK id · FK initiated_by</text>
+<text x="1555" y="1278" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+</svg>
