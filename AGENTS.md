@@ -30,3 +30,9 @@ Build an extensible AI-native board-game platform with a safe, auditable MCP int
 Schema/API contract and tests updated; no cross-tenant leaks; backward compatibility checked; CI passes; changed behavior documented; observability and rollout defined; reviewed PR submitted.
 
 More details: `docs/ai-mcp/AI_AGENT_REPOSITORY_RULES.md` and `docs/governance/REPOSITORY_GOVERNANCE.md`.
+## UI/UX alignment — adopted 2026-10-10
+- All platform UI uses KingDragonHub visual language; first read `docs/design/README.md` and token/agent guidance.
+- Use orange `#FF5722` for brand highlights; enforce accessible action/text contrast variants.
+- Preserve brand shell while games may have distinct board/render style; do not introduce unrelated neon blue/purple base branding.
+- Verify actual KingDragonHub font/nav/CSS against authorized host source before claiming pixel-perfect implementation.
+- Changes to global visual tokens must pass Brand/UX review; do not duplicate site header on embedded routes.

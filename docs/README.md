@@ -34,5 +34,16 @@
 - [LiveOps & dynamic content](liveops/LIVEOPS_CONTENT_STRATEGY.md)
 - [Master roadmap](roadmap/MASTER_ROADMAP.md)
 
+## UI/UX — KingDragonHub Design Language
+- [Design reference & implementation index](design/README.md)
+- [Reference screenshot audit](design/REFERENCE_AUDIT.md)
+- [Design language](design/DESIGN_LANGUAGE.md)
+- [Provisional token JSON](design/tokens/kingdragonhub.tokens.json)
+- [Components](design/COMPONENTS.md)
+- [Screens and flows](design/SCREEN_INVENTORY.md)
+- [Interactions and accessibility](design/MOTION_ACCESSIBILITY.md)
+- [Production integration contract](design/KINGDRAGONHUB_INTEGRATION.md)
+- [AI Agent UI rules](design/AGENT_UI_INSTRUCTIONS.md)
+
 ## Editing policy
 Change documentation by reviewed PR; publish a new ADR for major decisions; keep archived v1.0 read-only; remove secrets and personal student data. AI Agents use scoped MCP tools and explicit approval for production writes.

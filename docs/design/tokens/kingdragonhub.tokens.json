@@ -1,0 +1,257 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "kingdragonhub-boardgame-foundation",
+  "version": "0.1.0",
+  "status": "provisional except brand orange confirmed in supplied screenshot",
+  "color": {
+    "brand": {
+      "primary": {
+        "$type": "color",
+        "$value": "#FF5722",
+        "$description": "Orange in reference utility screenshot."
+      },
+      "primaryHover": {
+        "$type": "color",
+        "$value": "#E64A19"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "#FFF2EC"
+      },
+      "actionFill": {
+        "$type": "color",
+        "$value": "#C63D14",
+        "$description": "Accessible orange variant for white small text; contrast ~5.15:1; primary #FF5722 remains brand highlight."
+      },
+      "actionFillHover": {
+        "$type": "color",
+        "$value": "#BF360C"
+      },
+      "actionText": {
+        "$type": "color",
+        "$value": "#FFFFFF"
+      },
+      "primaryOnBrand": {
+        "$type": "color",
+        "$value": "#111827",
+        "$description": "Ink text on #FF5722 for small text; contrast ~5.61:1"
+      },
+      "smallOrangeText": {
+        "$type": "color",
+        "$value": "#C63D14"
+      }
+    },
+    "light": {
+      "bg": {
+        "$type": "color",
+        "$value": "#F7F9FC"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "#FFFFFF"
+      },
+      "surfaceMuted": {
+        "$type": "color",
+        "$value": "#F3F6F9"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#111827"
+      },
+      "textMuted": {
+        "$type": "color",
+        "$value": "#606B7D"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#253047"
+      },
+      "borderSubtle": {
+        "$type": "color",
+        "$value": "#DEE4EA"
+      }
+    },
+    "dark": {
+      "bg": {
+        "$type": "color",
+        "$value": "#111827"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "#1B2638"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#F7F9FC"
+      },
+      "textMuted": {
+        "$type": "color",
+        "$value": "#B8C2D0"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#8290A3"
+      }
+    },
+    "semantic": {
+      "success": {
+        "$type": "color",
+        "$value": "#17805D"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#A45D08"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "#C92A2A"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "#FF5722"
+      }
+    }
+  },
+  "font": {
+    "ui": {
+      "$type": "fontFamily",
+      "$value": "Inter, system-ui, -apple-system, sans-serif",
+      "$description": "Provisional fallback; verify KingDragonHub source font before release."
+    },
+    "weight": {
+      "body": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": 600
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700
+      },
+      "heavy": {
+        "$type": "fontWeight",
+        "$value": 800
+      }
+    }
+  },
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "card": {
+      "$type": "dimension",
+      "$value": "14px"
+    },
+    "modal": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": "999px"
+    }
+  },
+  "border": {
+    "card": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "focus": {
+      "$type": "dimension",
+      "$value": "2px"
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": "64px"
+    }
+  },
+  "layout": {
+    "container": {
+      "$type": "dimension",
+      "$value": "1200px"
+    },
+    "headerHeight": {
+      "$type": "dimension",
+      "$value": "58px"
+    },
+    "sidebarDesktop": {
+      "$type": "dimension",
+      "$value": "256px"
+    }
+  },
+  "motion": {
+    "fast": {
+      "$type": "duration",
+      "$value": "120ms"
+    },
+    "normal": {
+      "$type": "duration",
+      "$value": "200ms"
+    },
+    "slow": {
+      "$type": "duration",
+      "$value": "350ms"
+    }
+  },
+  "breakpoints": {
+    "mobile": {
+      "$type": "dimension",
+      "$value": "640px"
+    },
+    "tablet": {
+      "$type": "dimension",
+      "$value": "1024px"
+    },
+    "desktop": {
+      "$type": "dimension",
+      "$value": "1280px"
+    }
+  },
+  "metadata": {
+    "source": "7 KingDragonHub user screenshots, 2026-10-10; exact CSS/font requires original source audit",
+    "policy": "Generated themes cannot mutate platform safety/accessibility tokens without review.",
+    "accessibility": "WCAG AA: white on #FF5722 about 3.16:1 (fails small text); use white on #C63D14 (~5.15:1) or #111827 on #FF5722 (~5.61:1). Validate final token contrast with tools."
+  }
+}
