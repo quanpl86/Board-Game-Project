@@ -207,9 +207,16 @@ ALTER TABLE education.assignments ADD CONSTRAINT assignment_rubric_lesson_consis
 -- Catalog/teaching revisions are immutable once they have been published or approved.
 CREATE FUNCTION education.restrict_approved_revisions() RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
-  IF TG_TABLE_NAME='lessons' AND OLD.published_at IS NOT NULL
-    OR TG_TABLE_NAME='rubrics' AND OLD.approved_at IS NOT NULL THEN
-    RAISE EXCEPTION 'published/approved education revision is immutable' USING ERRCODE='55000';
+  IF TG_TABLE_NAME = 'lessons' THEN
+    IF OLD.published_at IS NOT NULL THEN
+      RAISE EXCEPTION 'published lesson is immutable' USING ERRCODE='55000';
+    END IF;
+  ELSIF TG_TABLE_NAME = 'rubrics' THEN
+    IF OLD.approved_at IS NOT NULL THEN
+      RAISE EXCEPTION 'approved rubric is immutable' USING ERRCODE='55000';
+    END IF;
+  ELSE
+    RAISE EXCEPTION 'unknown approved revision table' USING ERRCODE='55000';
   END IF;
   IF TG_OP='DELETE' THEN RETURN OLD; END IF;
   RETURN NEW;
