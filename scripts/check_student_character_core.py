@@ -26,7 +26,7 @@ for table in EXPECTED:
   for mode in ("ENABLE","FORCE"):
     if f"ALTER TABLE {table} {mode} ROW LEVEL SECURITY;" not in SQL:
       errors.append("unsafe RLS "+table+" "+mode)
-if len(re.findall(r"CREATE TABLE\s+",SQL))!=6:
+if len(re.findall(r"^CREATE TABLE\s+",re.sub(r"--[^\n]*","",SQL),re.M))!=6:
   errors.append("migration must only create six core tables")
 if re.search(r"\bCREATE\s+POLICY\b|\bGRANT\s+(?:ALL|SELECT|INSERT|UPDATE|DELETE)\b|\bDROP\s+(?:TABLE|SCHEMA)\b",SQL,re.I):
   errors.append("migration must not grant runtime permissions or destroy data")

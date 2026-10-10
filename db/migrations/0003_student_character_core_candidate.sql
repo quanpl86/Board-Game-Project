@@ -109,10 +109,12 @@ CREATE TRIGGER avatar_rig_append_only BEFORE UPDATE OR DELETE ON commerce.avatar
 
 CREATE FUNCTION characters.guard_published_character_version() RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
-  IF TG_OP <> 'INSERT' AND OLD.published_at IS NOT NULL THEN
-    RAISE EXCEPTION 'published character version is immutable' USING ERRCODE='55000';
+  IF TG_OP = 'UPDATE' OR TG_OP = 'DELETE' THEN
+    IF OLD.published_at IS NOT NULL THEN
+      RAISE EXCEPTION 'published character version is immutable' USING ERRCODE='55000';
+    END IF;
+    IF TG_OP = 'DELETE' THEN RETURN OLD; END IF;
   END IF;
-  IF TG_OP='DELETE' THEN RETURN OLD; END IF;
   IF NEW.published_at IS NOT NULL AND NOT EXISTS (
     SELECT 1 FROM assets.asset_versions av
     JOIN assets.assets a ON a.id=av.asset_id
