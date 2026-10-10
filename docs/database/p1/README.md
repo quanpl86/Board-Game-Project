@@ -28,8 +28,3 @@
 Manifest: `db/schema/p1_candidate_tables.json`. Regenerate *all* diagram/CSV/datasheet files with `node scripts/generate_p1_database_atlas.mjs`. CI should run `node scripts/generate_p1_database_atlas.mjs --check`; generated files are proposals derived from candidate manifest, not a permission grant.
 
 See [P0 30-table production-review candidate](../README.md) and [cross-layer Agent protocol](../AGENT_IMPLEMENTATION_REFERENCE.md). Changes to physical schema require a **separate** approved SQL migration with its own smoke/integration tests.
-
-## Education physical migration candidate — Dev/CI only
-- [Physical Education ERD with exact SQL FK/composite refinements](EDUCATION_PHYSICAL_ERD.md)
-- [DDL, guard and security decisions](EDUCATION_PHYSICAL_CANDIDATE.md)
-- SQL: `db/migrations/0002_p1a_education_candidate.sql`; tests: `db/tests/0002_p1a_education_smoke.sql`. Competition and Commerce do not have SQL migrations yet.
