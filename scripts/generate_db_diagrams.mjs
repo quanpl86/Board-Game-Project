@@ -12,7 +12,7 @@ const generateArtifacts=function generateArtifacts(data){
  const palette={identity:"#3869A6",tenancy:"#147F77",assets:"#7952AF",catalog:"#A36C25",gameplay:"#C65029",publishing:"#A3567B",integration:"#567184"};
  const all=new Map(tables.map(t=>[t.id,t]));const esc=x=>String(x??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
  const ids=s=>s.replace(/[^a-z0-9_]/gi,"_");
- const cols=t=>t.fields.map(line=>{let m=/^([a-z_]+)\s+(.+)$/.exec(line);if(!m||["PRIMARY","FOREIGN","UNIQUE","CHECK"].includes(m[1].toUpperCase()))return null;let tail=m[2];let kind=(/\bPRIMARY KEY\b/.test(tail)?"PK":/\bREFERENCES\b/.test(tail)?"FK":"");
+ const cols=t=>t.fields.map(line=>{let m=/^([a-z_][a-z0-9_]*)\s+(.+)$/.exec(line);if(!m||["PRIMARY","FOREIGN","UNIQUE","CHECK"].includes(m[1].toUpperCase()))return null;let tail=m[2];let kind=(/\bPRIMARY KEY\b/.test(tail)?"PK":/\bREFERENCES\b/.test(tail)?"FK":"");
  const type=(tail.match(/^([a-z]+(?:\([^)]+\))?)/)||[])[1]||"text";return {name:m[1],type,kind,required:tail.includes("NOT NULL")} }).filter(Boolean).map(c=>{const pk=t.fields.filter(f=>f.startsWith("PRIMARY KEY")).some(f=>f.includes(c.name));const fk=fks.some(f=>f.from===t.id&&f.via.split(",").map(a=>a.trim()).includes(c.name));return {...c,kind:pk||c.kind==="PK"?"PK":fk?"FK":c.kind};});
  const hFor=(t,compact=false)=>compact?64:38+24*cols(t).length+10;
  const box=(t,x,y,compact=false,primary=false)=>({id:t.id,x,y,w:compact?300:340,h:hFor(t,compact),compact,primary,domain:t.domain});

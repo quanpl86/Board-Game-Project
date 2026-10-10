@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1730" height="625" viewBox="0 0 1730 625" role="img" aria-label="BẢNG CATALOG.GAME_VERSIONS">
+<svg xmlns="http://www.w3.org/2000/svg" width="1730" height="673" viewBox="0 0 1730 673" role="img" aria-label="BẢNG CATALOG.GAME_VERSIONS">
 <rect width="100%" height="100%" fill="#F8FAFC"/>
 <text x="68" y="58" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#132238">BẢNG CATALOG.GAME_VERSIONS</text>
-<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">8 cột · 2 FK tham chiếu tới · 1 FK tham chiếu đi · 0 self-edge</text>
-<path d="M380,222 L540,222 L540,320 L700,320" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
-<path d="M380,322 L540,322 L540,320 L700,320" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
-<path d="M1040,320 L1180,320 L1180,222 L1320,222" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
-<rect x="700" y="200" width="340" height="240" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
+<text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">10 cột · 2 FK tham chiếu tới · 1 FK tham chiếu đi · 0 self-edge</text>
+<path d="M380,222 L540,222 L540,344 L700,344" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M380,322 L540,322 L540,344 L700,344" fill="none" stroke="#C65029" stroke-width="1.2" opacity=".52"/>
+<path d="M1040,344 L1180,344 L1180,222 L1320,222" fill="none" stroke="#A36C25" stroke-width="1.2" opacity=".52"/>
+<rect x="700" y="200" width="340" height="288" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
 <rect x="700" y="200" width="340" height="37" rx="8" fill="#A36C25"/>
 <text x="712" y="225" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">catalog.game_versions</text>
 <text x="711" y="255" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
@@ -16,10 +16,13 @@
 <text x="711" y="327" font-family="Consolas,monospace" font-size="12" fill="#293647">    engine_api_version : text</text>
 <text x="711" y="351" font-family="Consolas,monospace" font-size="12" fill="#293647">    state_schema_version : integer</text>
 <rect x="702" y="358" width="336" height="24" fill="#F4F7FA"/>
-<text x="711" y="375" font-family="Consolas,monospace" font-size="12" fill="#293647">    manifest : jsonb</text>
-<text x="711" y="399" font-family="Consolas,monospace" font-size="12" fill="#293647">    published_at : timestamptz</text>
+<text x="711" y="375" font-family="Consolas,monospace" font-size="12" fill="#293647">    rules_sha256 : text</text>
+<text x="711" y="399" font-family="Consolas,monospace" font-size="12" fill="#293647">    asset_manifest_sha256 : text</text>
 <rect x="702" y="406" width="336" height="24" fill="#F4F7FA"/>
-<text x="711" y="423" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<text x="711" y="423" font-family="Consolas,monospace" font-size="12" fill="#293647">    manifest : jsonb</text>
+<text x="711" y="447" font-family="Consolas,monospace" font-size="12" fill="#293647">    published_at : timestamptz</text>
+<rect x="702" y="454" width="336" height="24" fill="#F4F7FA"/>
+<text x="711" y="471" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
 <rect x="80" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#C65029" stroke-width="2"/>
 <text x="92" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#C65029">gameplay.game_rooms</text>
 <text x="92" y="235" font-family="monospace" font-size="11" fill="#566579">PK id · FK game_version_id</text>
@@ -29,5 +32,5 @@
 <rect x="1320" y="190" width="300" height="64" rx="9" fill="#FFFFFF" stroke="#A36C25" stroke-width="2"/>
 <text x="1332" y="214" font-family="Arial" font-size="14" font-weight="700" fill="#A36C25">catalog.games</text>
 <text x="1332" y="235" font-family="monospace" font-size="11" fill="#566579">PK id · FK created_by</text>
-<text x="1665" y="594" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
+<text x="1665" y="642" text-anchor="end" font-family="Arial" font-size="12" fill="#718096">BGU P0 · 30 bảng / 49 FK · source db/schema/p0_tables.json · REVIEW CANDIDATE</text>
 </svg>

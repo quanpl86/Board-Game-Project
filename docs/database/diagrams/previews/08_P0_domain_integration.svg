@@ -4,11 +4,11 @@
 <text x="68" y="89" font-family="Arial,sans-serif" font-size="13" fill="#566579">Đầy đủ cột PK/FK và 8 quan hệ chạm domain · Bảng ngoài domain hiện dạng liên kết</text>
 <path d="M900,289 L960,289 L960,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
 <path d="M900,289 L960,289 L960,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
-<path d="M440,610 L730,610 L730,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
-<path d="M440,610 L730,610 L730,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
-<path d="M440,610 L730,610 L730,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M440,622 L730,622 L730,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M440,622 L730,622 L730,177 L1020,177" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M440,622 L730,622 L730,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
 <path d="M730,478 L950,478 L950,209 L1170,209" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
-<path d="M560,634 L500,634 L500,610 L440,610" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
+<path d="M560,634 L500,634 L500,622 L440,622" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
 <path d="M900,634 L960,634 L960,265 L1020,265" fill="none" stroke="#567184" stroke-width="1.2" opacity=".52"/>
 <rect x="100" y="145" width="340" height="264" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
 <rect x="100" y="145" width="340" height="37" rx="8" fill="#567184"/>
@@ -44,7 +44,7 @@
 <text x="571" y="392" font-family="Consolas,monospace" font-size="12" fill="#293647">    redacted_metadata : jsonb</text>
 <rect x="562" y="399" width="336" height="24" fill="#F4F7FA"/>
 <text x="571" y="416" font-family="Consolas,monospace" font-size="12" fill="#293647">    occurred_at : timestamptz</text>
-<rect x="100" y="454" width="340" height="312" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
+<rect x="100" y="454" width="340" height="336" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
 <rect x="100" y="454" width="340" height="37" rx="8" fill="#567184"/>
 <text x="112" y="479" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">integration.agent_approvals</text>
 <text x="111" y="509" font-family="Consolas,monospace" font-size="12" fill="#215A84">PK  id : uuid</text>
@@ -56,13 +56,15 @@
 <text x="111" y="605" font-family="Consolas,monospace" font-size="12" fill="#293647">    tool_code : text</text>
 <rect x="102" y="612" width="336" height="24" fill="#F4F7FA"/>
 <text x="111" y="629" font-family="Consolas,monospace" font-size="12" fill="#293647">    target_resource : text</text>
-<text x="111" y="653" font-family="Consolas,monospace" font-size="12" fill="#293647">    scope_hash : text</text>
+<text x="111" y="653" font-family="Consolas,monospace" font-size="12" fill="#293647">    revision_sha256 : text</text>
 <rect x="102" y="660" width="336" height="24" fill="#F4F7FA"/>
-<text x="111" y="677" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
-<text x="111" y="701" font-family="Consolas,monospace" font-size="12" fill="#293647">    expires_at : timestamptz</text>
+<text x="111" y="677" font-family="Consolas,monospace" font-size="12" fill="#293647">    scope_hash : text</text>
+<text x="111" y="701" font-family="Consolas,monospace" font-size="12" fill="#293647">    status : text</text>
 <rect x="102" y="708" width="336" height="24" fill="#F4F7FA"/>
-<text x="111" y="725" font-family="Consolas,monospace" font-size="12" fill="#293647">    consumed_at : timestamptz</text>
-<text x="111" y="749" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
+<text x="111" y="725" font-family="Consolas,monospace" font-size="12" fill="#293647">    expires_at : timestamptz</text>
+<text x="111" y="749" font-family="Consolas,monospace" font-size="12" fill="#293647">    consumed_at : timestamptz</text>
+<rect x="102" y="756" width="336" height="24" fill="#F4F7FA"/>
+<text x="111" y="773" font-family="Consolas,monospace" font-size="12" fill="#293647">    created_at : timestamptz</text>
 <rect x="560" y="478" width="340" height="312" rx="9" fill="#FFFFFF" stroke="#567184" stroke-width="2"/>
 <rect x="560" y="478" width="340" height="37" rx="8" fill="#567184"/>
 <text x="572" y="503" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">integration.agent_invocations</text>
