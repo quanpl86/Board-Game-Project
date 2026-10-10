@@ -24,3 +24,7 @@ F01 identity and tenant; F02 catalog and assets; F03 room and memberships; F04 m
 
 ## Validation
 `python3 scripts/check_db_schema.py` checks SQL/manifest/table-doc links and foreign keys. `db/tests/0001_p0_smoke.sql` exercises SQL constraints in isolated CI PostgreSQL; this is not proof of SSO/auth product integration.
+
+## Future data model planning
+- [P1/P2 relationship blueprint](FULL_PLATFORM_RELATIONSHIP_BLUEPRINT.md) — education, competition, avatar/shop, social, CMS, worlds, coding/AI logical ERDs (not migration-ready).
+- [Gap and review matrix](P1_P2_GAP_MATRIX.md) — schema still needed before each feature release.

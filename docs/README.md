@@ -69,3 +69,9 @@ Change documentation by reviewed PR; publish a new ADR for major decisions; keep
 - [Monorepo, CI and local developer setup](implementation/PHASE1_BOOTSTRAP.md)
 - [Agent task contract and validator](implementation/AGENT_TASK_LIFECYCLE.md)
 - [Release gates](implementation/RELEASE_GATES.md)
+
+## Database architecture & per-table ERD (P0 candidate)
+- [PostgreSQL P0 and all 30 physical table diagrams](database/README.md)
+- [Overall ERD](database/ERD_ALL_P0.md)
+- [Future domain conceptual ERDs](database/FULL_PLATFORM_RELATIONSHIP_BLUEPRINT.md)
+- [KingDragonHub SSO/Identity discovery gate](integration/KINGDRAGONHUB_AUTH_DISCOVERY.md)
