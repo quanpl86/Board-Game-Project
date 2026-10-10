@@ -1,0 +1,57 @@
+name: P0 PostgreSQL Schema and ERD
+on:
+  pull_request:
+    paths:
+      - 'db/**'
+      - 'docs/database/**'
+      - 'scripts/check_db_schema.py'
+      - '.github/workflows/database-p0.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'db/**'
+      - 'docs/database/**'
+      - 'scripts/check_db_schema.py'
+      - '.github/workflows/database-p0.yml'
+permissions:
+  contents: read
+concurrency:
+  group: db-p0-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  erd-and-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: ci_local_only
+          POSTGRES_USER: postgres
+          POSTGRES_DB: bgu_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d bgu_ci"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGDATABASE: bgu_ci
+      PGUSER: postgres
+      PGPASSWORD: ci_local_only
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Validate ERD and migration metadata
+        run: python scripts/check_db_schema.py
+      - name: Install PostgreSQL client if absent
+        run: command -v psql || (sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client)
+      - name: Apply P0 migration to isolated CI PostgreSQL
+        run: psql -X -v ON_ERROR_STOP=1 -f db/migrations/0001_p0_foundation.sql
+      - name: Test relational constraints and default-deny RLS
+        run: psql -X -v ON_ERROR_STOP=1 -f db/tests/0001_p0_smoke.sql
+# No credentials from production; this workflow uses disposable CI service only.
+# SQL migration requires separate human DBA/security approval before staging/prod.
