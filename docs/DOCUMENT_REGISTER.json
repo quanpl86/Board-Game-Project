@@ -1,11 +1,12 @@
 {
   "baselineDate": "2026-10-09",
   "status": "draft",
-  "version": "1.0",
+  "version": "1.1",
   "sourceOfTruth": [
     "docs/product/MASTER_PLATFORM_BLUEPRINT.md",
     "docs/architecture/DATABASE_DATA_DICTIONARY.md",
-    "docs/ai-mcp/MCP_AI_AGENT_CONTROL_PLANE.md"
+    "docs/ai-mcp/MCP_AI_AGENT_CONTROL_PLANE.md",
+    "docs/design/DESIGN_LANGUAGE.md"
   ],
   "domains": {
     "product": [
@@ -47,7 +48,19 @@
     ],
     "roadmap": [
       "docs/roadmap/MASTER_ROADMAP.md"
+    ],
+    "design": [
+      "docs/design/README.md",
+      "docs/design/REFERENCE_AUDIT.md",
+      "docs/design/DESIGN_LANGUAGE.md",
+      "docs/design/tokens/kingdragonhub.tokens.json",
+      "docs/design/COMPONENTS.md",
+      "docs/design/SCREEN_INVENTORY.md",
+      "docs/design/MOTION_ACCESSIBILITY.md",
+      "docs/design/KINGDRAGONHUB_INTEGRATION.md",
+      "docs/design/AGENT_UI_INSTRUCTIONS.md"
     ]
   },
-  "policy": "Changes via reviewed PR/ADR. Do not publish secrets, student data or unlicensed media."
+  "policy": "Changes via reviewed PR/ADR. Do not publish secrets, student data or unlicensed media.",
+  "designDecision": "KingDragonHub visual language selected 2026-10-10; source-css verification and visual screens outstanding"
 }
