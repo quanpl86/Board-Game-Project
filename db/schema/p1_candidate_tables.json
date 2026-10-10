@@ -1,0 +1,4012 @@
+{
+  "schemaVersion": 1,
+  "status": "DRAFT_LOGICAL_PHYSICAL_CONTRACT_NOT_MIGRATION",
+  "version": "0.1.0",
+  "sources": [
+    "docs/economy/ECONOMY_INVENTORY_DATA_MODEL.md",
+    "docs/competition/LEADERBOARD_HALL_OF_FAME_SPEC.md",
+    "docs/education/BOARD_GAME_EDUCATION_PRD.md",
+    "docs/avatars/AVATAR_ITEM_AND_3D_ASSET_SPEC.md",
+    "docs/architecture/DB_FREEZE_READINESS_V2.md"
+  ],
+  "approvalRequired": [
+    "Product Owner",
+    "BGU-DBA",
+    "BGU-SEC",
+    "Education and Economy owner"
+  ],
+  "tables": [
+    {
+      "id": "education.academic_terms",
+      "domain": "education",
+      "name": "academic_terms",
+      "description": "Niên khóa theo tổ chức, ngày bắt đầu/kết thúc theo UTC.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "organization_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "tenancy.organizations.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "term_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "starts_on",
+          "type": "date",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ends_on",
+          "type": "date",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(organization_id,term_code)"
+      ],
+      "checks": [
+        "ends_on >= starts_on"
+      ],
+      "indexes": [
+        "(organization_id,status,starts_on)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.classes",
+      "domain": "education",
+      "name": "classes",
+      "description": "Lớp học thuộc tổ chức và niên khóa; phân quyền theo membership tổ chức.",
+      "classification": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "organization_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "tenancy.organizations.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "academic_term_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.academic_terms.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "class_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "display_name",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "teacher_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(organization_id,academic_term_id,class_code)"
+      ],
+      "checks": [
+        "term and class must share same organization (composite FK to finalize)"
+      ],
+      "indexes": [
+        "(organization_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.class_enrollments",
+      "domain": "education",
+      "name": "class_enrollments",
+      "description": "Lịch sử tham gia lớp học; không suy quyền từ việc tồn tại dòng dữ liệu.",
+      "classification": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "class_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.classes.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "student_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "invited",
+          "description": ""
+        },
+        {
+          "name": "joined_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "left_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(class_id,student_user_id)"
+      ],
+      "checks": [
+        "student must be permitted under org and age policy",
+        "left_at IS NULL OR joined_at IS NOT NULL"
+      ],
+      "indexes": [
+        "(student_user_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.courses",
+      "domain": "education",
+      "name": "courses",
+      "description": "Khóa/chương trình học dùng lại qua nhiều lớp; có thể do tổ chức sở hữu.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "owner_organization_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "tenancy.organizations.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "course_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "Course code globally unique by initial proposal; confirm scope"
+      ],
+      "indexes": [
+        "(status,course_code)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.lessons",
+      "domain": "education",
+      "name": "lessons",
+      "description": "Bài học phiên bản hóa nội dung để giữ bằng chứng lịch sử.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "course_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.courses.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "lesson_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "learning_goal",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "content_revision_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "publishing.content_revisions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(course_id,lesson_code,revision)"
+      ],
+      "checks": [
+        "revision > 0",
+        "published revision immutable via application + DB guard before release"
+      ],
+      "indexes": [
+        "(course_id,lesson_code,revision DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.rubrics",
+      "domain": "education",
+      "name": "rubrics",
+      "description": "Bộ tiêu chí đánh giá có revision, liên kết chính xác bài học.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "lesson_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.lessons.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "approved_by",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "approved_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(lesson_id,revision)"
+      ],
+      "checks": [
+        "revision > 0",
+        "approved rubric immutable; confirm change process"
+      ],
+      "indexes": [
+        "(lesson_id,revision DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.rubric_criteria",
+      "domain": "education",
+      "name": "rubric_criteria",
+      "description": "Tiêu chí rubric riêng biệt; mức đánh giá cần diễn giải rõ.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "rubric_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.rubrics.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "criterion_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "weight",
+          "type": "numeric(8,3)",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "max_level",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(rubric_id,criterion_code)"
+      ],
+      "checks": [
+        "weight >= 0",
+        "max_level >= 1"
+      ],
+      "indexes": [
+        "(rubric_id,sort_order)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.assignments",
+      "domain": "education",
+      "name": "assignments",
+      "description": "Giáo viên giao bài cho lớp; ràng buộc lesson/rubric revision.",
+      "classification": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "class_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.classes.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "lesson_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.lessons.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "rubric_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "education.rubrics.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "assigned_by",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "opens_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "due_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "opens_at IS NULL OR due_at IS NULL OR due_at > opens_at",
+        "rubric lesson must match assignment lesson; composite constraint pending"
+      ],
+      "indexes": [
+        "(class_id,status,opens_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.learning_attempts",
+      "domain": "education",
+      "name": "learning_attempts",
+      "description": "Lượt nộp bài cá nhân; kết quả game chỉ là bằng chứng, không phải điểm học thuật.",
+      "classification": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "assignment_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.assignments.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "student_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "attempt_no",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "match_result_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "gameplay.match_results.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "in_progress",
+          "description": ""
+        },
+        {
+          "name": "submitted_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(assignment_id,student_user_id,attempt_no)"
+      ],
+      "checks": [
+        "attempt_no > 0",
+        "student active class enrollment and match participation must be checked"
+      ],
+      "indexes": [
+        "(student_user_id,submitted_at DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.learning_evidence",
+      "domain": "education",
+      "name": "learning_evidence",
+      "description": "Minh chứng theo lượt và schema version, mặc định riêng tư.",
+      "classification": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.learning_attempts.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "evidence_type",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "schema_version",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "source_match_command_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "gameplay.match_commands.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "evidence_sha256",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "redacted_payload",
+          "type": "jsonb",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "schema_version > 0",
+        "evidence_sha256 is sha256 of canonical evidence data",
+        "never place child PII in generic payload"
+      ],
+      "indexes": [
+        "(attempt_id,created_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "education.rubric_assessments",
+      "domain": "education",
+      "name": "rubric_assessments",
+      "description": "Kết quả giáo viên nhận xét tiêu chí theo revision; lịch sử không ghi đè.",
+      "classification": "highly restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "attempt_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.learning_attempts.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "rubric_criterion_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "education.rubric_criteria.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "assessor_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "assessment_revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "awarded_level",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "private_feedback",
+          "type": "text",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "reviewed_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(attempt_id,rubric_criterion_id,assessment_revision)"
+      ],
+      "checks": [
+        "assessment_revision > 0",
+        "awarded_level >= 0",
+        "criteria rubric must equal assignment rubric; authorization required"
+      ],
+      "indexes": [
+        "(attempt_id,reviewed_at DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.event_programs",
+      "domain": "competition",
+      "name": "event_programs",
+      "description": "Sự kiện do tổ chức tổ chức; không đồng nhất CMS campaign.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "organization_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "tenancy.organizations.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "organizer_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "slug",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "starts_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ends_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(organization_id,slug)"
+      ],
+      "checks": [
+        "ends_at > starts_at"
+      ],
+      "indexes": [
+        "(organization_id,starts_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.tournaments",
+      "domain": "competition",
+      "name": "tournaments",
+      "description": "Giải đấu của event gắn game version và thể thức đã phê duyệt.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "event_program_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.event_programs.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "game_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "catalog.game_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "format_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "format_code must be versioned approved tournament policy"
+      ],
+      "indexes": [
+        "(event_program_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.tournament_registrations",
+      "domain": "competition",
+      "name": "tournament_registrations",
+      "description": "Đăng ký cá nhân; eligibility/consent kiểm tra bởi service.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "tournament_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.tournaments.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "participant_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "pending",
+          "description": ""
+        },
+        {
+          "name": "eligibility_revision_hash",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "registered_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(tournament_id,participant_user_id)"
+      ],
+      "checks": [
+        "age/organization policy must be verified server-side"
+      ],
+      "indexes": [
+        "(tournament_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.tournament_rounds",
+      "domain": "competition",
+      "name": "tournament_rounds",
+      "description": "Vòng đấu thuộc giải, không trực tiếp đồng nhất với một trận.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "tournament_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.tournaments.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "round_number",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "starts_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(tournament_id,round_number)"
+      ],
+      "checks": [
+        "round_number >= 1"
+      ],
+      "indexes": [
+        "(tournament_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.tournament_fixtures",
+      "domain": "competition",
+      "name": "tournament_fixtures",
+      "description": "Cặp đấu theo vòng, có thể liên kết nhiều match rematch.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "round_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.tournament_rounds.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "fixture_no",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "scheduled_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "scheduled",
+          "description": ""
+        },
+        {
+          "name": "referee_user_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(round_id,fixture_no)"
+      ],
+      "checks": [
+        "fixture_no >= 1"
+      ],
+      "indexes": [
+        "(round_id,scheduled_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.fixture_matches",
+      "domain": "competition",
+      "name": "fixture_matches",
+      "description": "Bảng cầu nối fixture → match đã xác minh từ Game Server.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "fixture_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.tournament_fixtures.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "match_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "gameplay.matches.id",
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "leg_number",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "recorded_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(fixture_id,leg_number)"
+      ],
+      "checks": [
+        "leg_number > 0",
+        "match Game Version must match tournament; verify before link"
+      ],
+      "indexes": [
+        "(fixture_id,leg_number)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.scoring_policies",
+      "domain": "competition",
+      "name": "scoring_policies",
+      "description": "Phiên bản chính sách tính điểm, normalize/tie break theo game.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "game_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "catalog.game_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "policy_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "direction",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "rules_sha256",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "effective_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(game_version_id,policy_code,revision)"
+      ],
+      "checks": [
+        "revision > 0",
+        "rules_sha256 canonical signed policy hash"
+      ],
+      "indexes": [
+        "(game_version_id,policy_code,revision DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.score_records",
+      "domain": "competition",
+      "name": "score_records",
+      "description": "Ledger điểm immutable chứng minh từ entry kết quả authoritative, sửa sai bằng bù.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "result_entry_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "gameplay.match_result_entries.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "participant_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "scoring_policy_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.scoring_policies.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "correction_of_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "competition.score_records.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "points_delta",
+          "type": "numeric(18,5)",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "source_event_key",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "verified_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "immutable; never update verified score records",
+        "policy game_version must match source match result",
+        "correction references prior source with audit"
+      ],
+      "indexes": [
+        "(participant_user_id,scoring_policy_id,verified_at DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.leaderboards",
+      "domain": "competition",
+      "name": "leaderboards",
+      "description": "Định nghĩa bảng xếp hạng, không chứa đánh giá học thuật cá nhân công khai.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "scoring_policy_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.scoring_policies.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "tournament_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "competition.tournaments.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "scope",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "visibility_policy",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "restricted",
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "private learner grade excluded",
+        "visible minors require policy"
+      ],
+      "indexes": [
+        "(scoring_policy_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.leaderboard_entries",
+      "domain": "competition",
+      "name": "leaderboard_entries",
+      "description": "Projection tổng điểm/rank có thể tính lại từ score_records.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "leaderboard_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.leaderboards.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "total_score",
+          "type": "numeric(18,5)",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ranking_position",
+          "type": "integer",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "calculated_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "source_revision",
+          "type": "bigint",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(leaderboard_id,user_id)"
+      ],
+      "checks": [
+        "source_revision > 0",
+        "projection must never grant Coin or become grade"
+      ],
+      "indexes": [
+        "(leaderboard_id,ranking_position)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "competition.hall_of_fame_entries",
+      "domain": "competition",
+      "name": "hall_of_fame_entries",
+      "description": "Vinh danh được phê duyệt riêng, có quyền rút công bố.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "source_score_record_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "competition.score_records.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "honoree_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "nominated_by",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "approved_by",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "display_name_approved",
+          "type": "text",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "human approval and guardian visibility required for minors",
+        "withdrawal audit required"
+      ],
+      "indexes": [
+        "(status,published_at DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.avatar_rigs",
+      "domain": "commerce",
+      "name": "avatar_rigs",
+      "description": "Định nghĩa rig tương thích, phiên bản bất biến và GLB source.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "rig_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "skeleton_sha256",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(rig_code,revision)"
+      ],
+      "checks": [
+        "revision > 0",
+        "published rig frozen"
+      ],
+      "indexes": [
+        "(rig_code,revision DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.item_definitions",
+      "domain": "commerce",
+      "name": "item_definitions",
+      "description": "Định danh loại vật phẩm, không phải quyền sở hữu.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_type",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "owner_organization_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "tenancy.organizations.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "not equivalent to inventory instance"
+      ],
+      "indexes": [
+        "(item_type,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.item_versions",
+      "domain": "commerce",
+      "name": "item_versions",
+      "description": "Bản phát hành cosmetic/version/rig and binding policy.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_definition_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.item_definitions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "compatible_rig_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "commerce.avatar_rigs.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "bind_policy",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "transfer_policy",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "manifest_sha256",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(item_definition_id,revision)"
+      ],
+      "checks": [
+        "revision >= 1",
+        "published item immutable",
+        "cosmetics no ranked advantages"
+      ],
+      "indexes": [
+        "(compatible_rig_id,published_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.item_version_assets",
+      "domain": "commerce",
+      "name": "item_version_assets",
+      "description": "N–N vật phẩm ↔ bản asset đã được duyệt.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.item_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "asset_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "assets.asset_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "asset_role",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(item_version_id,asset_version_id,asset_role)"
+      ],
+      "checks": [
+        "asset_version rights approved before publish"
+      ],
+      "indexes": [
+        "(item_version_id,asset_role)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.equipment_slots",
+      "domain": "commerce",
+      "name": "equipment_slots",
+      "description": "Danh mục vị trí trang bị; không hardcode thành từng cột User.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "slot_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "exclusivity_group",
+          "type": "text",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "codes aligned 2D/3D avatar spec"
+      ],
+      "indexes": [
+        "(sort_order)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.item_slot_rules",
+      "domain": "commerce",
+      "name": "item_slot_rules",
+      "description": "Vị trí chiếm dụng/xung đột của vật phẩm theo revision.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.item_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "equipment_slot_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.equipment_slots.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "operation",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "priority",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(item_version_id,equipment_slot_id)"
+      ],
+      "checks": [
+        "full suit must declare all occupied/hidden slots"
+      ],
+      "indexes": [
+        "(equipment_slot_id,priority)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.inventory_instances",
+      "domain": "commerce",
+      "name": "inventory_instances",
+      "description": "Bản quyền sở hữu cá thể duy nhất, độc lập item definition/version.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.item_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "source_order_line_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "commerce.shop_order_lines.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "owned",
+          "description": ""
+        },
+        {
+          "name": "bound_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "granted_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "audit ownership transfer via future inventory_events",
+        "single owner; no peer trade for minors"
+      ],
+      "indexes": [
+        "(owner_user_id,status)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.avatar_loadouts",
+      "domain": "commerce",
+      "name": "avatar_loadouts",
+      "description": "Preset avatar/rig theo ngữ cảnh, không đổi collision trong game.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "rig_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.avatar_rigs.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "context_game_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "catalog.games.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "active preset uniqueness requires partial index context review"
+      ],
+      "indexes": [
+        "(owner_user_id,context_game_id)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.avatar_loadout_items",
+      "domain": "commerce",
+      "name": "avatar_loadout_items",
+      "description": "Vật phẩm đang trang bị; phải xác minh ownership và rig/slot.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "loadout_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.avatar_loadouts.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "equipment_slot_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.equipment_slots.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "inventory_instance_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.inventory_instances.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "layer_priority",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(loadout_id,equipment_slot_id)"
+      ],
+      "checks": [
+        "same inventory instance cannot occupy incompatible slots",
+        "server verifies instance owner = loadout owner"
+      ],
+      "indexes": [
+        "(inventory_instance_id)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.currencies",
+      "domain": "commerce",
+      "name": "currencies",
+      "description": "Đơn vị tiền ảo earned Coin/Event Token; không có thanh toán tiền thật.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "currency_code",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "display_name",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "spendable",
+          "type": "boolean",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "true",
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "no cashout, no NFT, no lootbox in MVP"
+      ],
+      "indexes": [],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.ledger_accounts",
+      "domain": "commerce",
+      "name": "ledger_accounts",
+      "description": "Tài khoản ledger theo currency và chủ thể, tách user/system.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "currency_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.currencies.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "owner_user_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "account_kind",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "purpose",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "active",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "system account requires owner null; user account requires user FK",
+        "scope+purpose uniqueness must be approved"
+      ],
+      "indexes": [
+        "(currency_id,owner_user_id,purpose)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.ledger_transactions",
+      "domain": "commerce",
+      "name": "ledger_transactions",
+      "description": "Header immutable/idempotent giao dịch cân bằng; posted chỉ khi đủ entries.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "idempotency_key",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "actor_user_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "transaction_type",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "pending",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        },
+        {
+          "name": "posted_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "one posting transaction, immutable entries",
+        "rollback with compensating transaction"
+      ],
+      "indexes": [
+        "(status,created_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.ledger_entries",
+      "domain": "commerce",
+      "name": "ledger_entries",
+      "description": "Double-entry signed amount; tổng 0 theo transaction/currency phải kiểm tra atomically.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "transaction_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.ledger_transactions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "account_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.ledger_accounts.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "amount_signed",
+          "type": "bigint",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "amount_signed <> 0",
+        "SUM(amount_signed) per transaction and currency = 0; enforce via authorized posting service/deferred DB review",
+        "non-negative available funds guard required"
+      ],
+      "indexes": [
+        "(transaction_id,account_id)",
+        "(account_id,created_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.shop_offers",
+      "domain": "commerce",
+      "name": "shop_offers",
+      "description": "Đề nghị bán chính thức, không phải marketplace ngang hàng.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.item_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "draft",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "only approved official shop publisher may publish"
+      ],
+      "indexes": [
+        "(status,created_at)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.shop_offer_revisions",
+      "domain": "commerce",
+      "name": "shop_offer_revisions",
+      "description": "Bản giá/số lượng/kho hàng/version; không đổi giá đã dùng trong đơn.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "shop_offer_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.shop_offers.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "revision",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "currency_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.currencies.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "price_amount",
+          "type": "bigint",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "stock_limit",
+          "type": "integer",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "max_per_user",
+          "type": "integer",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "approved_by",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "published_at",
+          "type": "timestamptz",
+          "required": false,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(shop_offer_id,revision)"
+      ],
+      "checks": [
+        "price_amount >= 0",
+        "stock_limit IS NULL OR stock_limit >= 0",
+        "published offer revision immutable"
+      ],
+      "indexes": [
+        "(shop_offer_id,revision DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.shop_orders",
+      "domain": "commerce",
+      "name": "shop_orders",
+      "description": "Đơn mua với idempotency key, buyer, phiên bản giá và ledger settlement.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "buyer_user_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "identity.users.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "offer_revision_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.shop_offer_revisions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "settlement_transaction_id",
+          "type": "uuid",
+          "required": false,
+          "pk": false,
+          "fk": "commerce.ledger_transactions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "idempotency_key",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "total_amount",
+          "type": "bigint",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "pending",
+          "description": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamptz",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": "now()",
+          "description": ""
+        }
+      ],
+      "uniques": [],
+      "checks": [
+        "quantity >= 1",
+        "total_amount >= 0",
+        "server must enforce price*quantity and atomic stock/ledger/inventory",
+        "minor store eligibility"
+      ],
+      "indexes": [
+        "(buyer_user_id,created_at DESC)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    },
+    {
+      "id": "commerce.shop_order_lines",
+      "domain": "commerce",
+      "name": "shop_order_lines",
+      "description": "Receipt link item version và số lượng được giao; instance có thể tham chiếu dòng đơn.",
+      "classification": "restricted",
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "pk": true,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "order_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.shop_orders.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "item_version_id",
+          "type": "uuid",
+          "required": true,
+          "pk": false,
+          "fk": "commerce.item_versions.id",
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "required": true,
+          "pk": false,
+          "fk": null,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "uniques": [
+        "(order_id,item_version_id)"
+      ],
+      "checks": [
+        "quantity >= 1",
+        "instance grant tracked by source_order_line_id"
+      ],
+      "indexes": [
+        "(order_id)"
+      ],
+      "approval": "DRAFT_NOT_FROZEN"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "education.academic_terms",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.classes",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.classes",
+      "via": "academic_term_id",
+      "to": "education.academic_terms",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.classes",
+      "via": "teacher_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.class_enrollments",
+      "via": "class_id",
+      "to": "education.classes",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.class_enrollments",
+      "via": "student_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.courses",
+      "via": "owner_organization_id",
+      "to": "tenancy.organizations",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.courses",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.lessons",
+      "via": "course_id",
+      "to": "education.courses",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.lessons",
+      "via": "content_revision_id",
+      "to": "publishing.content_revisions",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.rubrics",
+      "via": "lesson_id",
+      "to": "education.lessons",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.rubrics",
+      "via": "approved_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.rubric_criteria",
+      "via": "rubric_id",
+      "to": "education.rubrics",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.assignments",
+      "via": "class_id",
+      "to": "education.classes",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.assignments",
+      "via": "lesson_id",
+      "to": "education.lessons",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.assignments",
+      "via": "rubric_id",
+      "to": "education.rubrics",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.assignments",
+      "via": "assigned_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.learning_attempts",
+      "via": "assignment_id",
+      "to": "education.assignments",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.learning_attempts",
+      "via": "student_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.learning_attempts",
+      "via": "match_result_id",
+      "to": "gameplay.match_results",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.learning_evidence",
+      "via": "attempt_id",
+      "to": "education.learning_attempts",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.learning_evidence",
+      "via": "source_match_command_id",
+      "to": "gameplay.match_commands",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "education.rubric_assessments",
+      "via": "attempt_id",
+      "to": "education.learning_attempts",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.rubric_assessments",
+      "via": "rubric_criterion_id",
+      "to": "education.rubric_criteria",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "education.rubric_assessments",
+      "via": "assessor_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.event_programs",
+      "via": "organization_id",
+      "to": "tenancy.organizations",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.event_programs",
+      "via": "organizer_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.tournaments",
+      "via": "event_program_id",
+      "to": "competition.event_programs",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.tournaments",
+      "via": "game_version_id",
+      "to": "catalog.game_versions",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.tournament_registrations",
+      "via": "tournament_id",
+      "to": "competition.tournaments",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.tournament_registrations",
+      "via": "participant_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.tournament_rounds",
+      "via": "tournament_id",
+      "to": "competition.tournaments",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.tournament_fixtures",
+      "via": "round_id",
+      "to": "competition.tournament_rounds",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.tournament_fixtures",
+      "via": "referee_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.fixture_matches",
+      "via": "fixture_id",
+      "to": "competition.tournament_fixtures",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.fixture_matches",
+      "via": "match_id",
+      "to": "gameplay.matches",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.scoring_policies",
+      "via": "game_version_id",
+      "to": "catalog.game_versions",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.score_records",
+      "via": "result_entry_id",
+      "to": "gameplay.match_result_entries",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.score_records",
+      "via": "participant_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.score_records",
+      "via": "scoring_policy_id",
+      "to": "competition.scoring_policies",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.score_records",
+      "via": "correction_of_id",
+      "to": "competition.score_records",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.leaderboards",
+      "via": "scoring_policy_id",
+      "to": "competition.scoring_policies",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.leaderboards",
+      "via": "tournament_id",
+      "to": "competition.tournaments",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.leaderboard_entries",
+      "via": "leaderboard_id",
+      "to": "competition.leaderboards",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.leaderboard_entries",
+      "via": "user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.hall_of_fame_entries",
+      "via": "source_score_record_id",
+      "to": "competition.score_records",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "competition.hall_of_fame_entries",
+      "via": "honoree_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.hall_of_fame_entries",
+      "via": "nominated_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "competition.hall_of_fame_entries",
+      "via": "approved_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.item_definitions",
+      "via": "owner_organization_id",
+      "to": "tenancy.organizations",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.item_versions",
+      "via": "item_definition_id",
+      "to": "commerce.item_definitions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.item_versions",
+      "via": "compatible_rig_id",
+      "to": "commerce.avatar_rigs",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.item_version_assets",
+      "via": "item_version_id",
+      "to": "commerce.item_versions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.item_version_assets",
+      "via": "asset_version_id",
+      "to": "assets.asset_versions",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.item_slot_rules",
+      "via": "item_version_id",
+      "to": "commerce.item_versions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.item_slot_rules",
+      "via": "equipment_slot_id",
+      "to": "commerce.equipment_slots",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.inventory_instances",
+      "via": "item_version_id",
+      "to": "commerce.item_versions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.inventory_instances",
+      "via": "owner_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.inventory_instances",
+      "via": "source_order_line_id",
+      "to": "commerce.shop_order_lines",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.avatar_loadouts",
+      "via": "owner_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.avatar_loadouts",
+      "via": "rig_id",
+      "to": "commerce.avatar_rigs",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.avatar_loadouts",
+      "via": "context_game_id",
+      "to": "catalog.games",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.avatar_loadout_items",
+      "via": "loadout_id",
+      "to": "commerce.avatar_loadouts",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.avatar_loadout_items",
+      "via": "equipment_slot_id",
+      "to": "commerce.equipment_slots",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.avatar_loadout_items",
+      "via": "inventory_instance_id",
+      "to": "commerce.inventory_instances",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.ledger_accounts",
+      "via": "currency_id",
+      "to": "commerce.currencies",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.ledger_accounts",
+      "via": "owner_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.ledger_transactions",
+      "via": "actor_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.ledger_entries",
+      "via": "transaction_id",
+      "to": "commerce.ledger_transactions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.ledger_entries",
+      "via": "account_id",
+      "to": "commerce.ledger_accounts",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_offers",
+      "via": "item_version_id",
+      "to": "commerce.item_versions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_offers",
+      "via": "created_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.shop_offer_revisions",
+      "via": "shop_offer_id",
+      "to": "commerce.shop_offers",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_offer_revisions",
+      "via": "currency_id",
+      "to": "commerce.currencies",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_offer_revisions",
+      "via": "approved_by",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.shop_orders",
+      "via": "buyer_user_id",
+      "to": "identity.users",
+      "target": "id",
+      "scope": "P0"
+    },
+    {
+      "from": "commerce.shop_orders",
+      "via": "offer_revision_id",
+      "to": "commerce.shop_offer_revisions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_orders",
+      "via": "settlement_transaction_id",
+      "to": "commerce.ledger_transactions",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_order_lines",
+      "via": "order_id",
+      "to": "commerce.shop_orders",
+      "target": "id",
+      "scope": "P1"
+    },
+    {
+      "from": "commerce.shop_order_lines",
+      "via": "item_version_id",
+      "to": "commerce.item_versions",
+      "target": "id",
+      "scope": "P1"
+    }
+  ],
+  "p0TableNames": [
+    "identity.users",
+    "identity.external_identities",
+    "identity.profiles",
+    "identity.guardian_links",
+    "identity.policy_acknowledgments",
+    "tenancy.organizations",
+    "tenancy.organization_memberships",
+    "tenancy.roles",
+    "tenancy.permissions",
+    "tenancy.role_permissions",
+    "tenancy.role_assignments",
+    "assets.assets",
+    "assets.asset_versions",
+    "catalog.games",
+    "catalog.game_versions",
+    "gameplay.game_rooms",
+    "gameplay.room_memberships",
+    "gameplay.matches",
+    "gameplay.match_participants",
+    "gameplay.match_commands",
+    "gameplay.match_snapshots",
+    "gameplay.match_results",
+    "gameplay.match_result_entries",
+    "publishing.content_items",
+    "publishing.content_revisions",
+    "publishing.content_publications",
+    "integration.domain_outbox",
+    "integration.audit_events",
+    "integration.agent_approvals",
+    "integration.agent_invocations"
+  ],
+  "assumptions": [
+    "All proposed cross-table references are candidate FK declarations until physical migration validated",
+    "KingDragonHub SSO and RLS allow-policy absent",
+    "Ledger double-entry posting and stock concurrency require transactional implementation and dedicated tests",
+    "Education evidence and academic assessment private by default",
+    "No peer trading for minors; no marketplace physical tables"
+  ],
+  "generation": {
+    "status": "derive diagrams and dictionaries from this source; no production SQL"
+  }
+}
