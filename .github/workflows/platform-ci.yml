@@ -46,14 +46,9 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
-      - name: Install dependencies — temporary lockfile seed
-        run: pnpm install --no-frozen-lockfile
-      - name: Lockfile export for bootstrap (public metadata only)
-        shell: bash
-        run: |
-          echo "BGU_LOCK_BEGIN"
-          base64 -w0 pnpm-lock.yaml | fold -w200 | sed 's/^/BGU_LOCK_CHUNK:/'
-          echo "BGU_LOCK_END"
+          cache: 'pnpm'
+      - name: Install dependencies (frozen)
+        run: pnpm install --frozen-lockfile
       - name: Source checks
         run: pnpm lint
       - name: TypeScript
