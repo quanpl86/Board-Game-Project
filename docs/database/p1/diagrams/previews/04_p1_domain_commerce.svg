@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1530" height="2368" viewBox="0 0 1530 2368" role="img" aria-label="COMMERCE — PHYSICAL CANDIDATE">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="52" y="65" font-size="25" font-family="Arial,sans-serif" font-weight="700" fill="#15243C">COMMERCE — PHYSICAL CANDIDATE</text>
+<text x="52" y="105" font-family="Arial" font-size="13" fill="#55677A">17 bảng, 31 quan hệ liên quan; P0 neighbors là context, không thuộc migration P1</text>
+<path d="M950,257L1020,257L1020,193.5L1090,193.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,489L507.5,489L507.5,257L560,257" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,369L260,369L260,331L260,331" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M560,477.5L507.5,477.5L507.5,489L455,489" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M950,477.5L1020,477.5L1020,285.5L1090,285.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M560,686.5L507.5,686.5L507.5,489L455,489" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M560,686.5L507.5,686.5L507.5,721L455,721" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,833L260,833L260,609L260,609" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,941.5L772.5,941.5L772.5,377.5L1090,377.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1050L260,1050L260,2062L260,2062" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,810L1006.25,810L1006.25,411L1257.5,411" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,810L507.5,810L507.5,331L260,331" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M950,918.5L1020,918.5L1020,469.5L1090,469.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,1173.5L507.5,1173.5L507.5,918.5L560,918.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1088L260,1088L260,795L260,795" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1088L260,1088L260,1050L260,1050" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,1405.5L507.5,1405.5L507.5,1150.5L560,1150.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1297L758.75,1297L758.75,411L1257.5,411" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,1274L1006.25,1274L1006.25,411L1257.5,411" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,1637.5L507.5,1637.5L507.5,1382.5L560,1382.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1552L260,1552L260,1514L260,1514" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,1529L507.5,1529L507.5,609L260,609" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,1529L1006.25,1529L1006.25,411L1257.5,411" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,1892.5L507.5,1892.5L507.5,1614.5L560,1614.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1761L507.5,1761L507.5,1236L755,1236" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,1761L758.75,1761L758.75,411L1257.5,411" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,1738L1006.25,1738L1006.25,411L1257.5,411" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M560,1869.5L507.5,1869.5L507.5,1892.5L455,1892.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M755,1738L755,1738L755,1491L755,1491" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M455,2136L507.5,2136L507.5,1869.5L560,1869.5" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<path d="M260,2062L260,2062L260,609L260,609" fill="none" stroke="#684EA1" opacity=".36" stroke-width="1.3"/>
+<rect x="65" y="160" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="160" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="185" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.avatar_rigs</text>
+<text x="75" y="215" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="222" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="238" font-family="Consolas,monospace" font-size="12" fill="#344154">    rig_code : text</text>
+<text x="75" y="261" font-family="Consolas,monospace" font-size="12" fill="#344154">    revision : integer</text>
+<rect x="67" y="268" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="284" font-family="Consolas,monospace" font-size="12" fill="#344154">    skeleton_sha256 : text</text>
+<text x="75" y="307" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="560" y="160" width="390" height="194" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="160" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="185" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.item_definitions</text>
+<text x="570" y="215" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="222" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="238" font-family="Consolas,monospace" font-size="12" fill="#344154">    item_code : text</text>
+<text x="570" y="261" font-family="Consolas,monospace" font-size="12" fill="#344154">    item_type : text</text>
+<rect x="562" y="268" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="284" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  owner_organization_id : uuid</text>
+<text x="570" y="307" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<rect x="562" y="314" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="330" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="65" y="369" width="390" height="240" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="369" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="394" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.item_versions</text>
+<text x="75" y="424" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="431" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="447" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  item_definition_id : uuid</text>
+<text x="75" y="470" font-family="Consolas,monospace" font-size="12" fill="#344154">    revision : integer</text>
+<rect x="67" y="477" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="493" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  compatible_rig_id : uuid</text>
+<text x="75" y="516" font-family="Consolas,monospace" font-size="12" fill="#344154">    bind_policy : text</text>
+<rect x="67" y="523" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="539" font-family="Consolas,monospace" font-size="12" fill="#344154">    transfer_policy : text</text>
+<text x="75" y="562" font-family="Consolas,monospace" font-size="12" fill="#344154">    manifest_sha256 : text</text>
+<rect x="67" y="569" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="585" font-family="Consolas,monospace" font-size="12" fill="#344154">    published_at : timestamptz</text>
+<rect x="560" y="392" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="392" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="417" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.item_version_assets</text>
+<text x="570" y="447" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="454" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="470" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  item_version_id : uuid</text>
+<text x="570" y="493" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  asset_version_id : uuid</text>
+<rect x="562" y="500" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="516" font-family="Consolas,monospace" font-size="12" fill="#344154">    asset_role : text</text>
+<text x="570" y="539" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="65" y="647" width="390" height="148" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="647" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="672" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.equipment_slots</text>
+<text x="75" y="702" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="709" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="725" font-family="Consolas,monospace" font-size="12" fill="#344154">    slot_code : text</text>
+<text x="75" y="748" font-family="Consolas,monospace" font-size="12" fill="#344154">    exclusivity_group : text</text>
+<rect x="67" y="755" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="771" font-family="Consolas,monospace" font-size="12" fill="#344154">    sort_order : integer</text>
+<rect x="560" y="601" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="601" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="626" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.item_slot_rules</text>
+<text x="570" y="656" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="663" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="679" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  item_version_id : uuid</text>
+<text x="570" y="702" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  equipment_slot_id : uuid</text>
+<rect x="562" y="709" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="725" font-family="Consolas,monospace" font-size="12" fill="#344154">    operation : text</text>
+<text x="570" y="748" font-family="Consolas,monospace" font-size="12" fill="#344154">    priority : integer</text>
+<rect x="65" y="833" width="390" height="217" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="833" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="858" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.inventory_instances</text>
+<text x="75" y="888" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="895" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="911" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  item_version_id : uuid</text>
+<text x="75" y="934" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  owner_user_id : uuid</text>
+<rect x="67" y="941" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="957" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  source_order_line_id : uuid</text>
+<text x="75" y="980" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<rect x="67" y="987" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1003" font-family="Consolas,monospace" font-size="12" fill="#344154">    bound_at : timestamptz</text>
+<text x="75" y="1026" font-family="Consolas,monospace" font-size="12" fill="#344154">    granted_at : timestamptz</text>
+<rect x="560" y="810" width="390" height="217" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="810" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="835" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.avatar_loadouts</text>
+<text x="570" y="865" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="872" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="888" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  owner_user_id : uuid</text>
+<text x="570" y="911" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  rig_id : uuid</text>
+<rect x="562" y="918" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="934" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  context_game_id : uuid</text>
+<text x="570" y="957" font-family="Consolas,monospace" font-size="12" fill="#344154">    label : text</text>
+<rect x="562" y="964" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="980" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<text x="570" y="1003" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="65" y="1088" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="1088" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="1113" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.avatar_loadout_items</text>
+<text x="75" y="1143" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="1150" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1166" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  loadout_id : uuid</text>
+<text x="75" y="1189" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  equipment_slot_id : uuid</text>
+<rect x="67" y="1196" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1212" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  inventory_instance_id : uuid</text>
+<text x="75" y="1235" font-family="Consolas,monospace" font-size="12" fill="#344154">    layer_priority : integer</text>
+<rect x="560" y="1065" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="1065" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="1090" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.currencies</text>
+<text x="570" y="1120" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="1127" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1143" font-family="Consolas,monospace" font-size="12" fill="#344154">    currency_code : text</text>
+<text x="570" y="1166" font-family="Consolas,monospace" font-size="12" fill="#344154">    display_name : text</text>
+<rect x="562" y="1173" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1189" font-family="Consolas,monospace" font-size="12" fill="#344154">    spendable : boolean</text>
+<text x="570" y="1212" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<rect x="65" y="1297" width="390" height="217" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="1297" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="1322" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.ledger_accounts</text>
+<text x="75" y="1352" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="1359" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1375" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  currency_id : uuid</text>
+<text x="75" y="1398" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  owner_user_id : uuid</text>
+<rect x="67" y="1405" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1421" font-family="Consolas,monospace" font-size="12" fill="#344154">    account_kind : text</text>
+<text x="75" y="1444" font-family="Consolas,monospace" font-size="12" fill="#344154">    purpose : text</text>
+<rect x="67" y="1451" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1467" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<text x="75" y="1490" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="560" y="1274" width="390" height="217" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="1274" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="1299" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.ledger_transactions</text>
+<text x="570" y="1329" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="1336" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1352" font-family="Consolas,monospace" font-size="12" fill="#344154">    idempotency_key : text</text>
+<text x="570" y="1375" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  actor_user_id : uuid</text>
+<rect x="562" y="1382" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1398" font-family="Consolas,monospace" font-size="12" fill="#344154">    transaction_type : text</text>
+<text x="570" y="1421" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<rect x="562" y="1428" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1444" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<text x="570" y="1467" font-family="Consolas,monospace" font-size="12" fill="#344154">    posted_at : timestamptz</text>
+<rect x="65" y="1552" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="1552" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="1577" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.ledger_entries</text>
+<text x="75" y="1607" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="1614" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1630" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  transaction_id : uuid</text>
+<text x="75" y="1653" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  account_id : uuid</text>
+<rect x="67" y="1660" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1676" font-family="Consolas,monospace" font-size="12" fill="#344154">    amount_signed : bigint</text>
+<text x="75" y="1699" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="560" y="1529" width="390" height="171" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="1529" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="1554" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.shop_offers</text>
+<text x="570" y="1584" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="1591" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1607" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  item_version_id : uuid</text>
+<text x="570" y="1630" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  created_by : uuid</text>
+<rect x="562" y="1637" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1653" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<text x="570" y="1676" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="65" y="1761" width="390" height="263" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="1761" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="1786" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.shop_offer_revisions</text>
+<text x="75" y="1816" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="1823" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1839" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  shop_offer_id : uuid</text>
+<text x="75" y="1862" font-family="Consolas,monospace" font-size="12" fill="#344154">    revision : integer</text>
+<rect x="67" y="1869" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1885" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  currency_id : uuid</text>
+<text x="75" y="1908" font-family="Consolas,monospace" font-size="12" fill="#344154">    price_amount : bigint</text>
+<rect x="67" y="1915" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1931" font-family="Consolas,monospace" font-size="12" fill="#344154">    stock_limit : integer</text>
+<text x="75" y="1954" font-family="Consolas,monospace" font-size="12" fill="#344154">    max_per_user : integer</text>
+<rect x="67" y="1961" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="1977" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  approved_by : uuid</text>
+<text x="75" y="2000" font-family="Consolas,monospace" font-size="12" fill="#344154">    published_at : timestamptz</text>
+<rect x="560" y="1738" width="390" height="263" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="560" y="1738" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="571" y="1763" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.shop_orders</text>
+<text x="570" y="1793" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="562" y="1800" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1816" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  buyer_user_id : uuid</text>
+<text x="570" y="1839" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  offer_revision_id : uuid</text>
+<rect x="562" y="1846" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1862" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  settlement_transaction_id : uuid</text>
+<text x="570" y="1885" font-family="Consolas,monospace" font-size="12" fill="#344154">    idempotency_key : text</text>
+<rect x="562" y="1892" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1908" font-family="Consolas,monospace" font-size="12" fill="#344154">    quantity : integer</text>
+<text x="570" y="1931" font-family="Consolas,monospace" font-size="12" fill="#344154">    total_amount : bigint</text>
+<rect x="562" y="1938" width="386" height="23" fill="#F2F6FA"/>
+<text x="570" y="1954" font-family="Consolas,monospace" font-size="12" fill="#344154">    status : text</text>
+<text x="570" y="1977" font-family="Consolas,monospace" font-size="12" fill="#344154">    created_at : timestamptz</text>
+<rect x="65" y="2062" width="390" height="148" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<rect x="65" y="2062" width="390" height="39" rx="8" fill="#684EA1"/>
+<text x="76" y="2087" font-family="Arial" font-size="15" font-weight="700" fill="#FFFFFF">commerce.shop_order_lines</text>
+<text x="75" y="2117" font-family="Consolas,monospace" font-size="12" fill="#205782">PK  id : uuid</text>
+<rect x="67" y="2124" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="2140" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  order_id : uuid</text>
+<text x="75" y="2163" font-family="Consolas,monospace" font-size="12" fill="#AA5E2F">FK  item_version_id : uuid</text>
+<rect x="67" y="2170" width="386" height="23" fill="#F2F6FA"/>
+<text x="75" y="2186" font-family="Consolas,monospace" font-size="12" fill="#344154">    quantity : integer</text>
+<rect x="1090" y="160" width="335" height="67" rx="8" fill="#EDF3F8" stroke="#60758B" stroke-width="2"/>
+<text x="1103" y="184" font-family="Arial" font-size="14" fill="#60758B" font-weight="700">tenancy.organizations</text>
+<text x="1103" y="206" font-family="Arial" font-size="11" fill="#5C6B7C">P0 dependency</text>
+<rect x="1090" y="252" width="335" height="67" rx="8" fill="#EDF3F8" stroke="#60758B" stroke-width="2"/>
+<text x="1103" y="276" font-family="Arial" font-size="14" fill="#60758B" font-weight="700">assets.asset_versions</text>
+<text x="1103" y="298" font-family="Arial" font-size="11" fill="#5C6B7C">P0 dependency</text>
+<rect x="1090" y="344" width="335" height="67" rx="8" fill="#EDF3F8" stroke="#60758B" stroke-width="2"/>
+<text x="1103" y="368" font-family="Arial" font-size="14" fill="#60758B" font-weight="700">identity.users</text>
+<text x="1103" y="390" font-family="Arial" font-size="11" fill="#5C6B7C">P0 dependency</text>
+<rect x="1090" y="436" width="335" height="67" rx="8" fill="#EDF3F8" stroke="#60758B" stroke-width="2"/>
+<text x="1103" y="460" font-family="Arial" font-size="14" fill="#60758B" font-weight="700">catalog.games</text>
+<text x="1103" y="482" font-family="Arial" font-size="11" fill="#5C6B7C">P0 dependency</text>
+<text x="1490" y="2344" text-anchor="end" fill="#667789" font-size="12" font-family="Arial">P1 DESIGN CANDIDATE · NOT MIGRATED · 39 tables / 80 proposed FK edges</text>
+</svg>

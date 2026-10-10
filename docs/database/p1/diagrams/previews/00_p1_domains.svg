@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1710" height="585" viewBox="0 0 1710 585" role="img" aria-label="DATABASE P1 — 3 PHÂN HỆ">
+<rect width="100%" height="100%" fill="#F8FAFC"/>
+<text x="52" y="65" font-size="25" font-family="Arial,sans-serif" font-weight="700" fill="#15243C">DATABASE P1 — 3 PHÂN HỆ</text>
+<text x="52" y="105" font-family="Arial" font-size="13" fill="#55677A">39 bảng ứng viên · Education, Competition/Rankings, Avatar/Inventory/Shop · NOT MIGRATED</text>
+<rect x="90" y="220" width="425" height="150" rx="8" fill="#FFFFFF" stroke="#267A78" stroke-width="2"/>
+<text x="302.5" y="285" text-anchor="middle" font-family="Arial" font-size="22" fill="#267A78" font-weight="700">EDUCATION</text>
+<text x="302.5" y="312" text-anchor="middle" font-family="Arial" font-size="15" fill="#48566A">11 bảng đề xuất</text>
+<rect x="590" y="220" width="425" height="150" rx="8" fill="#FFFFFF" stroke="#AB6220" stroke-width="2"/>
+<text x="802.5" y="285" text-anchor="middle" font-family="Arial" font-size="22" fill="#AB6220" font-weight="700">COMPETITION</text>
+<text x="802.5" y="312" text-anchor="middle" font-family="Arial" font-size="15" fill="#48566A">11 bảng đề xuất</text>
+<rect x="1090" y="220" width="425" height="150" rx="8" fill="#FFFFFF" stroke="#684EA1" stroke-width="2"/>
+<text x="1302.5" y="285" text-anchor="middle" font-family="Arial" font-size="22" fill="#684EA1" font-weight="700">COMMERCE</text>
+<text x="1302.5" y="312" text-anchor="middle" font-family="Arial" font-size="15" fill="#48566A">17 bảng đề xuất</text>
+<text x="1670" y="561" text-anchor="end" fill="#667789" font-size="12" font-family="Arial">P1 DESIGN CANDIDATE · NOT MIGRATED · 39 tables / 80 proposed FK edges</text>
+</svg>

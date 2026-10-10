@@ -1,0 +1,48 @@
+# P1 proposed per-table physical-design datasheets (39)
+
+## education
+- [education.academic_terms](education.academic_terms.md)
+- [education.classes](education.classes.md)
+- [education.class_enrollments](education.class_enrollments.md)
+- [education.courses](education.courses.md)
+- [education.lessons](education.lessons.md)
+- [education.rubrics](education.rubrics.md)
+- [education.rubric_criteria](education.rubric_criteria.md)
+- [education.assignments](education.assignments.md)
+- [education.learning_attempts](education.learning_attempts.md)
+- [education.learning_evidence](education.learning_evidence.md)
+- [education.rubric_assessments](education.rubric_assessments.md)
+
+## competition
+- [competition.event_programs](competition.event_programs.md)
+- [competition.tournaments](competition.tournaments.md)
+- [competition.tournament_registrations](competition.tournament_registrations.md)
+- [competition.tournament_rounds](competition.tournament_rounds.md)
+- [competition.tournament_fixtures](competition.tournament_fixtures.md)
+- [competition.fixture_matches](competition.fixture_matches.md)
+- [competition.scoring_policies](competition.scoring_policies.md)
+- [competition.score_records](competition.score_records.md)
+- [competition.leaderboards](competition.leaderboards.md)
+- [competition.leaderboard_entries](competition.leaderboard_entries.md)
+- [competition.hall_of_fame_entries](competition.hall_of_fame_entries.md)
+
+## commerce
+- [commerce.avatar_rigs](commerce.avatar_rigs.md)
+- [commerce.item_definitions](commerce.item_definitions.md)
+- [commerce.item_versions](commerce.item_versions.md)
+- [commerce.item_version_assets](commerce.item_version_assets.md)
+- [commerce.equipment_slots](commerce.equipment_slots.md)
+- [commerce.item_slot_rules](commerce.item_slot_rules.md)
+- [commerce.inventory_instances](commerce.inventory_instances.md)
+- [commerce.avatar_loadouts](commerce.avatar_loadouts.md)
+- [commerce.avatar_loadout_items](commerce.avatar_loadout_items.md)
+- [commerce.currencies](commerce.currencies.md)
+- [commerce.ledger_accounts](commerce.ledger_accounts.md)
+- [commerce.ledger_transactions](commerce.ledger_transactions.md)
+- [commerce.ledger_entries](commerce.ledger_entries.md)
+- [commerce.shop_offers](commerce.shop_offers.md)
+- [commerce.shop_offer_revisions](commerce.shop_offer_revisions.md)
+- [commerce.shop_orders](commerce.shop_orders.md)
+- [commerce.shop_order_lines](commerce.shop_order_lines.md)
+
+Each page includes the full 265-column proposal, FK inbound/outbound, candidate unique/check/index, risks and one diagram per table. **No P1 SQL migration exists.**

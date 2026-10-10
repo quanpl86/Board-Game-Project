@@ -79,3 +79,8 @@ Change documentation by reviewed PR; publish a new ADR for major decisions; keep
 ## Database visual assets and Agent references
 - [Editable Draw.io diagrams, SVG previews, FK and column CSV](database/diagrams/README.md)
 - [Database / Backend / Frontend AI Agent implementation contract](database/AGENT_IMPLEMENTATION_REFERENCE.md)
+
+## Database P1 Candidate Atlas
+- [39 table data dictionary + 44 editable diagrams](database/p1/README.md)
+- [P1 architecture/implementation map for DBA, Backend, Frontend and QA](database/p1/CROSS_LAYER_IMPLEMENTATION.md)
+- [P1 approval decisions and risk register](database/p1/DECISION_REGISTER.md)
