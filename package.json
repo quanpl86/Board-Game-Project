@@ -1,0 +1,27 @@
+{
+  "name": "board-game-universe",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @bgu/web dev",
+    "dev:api": "pnpm --filter @bgu/api dev",
+    "dev:realtime": "pnpm --filter @bgu/realtime dev",
+    "dev:mcp": "pnpm --filter @bgu/mcp-gateway dev",
+    "lint": "node tools/check-source.mjs",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "node --test tools/tests/*.test.mjs && pnpm --filter @bgu/api test",
+    "build": "pnpm --filter @bgu/web build",
+    "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "agent:validate": "node tools/agent-task.mjs validate tools/examples/task-bgu-001.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/node": "^22.15.0",
+    "tsx": "^4.20.0",
+    "turbo": "^2.5.0"
+  }
+}

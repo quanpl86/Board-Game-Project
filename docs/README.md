@@ -64,3 +64,8 @@
 
 ## Editing policy
 Change documentation by reviewed PR; publish a new ADR for major decisions; keep archived v1.0 read-only; remove secrets and personal student data. AI Agents use scoped MCP tools and explicit approval for production writes.
+
+## Phase 1 implementation and delivery
+- [Monorepo, CI and local developer setup](implementation/PHASE1_BOOTSTRAP.md)
+- [Agent task contract and validator](implementation/AGENT_TASK_LIFECYCLE.md)
+- [Release gates](implementation/RELEASE_GATES.md)

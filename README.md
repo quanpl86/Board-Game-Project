@@ -1,5 +1,7 @@
 # Board Game Universe · AI-native Multi-Game Platform
 
+> **Foundation Alpha in progress:** Next.js Game Hub preview, Fastify demo API, disabled Realtime/MCP stubs, local Docker and CI are proposed in PR. See [Phase 1 Bootstrap](docs/implementation/PHASE1_BOOTSTRAP.md). No real match, authenticated account, DB migration or production deployment yet.
+
 **Status: PLANNING / DESIGN BASELINE — chưa triển khai ứng dụng production**  
 **Scope:** Classic Board Games · STEM / Education · 3D Simulation · Coding Challenges · Multiplayer · Social · Tournaments · LiveOps · MCP & AI Agents  
 **Primary language:** Tiếng Việt · **Repository owner:** `quanpl86`
