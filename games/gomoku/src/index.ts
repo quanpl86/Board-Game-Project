@@ -5,7 +5,7 @@
 import { createHash } from "node:crypto";
 import type { GamePlugin } from "@bgu/game-sdk";
 import {
-  BOARD_SIZE, GOMOKU_RULESET_ID, createInitialState, applyAction,
+  GOMOKU_RULESET_ID, createInitialState, applyAction,
   validateAction, getPlayerView, getOutcome, gomokuManifest,
   type GomokuState, type PlaceStoneAction,
   type GomokuView, type GomokuOutcome, type GomokuScoringEvidence,
@@ -31,33 +31,6 @@ export function hashState(state: GomokuState): string {
     winner: state.winner,
   });
   return createHash("sha256").update(canonical, "utf8").digest("hex");
-}
-
-export function getPlayerView(
-  state: GomokuState, viewer: string | null,
-): GomokuView {
-  // The viewer is a presentation hint only, not authenticated player identity.
-  if (viewer !== null && typeof viewer !== "string") {
-    throw new TypeError("Viewer must be a string or null");
-  }
-  // Gomoku has no hidden board pieces. Never expose internal command IDs here.
-  return {
-    schemaVersion: state.schemaVersion,
-    rulesetId: state.rulesetId,
-    boardSize: BOARD_SIZE,
-    board: [...state.board],
-    moves: state.history.map(({ seq, player, row, col }) => ({
-      seq, player, row, col,
-    })),
-    revision: state.revision,
-    nextPlayer: state.nextPlayer,
-    status: state.status,
-    winner: state.winner,
-  };
-}
-
-export function getOutcome(state: GomokuState): GomokuOutcome {
-  return { status: state.status, winner: state.winner };
 }
 
 export function getScoringEvidence(
