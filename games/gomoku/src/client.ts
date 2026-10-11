@@ -4,9 +4,9 @@ export {
   createInitialState, validateAction, applyAction, getPlayerView, getOutcome,
   type GomokuState, type GomokuMove, type PlaceStoneAction,
   type Stone, type Cell, type GameStatus,
-} from "./core.js";
+} from "./core";
 export {
   createLocalGomokuSession, reduceLocalGomokuSession,
   visibleLocalGomokuState, reconstructLocalHistory,
   type LocalGomokuSession, type LocalSessionAction,
-} from "./local-session.js";
+} from "./local-session";
