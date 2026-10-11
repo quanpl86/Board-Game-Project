@@ -13,7 +13,7 @@
     "dev:mcp": "pnpm --filter @bgu/mcp-gateway dev",
     "lint": "node tools/check-source.mjs && eslint . --max-warnings=0",
     "typecheck": "pnpm -r --if-present typecheck",
-    "test": "node --test tools/tests/*.test.mjs && pnpm --filter @bgu/api test",
+    "test": "node --test tools/tests/*.test.mjs && pnpm --filter @bgu/api test && pnpm --filter @bgu/gomoku test",
     "build": "pnpm --filter @bgu/web build",
     "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "agent:validate": "node tools/agent-task.mjs validate tools/examples/task-bgu-001.json",

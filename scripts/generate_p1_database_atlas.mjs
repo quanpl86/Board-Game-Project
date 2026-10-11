@@ -10,7 +10,6 @@ const ROOT=resolve(import.meta.dirname,"..");
 const buildP1=function buildP1(m){
  const groups=[...new Set(m.tables.map(t=>t.domain))];
  const lookup=new Map(m.tables.map(t=>[t.id,t]));
- const allP0=new Set(m.p0TableNames);
  const palettes={education:"#267A78",competition:"#AB6220",commerce:"#684EA1",external:"#60758B"};
  const slug=id=>id.replace(/[^A-Za-z0-9_]/g,"_");
  const esc=x=>String(x??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
@@ -51,7 +50,7 @@ const buildP1=function buildP1(m){
  });
  const pages=[domainPage,overview,...domainPages,...tablePages];
  const bColor=b=>palettes[b.domain]||palettes.external;
- const makeDrawio=(p,index)=>{
+ const makeDrawio=p=>{
   const q=['<mxCell id="0"/>','<mxCell id="1" parent="0"/>'];
   const add=(id,value,style,x,y,w,h,parent="1")=>q.push(`<mxCell id="${esc(id)}" value="${esc(value)}" style="${esc(style)}" vertex="1" parent="${esc(parent)}"><mxGeometry x="${x}" y="${y}" width="${w}" height="${h}" as="geometry"/></mxCell>`);
   add("title",p.title,"text;html=0;whiteSpace=wrap;fontStyle=1;fontSize=25;fontColor=#16253E;align=left;",50,42,p.w-90,45);
@@ -131,7 +130,6 @@ const buildP1=function buildP1(m){
  entries.push({path:root+"/tables/README.md",content:tablesIndex});
  for(const t of m.tables){
   const incoming=m.relationships.filter(e=>e.to===t.id),outgoing=m.relationships.filter(e=>e.from===t.id);
-  const neighbors=[...new Set([...incoming.map(e=>e.from),...outgoing.map(e=>e.to)].filter(id=>id!==t.id))];
   const link=id=>lookup.has(id)?`[${id}](${id}.md)`:`[${id}](../../tables/${id}.md)`;
   const fields=t.columns.map(c=>`| \`${c.name}\` | \`${c.type}\` | ${c.pk?"PK":c.fk?`FK → ${link(c.fk.slice(0,c.fk.lastIndexOf(".")))}.\`${c.fk.split(".").at(-1)}\``:"—"} | ${c.required?"NO":"YES"} | ${c.default?`\`${c.default}\``:"—"} |`).join("\n");
   let doc=`# ${t.id} — P1 DATA DICTIONARY\n\n**Status:** DRAFT / NOT MIGRATED · **Owner:** ${t.domain} · **Data classification:** ${t.classification}\n\n${t.description}\n\n## Direct relationship preview\n\n![Editable relationship preview](../diagrams/previews/${String(pages.indexOf(tablePages.find(x=>x.id==="p1_table_"+slug(t.id)))).padStart(2,"0")}_p1_table_${slug(t.id)}.svg)\n\n## Columns (${t.columns.length})\n| Column | Candidate PostgreSQL type | Key | Nullable | Default |\n|---|---|---|---|---|\n${fields}\n\n## Outbound foreign keys (${outgoing.length})\n${outgoing.map(e=>`- \`${e.via}\` → ${link(e.to)}.\`${e.target}\` (${e.scope})`).join("\n")||"- None"}\n\n## Inbound foreign keys (${incoming.length})\n${incoming.map(e=>`- ${link(e.from)}.\`${e.via}\` → \`${e.target}\``).join("\n")||"- None"}\n\n## Proposed integrity\n**Unique constraints:** ${t.uniques.length?t.uniques.map(x=>`\`${x}\``).join(", "):"No additional scoped UNIQUE specified yet."}\n\n**Check/invariant and domain guard:**\n${t.checks.length?t.checks.map(c=>`- ${c}`).join("\n"):"- Owner to verify permissible value set and lifecycle."}\n\n**Indexes:** ${t.indexes.length?t.indexes.map(i=>`\`${i}\``).join(", "):"Review EXPLAIN workloads before physical index choice."}\n\n## Required implementation and review\n- Evaluate tenant/organization scope and child PII, no direct browser/MCP SQL.\n- Verify FK, composite tenant conditions, status machine, optimistic revision, immutable business history, RLS allow-policy **after** SSO source audit.\n- Test authorized and unauthorized roles, concurrency and referential integrity in disposable PostgreSQL **only after migration PR exists**.\n- Cross-check UI screen IDs/typed API contracts; log P0/P1 decision conflicts before freezing.\n`;
@@ -148,7 +146,7 @@ const mismatches=[];
 for(const f of output.entries){
  const p=resolve(ROOT,f.path);
  if(check){
-   let current=null;try{current=readFileSync(p,"utf8")}catch{}
+   let current=null;try{current=readFileSync(p,"utf8")}catch{/* Missing file will be flagged by the mismatch check. */}
    if(current!==f.content)mismatches.push(f.path);
  }else{
    mkdirSync(dirname(p),{recursive:true});
