@@ -50,6 +50,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@bgu/gomoku':
+        specifier: workspace:*
+        version: link:../../games/gomoku
       '@bgu/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
