@@ -1,0 +1,17 @@
+{
+  "name": "@bgu/gomoku",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "tsx --test tests/*.test.ts",
+    "demo": "tsx src/demo.ts"
+  },
+  "dependencies": {
+    "@bgu/game-sdk": "workspace:*"
+  }
+}
