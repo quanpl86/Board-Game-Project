@@ -31,7 +31,7 @@ Root `pnpm test` also executes Gomoku tests in CI. `pnpm typecheck` covers `@bgu
 
 `packages/game-sdk/src/index.ts` defines a generic `GamePlugin`, manifest, validation result and stable rule exception.
 
-`src/index.ts` defines the Gomoku reducer, manifest, DTOs, terminal candidate evidence, state hash and replay function. Source shape is intentionally extensible to a second game but **no cross-game conformance runner or published version registry yet**.
+`src/core.ts` defines browser-safe deterministic Gomoku rules, state, manifest and DTOs. `src/local-session.ts` contains the ephemeral same-device controller (undo and seekable replay). `src/client.ts` exports only browser-safe functionality via `@bgu/gomoku/client`. `src/index.ts` retains the Node-only SHA-256 canonical hash, terminal candidate evidence and replay function via `@bgu/gomoku`. Source shape is intentionally extensible to a second game but **no cross-game conformance runner or published version registry yet**.
 
 ### Trust and safety boundary
 
