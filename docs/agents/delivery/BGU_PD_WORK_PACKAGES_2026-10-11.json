@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-10-11",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "status": "proposal",
+  "authority": "not_approved_scope_or_milestone",
+  "source_repo": "quanpl86/Board-Game-Project",
+  "existing_master_roadmap_unmodified": true,
+  "sprints": [
+    {
+      "id": "S0",
+      "window": "2026-10-12/2026-10-16"
+    },
+    {
+      "id": "S1",
+      "window": "2026-10-19/2026-10-30"
+    },
+    {
+      "id": "S2",
+      "window": "2026-11-02/2026-11-13"
+    },
+    {
+      "id": "S3",
+      "window": "2026-11-16/2026-11-27"
+    },
+    {
+      "id": "S4",
+      "window": "2026-11-30/2026-12-11"
+    }
+  ],
+  "work_packages": [
+    {
+      "id": "WP-01",
+      "title": "Delivery governance evidence",
+      "source": "#15",
+      "owner_role": "BGU-PD",
+      "reviewer_role": "Human Product Owner",
+      "risk": "R1",
+      "proposed_sprint": "S0",
+      "depends_on": [],
+      "status": "PROPOSED",
+      "acceptance": "Evidence-led board/report, real assignee visibility, CI/source URL",
+      "blocker": "No actual GitHub Project verification",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-02",
+      "title": "KingDragonHub SSO host audit",
+      "source": "#9",
+      "owner_role": "BGU-ARCH",
+      "reviewer_role": "BGU-SEC + Human Product Owner",
+      "risk": "R3",
+      "proposed_sprint": "S0",
+      "depends_on": [],
+      "status": "BLOCKED",
+      "acceptance": "Verified issuer, audience, subject, tenant, guardian, route and ADR",
+      "blocker": "No authorized host source verified",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-03",
+      "title": "P0 database freeze review",
+      "source": "#10 / PR #18",
+      "owner_role": "BGU-DBA",
+      "reviewer_role": "BGU-SEC + Human DB owner",
+      "risk": "R4",
+      "proposed_sprint": "S1",
+      "depends_on": [
+        "WP-02"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "RLS and migration/restore signed acceptance",
+      "blocker": "SSO required for allow-policy",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-04",
+      "title": "Education P1-A",
+      "source": "#22 / PR #21",
+      "owner_role": "BGU-DBA + BGU-EDU",
+      "reviewer_role": "BGU-SEC + BGU-QA",
+      "risk": "R4",
+      "proposed_sprint": "S1",
+      "depends_on": [
+        "WP-03"
+      ],
+      "status": "IN_PR",
+      "acceptance": "Postgres 11 tables, negative tenant+rubric tests; approved migration order",
+      "blocker": "Human signoff needed",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-05",
+      "title": "Student Universe candidate",
+      "source": "#26 / PR #25",
+      "owner_role": "BGU-DBA + BGU-ARCH",
+      "reviewer_role": "BGU-SEC + Human Product Owner",
+      "risk": "R4",
+      "proposed_sprint": "S1",
+      "depends_on": [],
+      "status": "IN_PR",
+      "acceptance": "22-table design reviewed; privacy/asset/inventory ownership decisions",
+      "blocker": "Guardian and Coin policy not approved",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-06",
+      "title": "Student/Character physical core",
+      "source": "#28 / PR #27",
+      "owner_role": "BGU-DBA + BGU-3D",
+      "reviewer_role": "BGU-SEC + BGU-QA",
+      "risk": "R4",
+      "proposed_sprint": "S1",
+      "depends_on": [
+        "WP-05"
+      ],
+      "status": "IN_PR",
+      "acceptance": "6 physical tables, RLS deny, license/owner immutability, no duplicate rig",
+      "blocker": "Stacked branch; no merge",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-07",
+      "title": "Commerce inventory/ledger candidate",
+      "source": "#24",
+      "owner_role": "BGU-DBA + BGU-BACK",
+      "reviewer_role": "BGU-SEC + Human Economy reviewer",
+      "risk": "R4",
+      "proposed_sprint": "S3",
+      "depends_on": [
+        "WP-06",
+        "WP-02"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "Balanced currency ledger, parallel spending/stock, atomic grant/refund; DEV only",
+      "blocker": "Human ECON-01-06 decisions",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-08",
+      "title": "Competition candidate",
+      "source": "#23",
+      "owner_role": "BGU-DBA + BGU-LIVEOPS",
+      "reviewer_role": "BGU-SEC + BGU-QA",
+      "risk": "R4",
+      "proposed_sprint": "S3",
+      "depends_on": [
+        "WP-04"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "Verified private-safe score records, deterministic ranking, corrections",
+      "blocker": "Scoring/privacy decision",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-09",
+      "title": "Gomoku Game SDK",
+      "source": "#11",
+      "owner_role": "BGU-GAME + BGU-BACK",
+      "reviewer_role": "BGU-ARCH + BGU-QA",
+      "risk": "R2",
+      "proposed_sprint": "S2",
+      "depends_on": [],
+      "status": "PROPOSED",
+      "acceptance": "Deterministic rules replay, invalid moves, win/draw, isolated preview",
+      "blocker": "Bootstrap verification needed",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-10",
+      "title": "Brand UI shell",
+      "source": "#12",
+      "owner_role": "BGU-UX + BGU-UI",
+      "reviewer_role": "Human Brand owner + BGU-QA",
+      "risk": "R2",
+      "proposed_sprint": "S2",
+      "depends_on": [],
+      "status": "PROPOSED",
+      "acceptance": "Responsive and accessible Game Hub & states, design screenshots",
+      "blocker": "Host source for pixel fidelity",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-11",
+      "title": "Authoritative API / Realtime",
+      "source": "#7 / #11 / #9",
+      "owner_role": "BGU-BACK",
+      "reviewer_role": "BGU-SEC + BGU-QA",
+      "risk": "R3",
+      "proposed_sprint": "S2",
+      "depends_on": [
+        "WP-09",
+        "WP-02"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "Authenticated permission-aware room/replay/API, no client scoring",
+      "blocker": "SSO required for signed-in flow",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-12",
+      "title": "Read-only MCP gateway",
+      "source": "#13",
+      "owner_role": "BGU-MCP",
+      "reviewer_role": "BGU-SEC + BGU-QA",
+      "risk": "R3",
+      "proposed_sprint": "S3",
+      "depends_on": [
+        "WP-02",
+        "WP-03"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "OAuth audience/tenant, read-only tool tests, audit",
+      "blocker": "Runner not verified",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-13",
+      "title": "QA CI/e2e matrix",
+      "source": "#16",
+      "owner_role": "BGU-QA",
+      "reviewer_role": "BGU-SEC + BGU-RELEASE",
+      "risk": "R2",
+      "proposed_sprint": "S4",
+      "depends_on": [
+        "WP-09",
+        "WP-10"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "Actual CI run URLs and browser/db evidence per SHA",
+      "blocker": "No head workflow scan",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    },
+    {
+      "id": "WP-14",
+      "title": "Staging and rollback",
+      "source": "#14",
+      "owner_role": "BGU-RELEASE",
+      "reviewer_role": "BGU-SEC + Human Release Manager",
+      "risk": "R3",
+      "proposed_sprint": "S4",
+      "depends_on": [
+        "WP-11",
+        "WP-13"
+      ],
+      "status": "PROPOSED",
+      "acceptance": "Approved isolated environment, smoke/rollback/backups; no production",
+      "blocker": "Hosting and human staging approval",
+      "assigned_github_user": null,
+      "verified_runtime": false
+    }
+  ]
+}
