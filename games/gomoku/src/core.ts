@@ -204,3 +204,30 @@ export function applyAction(
   };
 }
 
+export function getPlayerView(
+  state: GomokuState, viewer: string | null,
+): GomokuView {
+  // The viewer is a presentation hint only, not authenticated player identity.
+  if (viewer !== null && typeof viewer !== "string") {
+    throw new TypeError("Viewer must be a string or null");
+  }
+  // Gomoku has no hidden board pieces. Never expose internal command IDs here.
+  return {
+    schemaVersion: state.schemaVersion,
+    rulesetId: state.rulesetId,
+    boardSize: BOARD_SIZE,
+    board: [...state.board],
+    moves: state.history.map(({ seq, player, row, col }) => ({
+      seq, player, row, col,
+    })),
+    revision: state.revision,
+    nextPlayer: state.nextPlayer,
+    status: state.status,
+    winner: state.winner,
+  };
+}
+
+export function getOutcome(state: GomokuState): GomokuOutcome {
+  return { status: state.status, winner: state.winner };
+}
+
