@@ -1,0 +1,70 @@
+/* GAME-04 local preview: scoped UI, using provisional KingDragonHub palette. */
+.gomoku-page{min-height:100vh;background:var(--bg)}
+.gomoku-page-header{background:var(--surface);border-bottom:1px solid var(--border)}
+.gomoku-page-header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.gomoku-back-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink)}
+.gomoku-back-link:hover{text-decoration:underline}
+.gomoku-demo{padding:34px 0 76px}
+.gomoku-demo-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}
+.gomoku-demo-heading h1{font-size:clamp(2rem,4vw,3.2rem);margin:12px 0 10px}
+.gomoku-demo-heading h1 span{color:var(--action)}
+.gomoku-demo-heading p{margin:0;max-width:650px}
+.gomoku-preview-tag{display:flex;flex-direction:column;gap:2px;border:1px solid #cfbcae;border-radius:12px;padding:11px 16px;background:#fff5ec;font-size:13px;color:#653d29}
+.gomoku-preview-tag strong{font-size:14px;color:#74341b}
+.gomoku-playground{display:grid;grid-template-columns:minmax(0,1fr) minmax(255px,295px);gap:20px;align-items:start}
+.gomoku-board-panel,.gomoku-info-card{border:1px solid var(--outline);border-radius:var(--radius);background:var(--surface)}
+.gomoku-board-panel{padding:20px;min-width:0}
+.gomoku-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.gomoku-turn-state{display:flex;align-items:center;gap:10px;font-size:16px}
+.gomoku-turn-symbol{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid #485468;flex-shrink:0}
+.gomoku-symbol-black{background:#252c35;border-color:#171b23}
+.gomoku-symbol-white{background:#fff;border-color:#333e50}
+.gomoku-symbol-neutral{background:#f1f3f5;border-color:#9da8b6}
+.gomoku-revision{font-size:13px;color:var(--muted)}
+.gomoku-board-instruction{margin:12px 0 12px;font-size:14px}
+.gomoku-board-scroll{width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;border:1px solid #c5a372;border-radius:10px;background:#ead3a5;padding:8px;scrollbar-color:#ad7740 #f1dec2}
+.gomoku-board-scroll:focus-visible{outline:3px solid var(--action);outline-offset:3px}
+.gomoku-board{width:max-content;min-width:660px;user-select:none}
+.gomoku-board-row{display:grid;grid-template-columns:repeat(15,44px)}
+.gomoku-gridcell{width:44px;height:44px;position:relative}
+.gomoku-cell{width:44px;height:44px;display:grid;place-items:center;position:relative;padding:0;margin:0;border:1px solid #bd9965;background:#f4dfb8;cursor:crosshair;touch-action:manipulation}
+.gomoku-cell:hover{background:#fceacc}
+.gomoku-cell[aria-disabled=true]{cursor:default}
+.gomoku-cell:focus-visible{z-index:4;outline:3px solid #b93615;outline-offset:-3px;background:#fff1d5}
+.gomoku-stone{width:31px;height:31px;display:inline-block;border-radius:50%;box-shadow:0 2px 4px #3c2d2152;position:relative}
+.gomoku-stone-black{background:radial-gradient(circle at 32% 26%,#737982,#222832 65%,#0e1117);border:1px solid #111821}
+.gomoku-stone-white{background:radial-gradient(circle at 32% 24%,#fff,#f5f3ed 58%,#d6d2c8);border:1px solid #666e73}
+.gomoku-gridcell-last .gomoku-cell{background:#f9cfa1}
+.gomoku-last-marker{position:absolute;bottom:4px;right:4px;width:6px;height:6px;border-radius:50%;background:#c63d14;border:1px solid #fff}
+.gomoku-scroll-hint{font-size:12px;margin:7px 0 0;color:#656e7d}
+.gomoku-error{padding:10px 12px;color:#8b2711;background:#fff1ec;border:1px solid #d78066;border-radius:8px;font-size:14px;margin:12px 0 0}
+.gomoku-controls{display:flex;flex-wrap:wrap;gap:10px;padding-top:18px}
+.gomoku-controls .button,.gomoku-replay-controls .button{cursor:pointer;font-family:inherit}
+.gomoku-controls .button:focus-visible,.gomoku-replay-controls .button:focus-visible{outline:3px solid #c63d14;outline-offset:3px}
+.gomoku-controls .button:disabled,.gomoku-replay-controls .button:disabled{cursor:not-allowed;border-color:#ccd1d9;background:#eaeef2;color:#647083}
+.gomoku-replay{margin-top:16px;padding:15px;border:1px solid #d3dce5;border-radius:12px;background:#fbfcfe}
+.gomoku-replay-heading{display:flex;justify-content:space-between;gap:14px}
+.gomoku-slider-label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+.gomoku-replay input[type=range]{width:100%;accent-color:var(--action);min-height:32px;cursor:pointer}
+.gomoku-replay-controls{display:flex;gap:8px;flex-wrap:wrap}
+.gomoku-replay-controls .button{min-height:44px}
+.gomoku-sidebar{display:flex;flex-direction:column;gap:16px}
+.gomoku-info-card{padding:18px}
+.gomoku-info-card h2{font-size:19px;letter-spacing:0;margin:0 0 14px}
+.gomoku-player{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:11px;margin-top:10px}
+.gomoku-player-active{border:2px solid var(--action);padding:10px;background:#fff8f3}
+.gomoku-player-stone{width:26px;height:26px;flex-shrink:0}
+.gomoku-player div{display:flex;flex-direction:column;min-width:0}
+.gomoku-player small{font-size:12px;color:var(--muted)}
+.gomoku-active-text{font-size:11px;font-weight:700;color:var(--action);margin-left:auto;white-space:nowrap}
+.gomoku-local-note{font-size:12px;margin:12px 0 0}
+.gomoku-history-list{margin:0;padding:0;list-style:none;max-height:270px;overflow:auto}
+.gomoku-history-list li{display:flex;align-items:center;gap:12px;padding:7px 2px;border-bottom:1px solid var(--border);font-size:13px}
+.gomoku-history-list li span:last-child{margin-left:auto;color:var(--muted)}
+.gomoku-empty-history{font-size:13px;margin:0}
+.gomoku-rules-card p{font-size:13px;margin:0 0 10px}
+.gomoku-rules-card p:last-child{margin-bottom:0}
+.gomoku-page-footer{border-top:1px solid var(--border);padding:22px 0 30px;font-size:13px;color:var(--muted);background:var(--surface)}
+@media(max-width:1090px){.gomoku-playground{grid-template-columns:1fr}.gomoku-sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.gomoku-rules-card{grid-column:1 / -1}}
+@media(max-width:640px){.gomoku-demo{padding-top:22px}.gomoku-demo-heading{align-items:start;flex-direction:column;gap:14px}.gomoku-board-panel{padding:12px}.gomoku-sidebar{display:flex}.gomoku-controls .button{flex:1 1 100%}.gomoku-page-header-inner{min-height:62px}.gomoku-turn-state{font-size:15px}.gomoku-replay-controls .button{flex:1 1 45%}}
+@media(prefers-reduced-motion:reduce){.gomoku-page *{transition:none!important;animation:none!important}}
