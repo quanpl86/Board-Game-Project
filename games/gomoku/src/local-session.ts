@@ -9,7 +9,7 @@ import {
   type GomokuState,
   type PlaceStoneAction,
   validateAction,
-} from "./core.js";
+} from "./core";
 
 export interface LocalGomokuSession {
   readonly match: GomokuState;
