@@ -30,7 +30,7 @@ def check(data, roles):
     sprints = {x.get("id") for x in data.get("sprints", [])}
     for row in items:
         name = row.get("id", "?")
-        if not re.fullmatch(r"WP-\\d{2}", str(name)):
+        if not re.fullmatch(r"WP-\d{2}", str(name)):
             errors.append(f"{name}: invalid identifier")
         for key in ("title", "source", "owner_role", "reviewer_role", "risk", "acceptance", "blocker"):
             if not row.get(key):
