@@ -228,8 +228,12 @@ export function hashState(state: GomokuState): string {
 }
 
 export function getPlayerView(
-  state: GomokuState, _viewer: string | null,
+  state: GomokuState, viewer: string | null,
 ): GomokuView {
+  // The viewer is a presentation hint only, not authenticated player identity.
+  if (viewer !== null && typeof viewer !== "string") {
+    throw new TypeError("Viewer must be a string or null");
+  }
   // Gomoku has no hidden board pieces. Never expose internal command IDs here.
   return {
     schemaVersion: state.schemaVersion,
