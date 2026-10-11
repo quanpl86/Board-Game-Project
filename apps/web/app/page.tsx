@@ -26,13 +26,14 @@ export default function Home() {
             <div className="tag">{game.genre}</div>
             <h3>{game.name}</h3><p>{game.description}</p>
             <div className="card-footer"><span>{game.playersMin}–{game.playersMax} người chơi</span><span className="coming-soon">Đang phát triển</span></div>
+            {game.id === "gomoku" && <a className="button button-outline game-demo-link" href="/games/gomoku/demo">Chơi thử trên cùng thiết bị →</a>}
           </article>)}</div>
       </div></section>
       <section id="foundation" className="foundation container"><div className="eyebrow"><span className="orange-dot"/> FOUNDATION PHASE</div>
         <h2>CHẤT LƯỢNG <span className="accent">NGAY TỪ ĐẦU</span></h2>
         <div className="foundation-grid">
           <div><h3>Thiết kế nhất quán</h3><p>Giao diện theo ngôn ngữ KingDragonHub. Các token chưa đối chiếu CSS gốc còn tạm thời.</p></div>
-          <div><h3>Game đa thể loại</h3><p>Game Registry sẽ hỗ trợ game 2D, 3D và giáo dục. Game Server và gameplay chưa triển khai.</p></div>
+          <div><h3>Game đa thể loại</h3><p>Game Registry sẽ hỗ trợ game 2D, 3D và giáo dục. Đã có bản chơi thử Gomoku cục bộ; Game Server và multiplayer chưa triển khai.</p></div>
           <div><h3>AI có kiểm soát</h3><p>Agent có role, skill và quality gates. MCP Gateway chưa được phép truy cập các công cụ.</p></div>
         </div>
       </section>
