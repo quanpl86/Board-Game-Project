@@ -16,7 +16,6 @@ const generateArtifacts=function generateArtifacts(data){
  const type=(tail.match(/^([a-z]+(?:\([^)]+\))?)/)||[])[1]||"text";return {name:m[1],type,kind,required:tail.includes("NOT NULL")} }).filter(Boolean).map(c=>{const pk=t.fields.filter(f=>f.startsWith("PRIMARY KEY")).some(f=>f.includes(c.name));const fk=fks.some(f=>f.from===t.id&&f.via.split(",").map(a=>a.trim()).includes(c.name));return {...c,kind:pk||c.kind==="PK"?"PK":fk?"FK":c.kind};});
  const hFor=(t,compact=false)=>compact?64:38+24*cols(t).length+10;
  const box=(t,x,y,compact=false,primary=false)=>({id:t.id,x,y,w:compact?300:340,h:hFor(t,compact),compact,primary,domain:t.domain});
- const extNeighbor=(id,domain)=>({...all.get(id),external:all.get(id).domain!==domain});
  const makeOverview=()=>{
    let placed=[],xCols=[100,600,1100],laneWidth=430,domainGroups=[];
    let domainBuckets=[["identity","tenancy"],["assets","catalog","publishing"],["gameplay","integration"]];
@@ -31,7 +30,7 @@ const generateArtifacts=function generateArtifacts(data){
  };
  const makeDomainMap=()=>{
    const pos={identity:[130,205],tenancy:[570,205],assets:[1010,205],catalog:[130,500],gameplay:[570,500],publishing:[1010,500],integration:[570,790]};
-   let bs=domains.map(d=>{let v=pos[d],t={id:d,name:d,domain:d};return {id:d,domain:d,x:v[0],y:v[1],w:325,h:112,kind:"domain",count:tables.filter(x=>x.domain===d).length}});
+   let bs=domains.map(d=>{let v=pos[d];return {id:d,domain:d,x:v[0],y:v[1],w:325,h:112,kind:"domain",count:tables.filter(x=>x.domain===d).length}});
    const agg={};for(const r of fks){const a=all.get(r.from).domain,b=all.get(r.to).domain;if(a!==b){let k=a+">"+b;agg[k]=(agg[k]||0)+1}}
    return {id:"P0_7_domains",name:"00 Kiến trúc 7 domain",title:"BOARD GAME UNIVERSE — 7 DATA DOMAINS",subtitle:"Tổng quan 30 bảng P0 · Quan hệ chéo domain · Màu phân biệt nhóm dữ liệu",boxes:bs,relations:Object.entries(agg).map(([s,count])=>({from:s.split(">")[0],to:s.split(">")[1],via:`${count} FK`,target:""})),groups:[],w:1480,h:1060,kind:"domains"};
  };
@@ -40,7 +39,6 @@ const generateArtifacts=function generateArtifacts(data){
    const rel=fks.filter(f=>all.get(f.from).domain===d||all.get(f.to).domain===d);
    const external=[...new Set(rel.flatMap(f=>[f.from,f.to]))].filter(id=>all.get(id).domain!==d);
    let boxes=[],y=[145,145,145],cols=[100,560,1020];
-   const ownSize=Math.ceil(own.length/2);
    for(let i=0;i<own.length;i++){const t=own[i],k=i%2;let bx=box(t,cols[k],y[k]);boxes.push(bx);y[k]+=bx.h+45;}
    for(let i=0;i<external.length;i++){let t=all.get(external[i]),bx=box(t,cols[2],y[2],true);boxes.push(bx);y[2]+=bx.h+24;}
    return {id:"P0_domain_"+d,name:`Domain · ${d}`,title:`DOMAIN ${d.toUpperCase()} — ${own.length} BẢNG`,subtitle:`Đầy đủ cột PK/FK và ${rel.length} quan hệ chạm domain · Bảng ngoài domain hiện dạng liên kết`,boxes,relations:rel,groups:[],w:1450,h:Math.max(...y)+130};
@@ -94,7 +92,7 @@ const generateArtifacts=function generateArtifacts(data){
    });
    return out.join("\n");
  };
- const diagram=(p,i)=>`<diagram id="${esc(p.id)}" name="${esc(p.name)}"><mxGraphModel dx="1380" dy="860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="${p.w}" pageHeight="${p.h}" math="0" shadow="0"><root>${xmlCells(p)}</root></mxGraphModel></diagram>`;
+ const diagram=p=>`<diagram id="${esc(p.id)}" name="${esc(p.name)}"><mxGraphModel dx="1380" dy="860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="${p.w}" pageHeight="${p.h}" math="0" shadow="0"><root>${xmlCells(p)}</root></mxGraphModel></diagram>`;
  const drawio=`<?xml version="1.0" encoding="UTF-8"?>\n<mxfile host="app.diagrams.net" agent="Board Game Universe AI Agents" version="24.7.17" type="device">\n${pages.map(diagram).join("\n")}\n</mxfile>\n`;
  const svgPage=p=>{
   const e=esc;
